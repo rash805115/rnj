@@ -6,4 +6,5 @@ Class Name: Database Management Systems
 Contributors:
 -----------------
 
-Rahul Chaudhary		rac130@pitt.edu		Masters, Information Security
+Rahul Chaudhary				rac130@pitt.edu		Masters, Information Security
+Suriyaporn Aekanantakul		sua13@pitt.edu		Masters, Information Security
