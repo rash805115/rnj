@@ -1,0 +1,221 @@
+*{
+padding:0px;
+margin:0px;
+}
+
+html{
+width:100%;
+height:100%;
+}
+body{
+height:100%;
+width:100%;
+background-color:#FFFFFF;
+position:relative;
+}
+html > body{
+min-height:100%;
+height:auto;
+}
+
+/*banner*/
+#header_inside{
+width:1000px;
+margin:0 auto;
+position:relative;
+
+}
+/* menu @ banner*/
+#menu{
+position:absolute;
+top:170px;
+left:26px;
+
+}
+#menu li{
+display:inline;
+
+}
+#menu a{
+margin:0 1px 0 0;
+width:150px;
+text-align:center;
+padding:8px 0 10px 0;
+display:block;
+float:left;
+font-family: Cambria, Georgia, serif;
+font-size:24px;
+color:#490047;
+text-decoration:none;
+
+}
+
+/* Now have 4 */
+#menu .but1_active
+#menu .but2_active
+#menu .but3_active
+#menu .but4_active
+
+
+/* body down here */
+#wrapper{
+padding:0 0 0 0;
+height:100%;
+}
+#content_inside{
+background-color:#F3F1E9;
+background-position:top left;
+background-repeat:no-repeat;
+width:1000px;
+
+padding:0 0 0 0;
+margin:0 auto;
+overflow:hidden
+
+}
+
+/* categories on left */
+#sidebar{
+background-color:#EDDDD4;
+width:175px;
+float:left;
+padding:13px 32px 0 23px;
+
+font-family: Cambria, Georgia, serif;
+font-size:14px;
+
+}
+
+#list{
+list-style-type:none;
+margin:11px 0 0 0;
+line-height:30px;
+padding:0 0 0 10px;
+}
+#list :hover{
+background-color:#ECCCDD;
+}
+#list a{
+font-family: Cambria, Georgia, serif;
+color:#0D0D0D;
+text-decoration:none
+}
+#list a:visited{text-decoration:none}
+#list a:hover{
+text-decoration:underline;
+}
+
+#list li{
+width:175px;
+}
+
+
+/* body exclude sidebar */
+#main_block{
+font-family: Cambria, Georgia, serif;
+font-size:14px;
+color:#464646;
+overflow:hidden;
+float:left;
+width:750px;
+}
+.about{
+padding:13px 0 0 0;
+width:420px;
+float:left;
+margin:0 25px 0 10px;
+}
+.about p{
+padding:5px 0 0 12px;
+}
+
+
+/* login */
+.news{
+background-color:#ECECC5;
+border:1px solid #DFDEC0;
+width:270px;
+float:left;
+padding:13px 5px 13px 15px
+}
+.news p{
+padding:5px 0 0 2px
+}
+
+.newRegis{
+
+width:600px;
+float:left;
+padding:13px 10px 13px 15px
+}
+.newRegis p{
+padding:5px 0 0 2px;
+
+}
+
+/*view products from categories*/
+#items{
+float:left;
+padding:22px 0 0 0;
+width:770px;
+}
+.item{
+width:241px;
+height:265px;
+float:left;
+background-position:top left;
+background-repeat:no-repeat;
+padding:0 12px 15px 0;
+display:inline;
+}
+.item img{
+margin:26px 0 0 25px;
+}
+
+.view{
+display:block;
+float:left;
+line-height:18px;
+margin:7px 3px 0 43px;
+width:180px;
+text-align:center;
+text-decoration:none;
+color:#000333; 
+}
+
+
+/* view product's detail */
+#item{
+width:303px;
+height:260px;
+padding:13px 0 0 5px;
+float:left
+}
+#item h4{
+font-family: Cambria, Georgia, serif;
+font-size:24px;
+color:#242424;
+font-weight:normal;
+}
+.big_view{
+width:303px;
+height:260px;
+vertical-align:middle;
+border:1px solid #D6D3C7;
+background-color:#FFFFFF;
+position:relative;
+text-align:center;
+}
+
+
+.description{
+float:left;
+padding:100px 0 0 120px;
+}
+.description p{
+padding-bottom:15px;
+}
+.style1{
+padding:0 0 200px 0
+}
+
