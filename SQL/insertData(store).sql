@@ -1,0 +1,11 @@
+INSERT INTO store VALUES (1, 1, '421 8th Ave Rm 4202-J1', 10199, 1);
+INSERT INTO store VALUES (2, 1, '25 Dorchester Ave', 12288, 1);
+INSERT INTO store VALUES (3, 2, '1001 California Ave', 15290, 1);
+INSERT INTO store VALUES (4, 2, '2970 Market Street', 19104, 1);
+INSERT INTO store VALUES (5, 3, '433 W Harrison 4th Floor', 60607, 1);
+INSERT INTO store VALUES (6, 4, 'One Post Office Drive', 78284, 1);
+INSERT INTO store VALUES (7, 4, '7499 Northwest 31st St', 33122, 1);
+INSERT INTO store VALUES (8, 5, '900 Brentwood RD NE', 20066, 1);
+INSERT INTO store VALUES (9, 5, '2901 Scott Futrell Drive', 28228, 1);
+INSERT INTO store VALUES (10, 6, '1001 E. Sunset Rd', 89199, 1);
+INSERT INTO store VALUES (11, 7, '7001 S. Central Ave. Room 338B', 90052, 1);

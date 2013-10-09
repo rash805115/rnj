@@ -1,0 +1,18 @@
+INSERT INTO product VALUES (1, 1, 'Lenovo ThinkCentre', 0, 476, '/img');
+INSERT INTO product VALUES (2, 1, 'Acer Aspire X', 0, 379, '/img');
+INSERT INTO product VALUES (3, 2, 'HP ProBook', 0, 499, '/img');
+INSERT INTO product VALUES (4, 2, 'DELL Inspiron 15', 0, 389, '/img');
+INSERT INTO product VALUES (5, 3, 'The new iPad 3rd Gen', 0, 800, '/img');
+INSERT INTO product VALUES (6, 3, 'SAMSUNG Galaxy Tab 2', 0, 200, '/img');
+INSERT INTO product VALUES (7, 4, 'ASUS VX238H 23"', 0, 169, '/img');
+INSERT INTO product VALUES (8, 4, 'LG 27EN43V-B 27"', 0, 300, '/img');
+INSERT INTO product VALUES (9, 5, 'LG 42" 42LN5200', 0, 400, '/img');
+INSERT INTO product VALUES (10, 5, 'SAMSUNG 50" UN50EH5000FXZA', 0, 750, '/img');
+INSERT INTO product VALUES (11, 6, 'OLYMPUS E-PL5 ', 0, 549, '/img');
+INSERT INTO product VALUES (12, 6, 'Nikon COOLPIX S01', 0, 80, '/img');
+INSERT INTO product VALUES (13, 7, 'AVG AntiVirus 2013', 0, 25, '/img');
+INSERT INTO product VALUES (14, 7, 'CyberLink PowerDVD 13 Ultra', 0, 70, '/img');
+INSERT INTO product VALUES (15, 8, 'Microsoft Xbox 360E', 0, 300, '/img');
+INSERT INTO product VALUES (16, 8, 'Battlefield 4', 0, 60, '/img');
+INSERT INTO product VALUES (17, 9, 'iPhone 5C Blue', 0, 630, '/img');
+INSERT INTO product VALUES (18, 9, 'Samsung Galaxy S4', 0, 605, '/img');
