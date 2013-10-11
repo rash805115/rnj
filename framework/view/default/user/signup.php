@@ -9,7 +9,7 @@
 	</head>
 
 	<body>
-		<?php include (__DIR__ . "/../../default/header.php"); ?>
+		<?php include (__DIR__ . "/../../default/include.php"); ?>
 		
 		<div name="signup-div" id="signup-div">
 			<form method="POST" action="" name="signup-form" id="signup-form" onsubmit="return check('signup-form', 'checkForBlanks', 'checkForPasswordsMatch');">
@@ -37,8 +37,6 @@
 				</table>
 			</form>
 		</div>
-		
-		<?php include (__DIR__ . "/../../default/footer.php"); ?>
 		
 		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/check.js" . '"'); ?> ></script>
 	</body>
