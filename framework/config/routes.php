@@ -8,5 +8,6 @@ namespace phpsec\framework;
  * @note: wildcards only supported at the rightmost character
  */
 
+FrontController::$Routes["login"] =		"users/userslogincontroller";			//for user login
 FrontController::$Routes["signup"] =		"users/usersignupcontroller";			//for user signup
 FrontController::$Routes["*"] =			"default";					//route everything else to default
