@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 11, 2013 at 12:24 AM
+-- Generation Time: Oct 11, 2013 at 12:42 AM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -37,19 +37,6 @@ CREATE TABLE IF NOT EXISTS `AUTH_TOKENS` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `belong`
---
-
-CREATE TABLE IF NOT EXISTS `belong` (
-  `USERID` varchar(32) NOT NULL,
-  `sid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`USERID`,`sid`),
-  KEY `sid` (`sid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `businesscustomer`
 --
 
@@ -58,19 +45,6 @@ CREATE TABLE IF NOT EXISTS `businesscustomer` (
   `companyname` varchar(50) DEFAULT NULL,
   `annualincome` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`USERID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `buy`
---
-
-CREATE TABLE IF NOT EXISTS `buy` (
-  `tid` int(11) NOT NULL DEFAULT '0',
-  `USERID` varchar(32) NOT NULL,
-  PRIMARY KEY (`tid`),
-  KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -100,15 +74,14 @@ CREATE TABLE IF NOT EXISTS `employee` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `has`
+-- Table structure for table `employee_workin_store`
 --
 
-CREATE TABLE IF NOT EXISTS `has` (
-  `sid` int(11) NOT NULL DEFAULT '0',
-  `pid` int(11) NOT NULL,
-  `sinventory` int(11) DEFAULT NULL,
-  PRIMARY KEY (`sid`,`pid`),
-  KEY `pid` (`pid`)
+CREATE TABLE IF NOT EXISTS `employee_workin_store` (
+  `employeeid` varchar(32) NOT NULL,
+  `sid` int(11) DEFAULT NULL,
+  KEY `sid` (`sid`),
+  KEY `employeeid` (`employeeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -124,19 +97,6 @@ CREATE TABLE IF NOT EXISTS `homecustomer` (
   `age` int(11) DEFAULT NULL,
   `income` int(11) DEFAULT NULL,
   PRIMARY KEY (`USERID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `interested`
---
-
-CREATE TABLE IF NOT EXISTS `interested` (
-  `USERID` varchar(32) NOT NULL,
-  `pid` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`USERID`,`pid`),
-  KEY `pid` (`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -234,19 +194,6 @@ CREATE TABLE IF NOT EXISTS `review` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sell`
---
-
-CREATE TABLE IF NOT EXISTS `sell` (
-  `tid` int(11) NOT NULL DEFAULT '0',
-  `USERID` varchar(32) NOT NULL,
-  PRIMARY KEY (`tid`),
-  KEY `USERID` (`USERID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `SESSION`
 --
 
@@ -293,6 +240,20 @@ CREATE TABLE IF NOT EXISTS `store` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `store_has_product`
+--
+
+CREATE TABLE IF NOT EXISTS `store_has_product` (
+  `sid` int(11) NOT NULL DEFAULT '0',
+  `pid` int(11) NOT NULL,
+  `sinventory` int(11) DEFAULT NULL,
+  PRIMARY KEY (`sid`,`pid`),
+  KEY `pid` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transaction`
 --
 
@@ -327,14 +288,53 @@ CREATE TABLE IF NOT EXISTS `USER` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `workin`
+-- Table structure for table `user_belong_store`
 --
 
-CREATE TABLE IF NOT EXISTS `workin` (
-  `employeeid` varchar(32) NOT NULL,
-  `sid` int(11) DEFAULT NULL,
-  KEY `sid` (`sid`),
-  KEY `employeeid` (`employeeid`)
+CREATE TABLE IF NOT EXISTS `user_belong_store` (
+  `USERID` varchar(32) NOT NULL,
+  `sid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`USERID`,`sid`),
+  KEY `sid` (`sid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_buy_transaction`
+--
+
+CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
+  `tid` int(11) NOT NULL DEFAULT '0',
+  `USERID` varchar(32) NOT NULL,
+  PRIMARY KEY (`tid`),
+  KEY `USERID` (`USERID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_interested_product`
+--
+
+CREATE TABLE IF NOT EXISTS `user_interested_product` (
+  `USERID` varchar(32) NOT NULL,
+  `pid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`USERID`,`pid`),
+  KEY `pid` (`pid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_sell_product`
+--
+
+CREATE TABLE IF NOT EXISTS `user_sell_product` (
+  `tid` int(11) NOT NULL DEFAULT '0',
+  `USERID` varchar(32) NOT NULL,
+  PRIMARY KEY (`tid`),
+  KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -379,24 +379,10 @@ ALTER TABLE `AUTH_TOKENS`
   ADD CONSTRAINT `AUTH_TOKENS_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `belong`
---
-ALTER TABLE `belong`
-  ADD CONSTRAINT `belong_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `belong_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `businesscustomer`
 --
 ALTER TABLE `businesscustomer`
   ADD CONSTRAINT `businesscustomer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `buy`
---
-ALTER TABLE `buy`
-  ADD CONSTRAINT `buy_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `buy_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `customer`
@@ -411,24 +397,17 @@ ALTER TABLE `employee`
   ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `has`
+-- Constraints for table `employee_workin_store`
 --
-ALTER TABLE `has`
-  ADD CONSTRAINT `has_ibfk_4` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `has_ibfk_3` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `employee_workin_store`
+  ADD CONSTRAINT `employee_workin_store_ibfk_5` FOREIGN KEY (`employeeid`) REFERENCES `employee` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `employee_workin_store_ibfk_4` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `homecustomer`
 --
 ALTER TABLE `homecustomer`
   ADD CONSTRAINT `homecustomer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `interested`
---
-ALTER TABLE `interested`
-  ADD CONSTRAINT `interested_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `interested_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `PASSWORD`
@@ -456,13 +435,6 @@ ALTER TABLE `review`
   ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `sell`
---
-ALTER TABLE `sell`
-  ADD CONSTRAINT `sell_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `sell_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `SESSION`
 --
 ALTER TABLE `SESSION`
@@ -483,17 +455,45 @@ ALTER TABLE `store`
   ADD CONSTRAINT `store_ibfk_4` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `store_has_product`
+--
+ALTER TABLE `store_has_product`
+  ADD CONSTRAINT `store_has_product_ibfk_4` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `store_has_product_ibfk_3` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `transaction`
 --
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`);
 
 --
--- Constraints for table `workin`
+-- Constraints for table `user_belong_store`
 --
-ALTER TABLE `workin`
-  ADD CONSTRAINT `workin_ibfk_5` FOREIGN KEY (`employeeid`) REFERENCES `employee` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `workin_ibfk_4` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `user_belong_store`
+  ADD CONSTRAINT `user_belong_store_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_belong_store_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user_buy_transaction`
+--
+ALTER TABLE `user_buy_transaction`
+  ADD CONSTRAINT `user_buy_transaction_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_buy_transaction_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user_interested_product`
+--
+ALTER TABLE `user_interested_product`
+  ADD CONSTRAINT `user_interested_product_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_interested_product_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `user_sell_product`
+--
+ALTER TABLE `user_sell_product`
+  ADD CONSTRAINT `user_sell_product_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_sell_product_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `XUSER`
