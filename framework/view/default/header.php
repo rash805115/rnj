@@ -1,5 +1,5 @@
 <?php
-echo getcwd();
+
 ?>
 
 <div id="header">																																																																								

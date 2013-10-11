@@ -5,7 +5,7 @@
 	<head>
 		<title>RNJ: E-Commerce Portal</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-		<!--<link rel="stylesheet" type="text/css" href=<?php echo (__DIR__ . "/../css/style.css") ?> />-->
+		<link rel="stylesheet" type="text/css" <?php echo('href="' . "http://localhost/rnj/framework/file/css/style.css" . '"'); ?> />
 	</head>
 
 	<body>
@@ -40,6 +40,6 @@
 		
 		<?php include (__DIR__ . "/../../default/footer.php"); ?>
 		
-		<script type="text/javascript" src='<?php return realpath(__DIR__ . "/../../default/js/check.js") ?>' > </script>
+		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/check.js" . '"'); ?> ></script>
 	</body>
 </html>
