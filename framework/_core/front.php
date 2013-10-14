@@ -71,12 +71,10 @@ class FrontController
 	
 	protected function StaticContent($Request)
 	{
-		if (!realpath(__DIR__."/../static/{$Request}"))
-			return require_once (__DIR__ . "/../../view/default/404.php");
-		else
-		{
-			\phpsec\DownloadManager::download(__DIR__ . "/../static/{$Request}");
-		}
+		if (!$path=realpath(__DIR__."/../static/{$Request}")) return false;
+		$root=realpath(__DIR__."/../static");
+		if (substr($path,0,strlen($root))!==$root) return false; //LFD attack
+		return \phpsec\DownloadManager::download($path,$path);
 	}
 	
 	/**
