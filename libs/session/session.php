@@ -52,7 +52,7 @@ class Session
 	 * Idle period. If the user is inactive for more than this period, the session must expire.
 	 * @var int
 	 */
-	public static $inactivityMaxTime = 1800; //30 min.
+	public static $inactivityMaxTime = 18; //30 min.
 
 	
 
@@ -135,10 +135,10 @@ class Session
 	 */
 	public function existingSession()
 	{
-		if (!isset($_COOKIE['sessionid']))	//If user cannot provide a session ID, then no session is present for this user. Hance return false
+		if (!isset($_COOKIE['SESSIONID']))	//If user cannot provide a session ID, then no session is present for this user. Hance return false
 			return FALSE;
 			
-		$sessionID = $_COOKIE['sessionid'];	//get the session ID from the user cookie
+		$sessionID = $_COOKIE['SESSIONID'];	//get the session ID from the user cookie
 		
 		$result = SQL("SELECT `USERID` FROM SESSION WHERE `SESSION_ID` = ?", array($sessionID));	//match if the session ID received from the user is same as what was issued to them. If same, then the session ID stored in our DB must match with the one we received
 		if (count($result) != 1)	//a suitable match is not found
@@ -147,15 +147,15 @@ class Session
 			return FALSE;
 		}
 		
+		//set local variables
+		$this->session = $sessionID;
+		$this->userID = $result[0]['USERID'];
+		
 		//check if the session ID's have expired
 		if ($this->inactivityTimeout() || $this->expireTimeout())
 		{
 			throw new SessionExpired("ERROR: This session has expired.");
 		}
-		
-		//set local variables
-		$this->session = $sessionID;
-		$this->userID = $result[0]['USERID'];
 		
 		return $this->session;
 	}
@@ -405,6 +405,25 @@ class Session
 		
 		$this->updateUserCookies();
 		return $newSession;
+	}
+	
+	
+	
+	/**
+	 * Functoin to get the userID from a sessionID
+	 * @param string $sessionID	The session ID for which matching userID is needed
+	 * @return boolean | string	Returns the userID if match found. False otherwise
+	 */
+	public static function getUserIDFromSessionID($sessionID)
+	{
+		$result = SQL("SELECT `USERID` FROM SESSION WHERE `SESSION_ID` = ?", array($sessionID));
+		
+		if (count($result) == 1)
+		{
+			return $result[0]['USERID'];
+		}
+		else
+			return FALSE;
 	}
 }
 

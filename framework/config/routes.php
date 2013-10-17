@@ -8,7 +8,9 @@ namespace phpsec\framework;
  * @note: wildcards only supported at the rightmost character
  */
 
+FrontController::$Routes["home"] =			"general/indexcontroller";			//the first page for users
 FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user login
+FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user login
 FrontController::$Routes["signup"] =			"users/usersignupcontroller";			//for user signup
 FrontController::$Routes["temppass"] =			"users/temppasscontroller";			//for account activation and temp password management
 FrontController::$Routes["*"] =				"default";					//route everything else to default

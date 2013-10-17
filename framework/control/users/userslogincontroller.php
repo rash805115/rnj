@@ -5,16 +5,16 @@ class UsersLoginController extends phpsec\framework\DefaultController
 	function Handle($Request)
 	{
 		try
-		{
+		{echo \rand(0, 100);
 			$config = require_once (__DIR__ . "/../../config/config.php");
 			$userID = \phpsec\User::checkRememberMe();
 			
 			if (! $userID)
 			{
 				if ((isset($_POST['submit'])))
-				{
+				{echo "i come here" . \rand(0, 1000);
 					if( (isset($_POST['user'])) && ($_POST['user'] != "") && (isset($_POST['pass'])) && ($_POST['pass'] != "") )
-					{
+					{echo $_POST['user'];
 						try
 						{
 							$userID = $_POST['user'];
@@ -50,6 +50,11 @@ class UsersLoginController extends phpsec\framework\DefaultController
 								phpsec\User::enableRememberMe($_POST['user'], FALSE, TRUE);
 							}
 						}
+						
+						unset($_POST['submit']);
+						unset($_POST['user']);
+						unset($_POST['pass']);
+						unset($_POST['remember-me']);
 					}
 					else
 						$this->error .= "Empty fields are not allowed. Please fill the required areas." . "<BR>";
@@ -59,26 +64,34 @@ class UsersLoginController extends phpsec\framework\DefaultController
 			}
 			
 			$userSession = new phpsec\Session();
-
-                        if ($userSession->existingSession())
-                        {
-                                $userSessionID = $userSession->rollSession();
-                        }
-                        else
-                        {
-                                $userSessionID = $userSession->newSession($userID);
-                        }
 			
-			$userObj = phpsec\UserManagement::forceLogIn($userID);
-                        
-                        if (! $userObj->isPasswordExpired() )
-                        {
-				return require_once(__DIR__ . "/../../view/default/index.php");
-                        }
-                        else
-                        {
-                                $this->error .= "ERROR: Its been too long since you have changed your password. For security reasons, please change your password." . "<BR>";
-                        }
+			try
+			{
+				$sessionID = $userSession->existingSession();
+				
+				if ($sessionID)
+				{
+					$userSessionID = $userSession->rollSession();
+				}
+				else
+				{
+					$userSessionID = $userSession->newSession($userID);
+				}
+
+				$userObj = phpsec\UserManagement::forceLogIn($userID);
+
+				if ($userObj->isPasswordExpired() )
+				{
+					$this->info .= "Its been too long since you have changed your password. For security reasons, please change your password." . "<BR>";
+				}
+				
+				return require_once(__DIR__ . "/../../view/default/user/index.php");
+			}
+			catch (\phpsec\SessionExpired $e)
+			{
+				$this->error .= $e->getMessage() . "<BR>";
+				phpsec\User::deleteAuthenticationToken();
+			}
 		}
 		catch (Exception $e)
 		{

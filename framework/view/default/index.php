@@ -10,7 +10,7 @@
 
 	<body>
 		<?php include (__DIR__ . "/include.php"); ?>
-		Hello, <?php echo $userID; ?>.<BR>
-		This is the index page of the application. Once the user is logged in, this page is shown
+		
+		This is the index page of the application for general or not-logged users.
 	</body>
 </html>
