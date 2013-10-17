@@ -52,7 +52,7 @@ class Session
 	 * Idle period. If the user is inactive for more than this period, the session must expire.
 	 * @var int
 	 */
-	public static $inactivityMaxTime = 18; //30 min.
+	public static $inactivityMaxTime = 1800; //30 min.
 
 	
 

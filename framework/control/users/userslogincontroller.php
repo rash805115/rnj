@@ -5,16 +5,16 @@ class UsersLoginController extends phpsec\framework\DefaultController
 	function Handle($Request)
 	{
 		try
-		{echo \rand(0, 100);
+		{
 			$config = require_once (__DIR__ . "/../../config/config.php");
 			$userID = \phpsec\User::checkRememberMe();
 			
 			if (! $userID)
 			{
 				if ((isset($_POST['submit'])))
-				{echo "i come here" . \rand(0, 1000);
+				{
 					if( (isset($_POST['user'])) && ($_POST['user'] != "") && (isset($_POST['pass'])) && ($_POST['pass'] != "") )
-					{echo $_POST['user'];
+					{
 						try
 						{
 							$userID = $_POST['user'];
