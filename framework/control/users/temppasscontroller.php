@@ -17,14 +17,14 @@ class TempPassController extends phpsec\framework\DefaultController
 					else if ($_GET['mode'] === 'activation')
 					{
 						\phpsec\User::activateAccount($_GET['user']);
-						$this->info = "Your account <b>" . $_GET['user'] . "</b> is now activated.";
+						$this->info .= "Your account <b>" . $_GET['user'] . "</b> is now activated." . "<BR>";
 						require_once (__DIR__ . "/../../view/default/user/temppass.php");
 					}
 				}
 				else
 				{
-					$this->error = "ERROR: This validation token does not match our records!!!";
-					require_once (__DIR__ . "/../../view/default/user/temppass.php");
+					$this->error .= "ERROR: This validation token does not match our records!!!" . "<BR>";
+					return require_once (__DIR__ . "/../../view/default/user/temppass.php");
 				}
 			}
 			else if ( (isset($_GET['user'])) && ($_GET['user'] != "") && (isset($_GET['email'])) && ($_GET['email'] != "") && (($_GET['mode'] === 'temppass') || ($_GET['mode'] === 'activation')) )
@@ -46,18 +46,18 @@ class TempPassController extends phpsec\framework\DefaultController
 
 				if ( !$send )
 				{
-					$this->error = "ERROR: Mail was not send!";
+					$this->error .= "ERROR: Mail was not send!" . "<BR>";
 				}
 				
-				require_once (__DIR__ . "/../../view/default/user/temppass.php");
+				return require_once (__DIR__ . "/../../view/default/user/temppass.php");
 			}
 			else
-				require_once (__DIR__ . "/../../view/default/404.php");
+				return require_once (__DIR__ . "/../../view/default/404.php");
 		}
 		catch (Exception $e)
 		{
-			$this->error = $e->getMessage();
-			require_once (__DIR__ . "/../../view/default/user/temppass.php");
+			$this->error .= $e->getMessage() . "<BR>";
+			return require_once (__DIR__ . "/../../view/default/user/temppass.php");
 		}
 	}
 }

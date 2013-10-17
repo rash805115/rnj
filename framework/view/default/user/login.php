@@ -12,7 +12,7 @@
 		<?php include (__DIR__ . "/../../default/include.php"); ?>
 		
 		<div name="login-div" id="login-div">
-			<form method="POST" action="#" name="login-form" id="login-form" onsubmit="return check('login-form', 'checkForBlanks');">
+			<form method="POST" action="" name="login-form" id="login-form" onsubmit="return check('login-form', 'checkForBlanks');">
 				<table name="login-table" id="login-table">
 					<tr name="user-field" id="user-field">
 						<td><label>Username:</label></td>
@@ -20,7 +20,7 @@
 					</tr>
 					<tr name="pass-field" id="pass-field">
 						<td><label>Password:</label></td>
-						<td><input type="text" name="pass" id="pass" maxlength="32"></td>
+						<td><input type="password" name="pass" id="pass" maxlength="32"></td>
 					</tr>
 					<tr name="remember-me-field" id="remember-me-field">
 						<td><label>Remember Me:</label></td>

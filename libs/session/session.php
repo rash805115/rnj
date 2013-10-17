@@ -147,15 +147,15 @@ class Session
 			return FALSE;
 		}
 		
-		//set local variables
-		$this->session = $sessionID;
-		$this->userID = $result[0]['USERID'];
-		
 		//check if the session ID's have expired
 		if ($this->inactivityTimeout() || $this->expireTimeout())
 		{
 			throw new SessionExpired("ERROR: This session has expired.");
 		}
+		
+		//set local variables
+		$this->session = $sessionID;
+		$this->userID = $result[0]['USERID'];
 		
 		return $this->session;
 	}
