@@ -85,7 +85,9 @@ class UsersLoginController extends phpsec\framework\DefaultController
 					$this->info .= "Its been too long since you have changed your password. For security reasons, please change your password." . "<BR>";
 				}
 				
-				return require_once(__DIR__ . "/../../view/default/user/index.php");
+				$url_to_redirect = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/user/index";
+				header("HTTP/1.1 302 Found");
+				header('Location: '.$url_to_redirect);
 			}
 			catch (\phpsec\SessionExpired $e)
 			{

@@ -11,6 +11,7 @@ namespace phpsec\framework;
 FrontController::$Routes["home"] =			"general/indexcontroller";			//the first page for users
 FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user login
 FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user login
+FrontController::$Routes["user/index"] =			"users/userindexcontroller";			//the first page for users
 FrontController::$Routes["signup"] =			"users/usersignupcontroller";			//for user signup
 FrontController::$Routes["temppass"] =			"users/temppasscontroller";			//for account activation and temp password management
 FrontController::$Routes["*"] =				"default";					//route everything else to default
