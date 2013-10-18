@@ -14,4 +14,5 @@ FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for use
 FrontController::$Routes["user/index"] =			"users/userindexcontroller";			//the first page for users
 FrontController::$Routes["signup"] =			"users/usersignupcontroller";			//for user signup
 FrontController::$Routes["temppass"] =			"users/temppasscontroller";			//for account activation and temp password management
+FrontController::$Routes["passwordreset"] =		"users/passwordresetcontroller";		//for account activation and temp password management
 FrontController::$Routes["*"] =				"default";					//route everything else to default
