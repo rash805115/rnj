@@ -38,6 +38,13 @@ class UsersLoginController extends phpsec\framework\DefaultController
 							$this->error .= "Incorrect Username/Password combination!" . "<BR>";
 							return require_once (__DIR__ . "/../../view/default/user/login.php");
 						}
+						catch (phpsec\UserAccountInactive $e)
+						{
+							$userEmail = phpsec\User::getPrimaryEmail($_POST['user']);
+							$activationLink = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/temppass?user=" . $_POST['user'] . "&mode=activation" . "&email=" . $userEmail;
+							$this->error .= "ERROR: The account is inactive. Please activate your account by clicking <a href=\"{$activationLink}\">here</a>." . "<BR>";
+							return require_once (__DIR__ . "/../../view/default/user/login.php");
+						}
 
 						if( (isset($_POST['remember-me'])) && ($_POST['remember-me'] == "on") )
 						{
@@ -50,11 +57,6 @@ class UsersLoginController extends phpsec\framework\DefaultController
 								phpsec\User::enableRememberMe($_POST['user'], FALSE, TRUE);
 							}
 						}
-						
-						unset($_POST['submit']);
-						unset($_POST['user']);
-						unset($_POST['pass']);
-						unset($_POST['remember-me']);
 					}
 					else
 						$this->error .= "Empty fields are not allowed. Please fill the required areas." . "<BR>";
