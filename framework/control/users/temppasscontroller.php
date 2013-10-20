@@ -12,7 +12,11 @@ class TempPassController extends phpsec\framework\DefaultController
 				{
 					if ($_GET['mode'] === 'temppass')
 					{
-						//do something here.
+						$userSession = new phpsec\Session();
+						$userSessionID = $userSession->newSession($_GET['user']);
+						
+						$nextLocation = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/requestnewpassword";
+						header("Location: {$nextLocation}");
 					}
 					else if ($_GET['mode'] === 'activation')
 					{
