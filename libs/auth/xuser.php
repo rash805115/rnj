@@ -12,7 +12,7 @@ class XUser extends User
 	 * First name of the user
 	 * @var string
 	 */
-	protected $firstName = NULL;
+	public $firstName = NULL;
 	
 	
 	
@@ -20,7 +20,7 @@ class XUser extends User
 	 * Last name of the user
 	 * @var string
 	 */
-	protected $lastName = NULL;
+	public $lastName = NULL;
 	
 	
 	
@@ -28,7 +28,7 @@ class XUser extends User
 	 * Secondary email of the user
 	 * @var string
 	 */
-	protected $secondaryEmail = NULL;
+	public $secondaryEmail = NULL;
 	
 	
 	
@@ -36,15 +36,26 @@ class XUser extends User
 	 * Date of Birth of the user
 	 * @var int
 	 */
-	protected $dob = NULL;
+	public $dob = NULL;
 	
 	
 	
+	public $type = NULL;
+	public $zip = NULL;
+	public $streetaddr = NULL;
+	public $city = NULL;
+	public $state = NULL;
+
+
+
+
+
+
 	/**
 	 * Minimum age that is required for all users
 	 * @var int
 	 */
-	protected static $minAge = 378684000;	//12 years.
+	public static $minAge = 378684000;	//12 years.
 	
 	
 	
@@ -132,6 +143,52 @@ class XUser extends User
 			return FALSE;
 
 		return TRUE;
+	}
+	
+	
+	
+	public function isTypeSet()
+	{
+		$result = SQL("SELECT type FROM XUSER WHERE USERID = ?", array($this->userID));
+		
+		if (count($result) == 1)
+		{
+			if ( ($result[0]['type'] == 'e')  || ($result[0]['type'] == 'c'))
+				return $result[0]['type'];
+		}
+		
+		return FALSE;
+	}
+	
+	
+	
+	public function setType($type)
+	{
+		SQL("UPDATE XUSER SET type = ? WHERE USERID = ?", array($type, $this->userID));
+	}
+	
+	
+	
+	public function setZip($zip)
+	{
+		SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
+	}
+	
+	
+	
+	public function setStreetAddress($streetaddr)
+	{
+		SQL("UPDATE XUSER SET streetaddr = ? WHERE USERID = ?", array($streetaddr, $this->userID));
+	}
+	
+	public function setCity($city)
+	{
+		SQL("UPDATE XUSER SET city = ? WHERE USERID = ?", array($city, $this->userID));
+	}
+	
+	public function setState($state)
+	{
+		SQL("UPDATE XUSER SET state = ? WHERE USERID = ?", array($state, $this->userID));
 	}
 	
 	
