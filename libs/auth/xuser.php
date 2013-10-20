@@ -164,6 +164,7 @@ class XUser extends User
 	
 	public function setType($type)
 	{
+		$this->type = $type;
 		SQL("UPDATE XUSER SET type = ? WHERE USERID = ?", array($type, $this->userID));
 	}
 	
@@ -171,6 +172,7 @@ class XUser extends User
 	
 	public function setZip($zip)
 	{
+		$this->zip = $zip;
 		SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
 	}
 	
@@ -178,16 +180,19 @@ class XUser extends User
 	
 	public function setStreetAddress($streetaddr)
 	{
+		$this->streetaddr = $streetaddr;
 		SQL("UPDATE XUSER SET streetaddr = ? WHERE USERID = ?", array($streetaddr, $this->userID));
 	}
 	
 	public function setCity($city)
 	{
+		$this->city = $city;
 		SQL("UPDATE XUSER SET city = ? WHERE USERID = ?", array($city, $this->userID));
 	}
 	
 	public function setState($state)
 	{
+		$this->state = $state;
 		SQL("UPDATE XUSER SET state = ? WHERE USERID = ?", array($state, $this->userID));
 	}
 	
