@@ -427,7 +427,7 @@ class UserExistsException extends UserException {}			//User already exists in th
 class UserNotExistsException extends UserException {}			//User does not exists in the database.
 class UserLocked extends UserException {}				//User account is locked.
 class UserAccountInactive extends UserException {}			//User account is inactive.
-
+class UserIDEmptyNull extends UserException {}			//User ID is null or empty
 
 
 class User extends BasicPasswordManagement
@@ -497,10 +497,14 @@ class User extends BasicPasswordManagement
 	 * @param string $pass		The desired password of the user
 	 * @param string $pemail	The desired email of the user
 	 * @throws UserExistsException	Will be thrown if the user already exists in the DB
+	 * @throws UserIDEmptyNull	Will be thrown if the user ID is Empty or Null
 	 */
 	public static function newUserObject($id, $pass, $pemail)
 	{
 		$obj = new User();	//create a new user object
+
+		if ($id == null || $id == "")
+		    throw new UserIDEmptyNull("ERROR: User ID cannot be empty or null");
 		
 		$obj->userID = $id;		//set userID
 		$obj->primaryEmail = $pemail;	//set primary email

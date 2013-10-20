@@ -221,4 +221,24 @@ class UserTest extends \PHPUnit_Framework_TestCase
 		
 		User::deleteAuthenticationToken();
 	}
+	
+	/**
+	 * Function to test if allows to create a user with an Null ID
+	 * @expectedException phpsec\UserIDEmptyNull
+	 */
+	public function testUserIDNull()
+	{
+	    BasicPasswordManagement::$hashAlgo = "haval256,5"; //choose a hashing algo
+	    User::newUserObject(null, 'testing', "rac130@pitt.edu"); //create a new user
+	}
+	
+	/**
+	 * Function to test if allows to create a user with an Empty ID
+	 * @expectedException phpsec\UserIDEmptyNull
+	 */
+	public function testUserIDEmpty()
+	{
+	    BasicPasswordManagement::$hashAlgo = "haval256,5"; //choose a hashing algo
+	    User::newUserObject("", 'testing', "rac130@pitt.edu"); //create a new user
+	}
 }
