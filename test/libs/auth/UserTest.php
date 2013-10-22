@@ -252,7 +252,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse(User::isUserIDValid("A#BC-D"));
 		$this->assertFalse(User::isUserIDValid("##$%"));
 		$this->assertFalse(User::isUserIDValid("0A1b2C3d4 "));
-		
 	}
 	
 	

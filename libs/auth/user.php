@@ -492,7 +492,7 @@ class User extends BasicPasswordManagement
 	
 
 	/**
-	 * Minimum number of chars allowed for UserID, should match table definition
+	 * Minimum number of chars allowed for UserID, should not exceed the table definition
 	 * @var int
 	 */
 	public static $minUserIDNChars = 4; 
@@ -947,9 +947,7 @@ class User extends BasicPasswordManagement
 	    if ($userID == null || strlen($userID) < User::$minUserIDNChars || strlen($userID) > User::$maxUserIDNChars)
 	        return FALSE;
 	     
-	    //echo ":" . preg_replace(array("/!*[a-z|0-9]/"),"",$userID) . ":";
-	    
-	    return strlen(preg_replace(array("/!*[A-Za-z|0-9]/"),"",$userID)) == 0;
+	    return strlen(preg_replace("/[a-z0-9A-Z]/","",$userID)) == 0;
 	}	
 }
 
