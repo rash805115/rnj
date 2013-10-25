@@ -2,6 +2,9 @@
 namespace phpsec;
 
 
+class XUserException extends \Exception {}
+class InvalidAddress extends XUserException {}
+
 
 class XUser extends User
 {
@@ -12,7 +15,7 @@ class XUser extends User
 	 * First name of the user
 	 * @var string
 	 */
-	protected $firstName = NULL;
+	public $firstName = NULL;
 	
 	
 	
@@ -20,15 +23,7 @@ class XUser extends User
 	 * Last name of the user
 	 * @var string
 	 */
-	protected $lastName = NULL;
-	
-	
-	
-	/**
-	 * Secondary email of the user
-	 * @var string
-	 */
-	protected $secondaryEmail = NULL;
+	public $lastName = NULL;
 	
 	
 	
@@ -36,15 +31,24 @@ class XUser extends User
 	 * Date of Birth of the user
 	 * @var int
 	 */
-	protected $dob = NULL;
+	public $dob = NULL;
 	
 	
 	
+	public $type = NULL;
+	public $zip = NULL;
+	public $streetaddr = NULL;
+
+
+
+
+
+
 	/**
 	 * Minimum age that is required for all users
 	 * @var int
 	 */
-	protected static $minAge = 378684000;	//12 years.
+	public static $minAge = 378684000;	//12 years.
 	
 	
 	
@@ -52,12 +56,26 @@ class XUser extends User
 	 * Constructor of this class.
 	 * @param \phpsec\User $userObj		The object of class \phpsec\User
 	 */
-	public function __construct($userObj)
+	public function __construct($userObj, $zip)
 	{
-		$this->userID = $userObj->getUserID();
+		try
+		{
+			$this->userID = $userObj->getUserID();
+		}
+		catch (\Exception $e)
+		{
+			throw new UserNotExistsException("ERROR: This user does not exists!");
+		}
 		
 		if (! XUser::isXUserExists($this->userID))	//If user's records are not present in the DB, then insert them
-			SQL("INSERT INTO XUSER (`USERID`) VALUES (?)", array($this->userID));
+		{
+			$rowsAffected = SQL("INSERT INTO XUSER (`USERID`, `zip`) VALUES (?, ?)", array($this->userID, $zip));
+			
+			if ($rowsAffected == 0)
+			{
+				throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
+			}
+		}
 	}
 	
 	
@@ -91,26 +109,13 @@ class XUser extends User
 	
 	
 	/**
-	 * To set the secondary email of the user
-	 * @param string $secondaryEmail	The secondary email of the user
-	 */
-	public function setSecondaryEmail($secondaryEmail)
-	{
-		$this->secondaryEmail = $secondaryEmail;
-		
-		SQL("UPDATE XUSER SET `S_EMAIL` = ? WHERE USERID = ?", array($this->secondaryEmail, $this->userID));
-	}
-	
-	
-	
-	/**
 	 * To set the DOB of the user
 	 * @param int $dob	The DOB of the user
 	 */
 	public function setDOB($dob)
 	{
 		$dob = (int)$dob;
-		
+		//here put code to convert data from given type to unix timestamp
 		if ( $dob < time() )	//The given DOB is in past because DOB's cant be in future
 		{
 			$this->dob = $dob;
@@ -132,6 +137,49 @@ class XUser extends User
 			return FALSE;
 
 		return TRUE;
+	}
+	
+	
+	
+	public function isTypeSet()
+	{
+		$result = SQL("SELECT type FROM XUSER WHERE USERID = ?", array($this->userID));
+		
+		if (count($result) == 1)
+		{
+			if ( ($result[0]['type'] == 'e')  || ($result[0]['type'] == 'c'))
+				return $result[0]['type'];
+		}
+		
+		return FALSE;
+	}
+	
+	
+	
+	public function setType($type)
+	{
+		$this->type = $type;
+		SQL("UPDATE XUSER SET type = ? WHERE USERID = ?", array($type, $this->userID));
+	}
+	
+	
+	
+	public function setZip($zip)
+	{
+		$this->zip = $zip;
+		
+		$rowsAffected = SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
+		
+		if ($rowsAffected == 0)
+			throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
+	}
+	
+	
+	
+	public function setStreetAddress($streetaddr)
+	{
+		$this->streetaddr = $streetaddr;
+		SQL("UPDATE XUSER SET streetaddr = ? WHERE USERID = ?", array($streetaddr, $this->userID));
 	}
 	
 	

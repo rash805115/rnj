@@ -62,3 +62,16 @@ function checkForPasswordsMatch(formName)
 	
 	return true;
 }
+
+function verifyEmail(elementID)
+{
+	var value = document.getElementById(elementID).value;
+	
+//	if (value.match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,63})$/") != value)
+//	{
+//		alert("Invalid Email!");
+//		return false;
+//	}
+	
+	return true;
+}
