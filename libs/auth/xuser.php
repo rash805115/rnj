@@ -2,6 +2,9 @@
 namespace phpsec;
 
 
+class XUserException extends \Exception {}
+class InvalidAddress extends XUserException {}
+
 
 class XUser extends User
 {
@@ -25,14 +28,6 @@ class XUser extends User
 	
 	
 	/**
-	 * Secondary email of the user
-	 * @var string
-	 */
-	public $secondaryEmail = NULL;
-	
-	
-	
-	/**
 	 * Date of Birth of the user
 	 * @var int
 	 */
@@ -43,8 +38,6 @@ class XUser extends User
 	public $type = NULL;
 	public $zip = NULL;
 	public $streetaddr = NULL;
-	public $city = NULL;
-	public $state = NULL;
 
 
 
@@ -63,12 +56,26 @@ class XUser extends User
 	 * Constructor of this class.
 	 * @param \phpsec\User $userObj		The object of class \phpsec\User
 	 */
-	public function __construct($userObj)
+	public function __construct($userObj, $zip)
 	{
-		$this->userID = $userObj->getUserID();
+		try
+		{
+			$this->userID = $userObj->getUserID();
+		}
+		catch (\Exception $e)
+		{
+			throw new UserNotExistsException("ERROR: This user does not exists!");
+		}
 		
 		if (! XUser::isXUserExists($this->userID))	//If user's records are not present in the DB, then insert them
-			SQL("INSERT INTO XUSER (`USERID`) VALUES (?)", array($this->userID));
+		{
+			$rowsAffected = SQL("INSERT INTO XUSER (`USERID`, `zip`) VALUES (?, ?)", array($this->userID, $zip));
+			
+			if ($rowsAffected == 0)
+			{
+				throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
+			}
+		}
 	}
 	
 	
@@ -102,26 +109,13 @@ class XUser extends User
 	
 	
 	/**
-	 * To set the secondary email of the user
-	 * @param string $secondaryEmail	The secondary email of the user
-	 */
-	public function setSecondaryEmail($secondaryEmail)
-	{
-		$this->secondaryEmail = $secondaryEmail;
-		
-		SQL("UPDATE XUSER SET `S_EMAIL` = ? WHERE USERID = ?", array($this->secondaryEmail, $this->userID));
-	}
-	
-	
-	
-	/**
 	 * To set the DOB of the user
 	 * @param int $dob	The DOB of the user
 	 */
 	public function setDOB($dob)
 	{
 		$dob = (int)$dob;
-		
+		//here put code to convert data from given type to unix timestamp
 		if ( $dob < time() )	//The given DOB is in past because DOB's cant be in future
 		{
 			$this->dob = $dob;
@@ -173,7 +167,11 @@ class XUser extends User
 	public function setZip($zip)
 	{
 		$this->zip = $zip;
-		SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
+		
+		$rowsAffected = SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
+		
+		if ($rowsAffected == 0)
+			throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
 	}
 	
 	
@@ -182,18 +180,6 @@ class XUser extends User
 	{
 		$this->streetaddr = $streetaddr;
 		SQL("UPDATE XUSER SET streetaddr = ? WHERE USERID = ?", array($streetaddr, $this->userID));
-	}
-	
-	public function setCity($city)
-	{
-		$this->city = $city;
-		SQL("UPDATE XUSER SET city = ? WHERE USERID = ?", array($city, $this->userID));
-	}
-	
-	public function setState($state)
-	{
-		$this->state = $state;
-		SQL("UPDATE XUSER SET state = ? WHERE USERID = ?", array($state, $this->userID));
 	}
 	
 	

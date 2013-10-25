@@ -27,6 +27,7 @@ class Autoloader
 			"AdvancedPasswordManagement"	=>	"auth/adv_password",
 			"BasicPasswordManagement"	=>	"auth/user",
 			"User"				=>	"auth/user",
+			"XUser"				=>	"auth/xuser",
 			"UserManagement"		=>	"auth/usermanagement",
 			"ErrorHandler"			=>	"core/error",
 			"DatabaseManager"		=>	"db/dbmanager",

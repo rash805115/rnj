@@ -20,7 +20,7 @@
 					</tr>
 					<tr name="email-field" id="email-field">
 						<td><label>E-Mail:</label></td>
-						<td><input type="text" name="email" id="email" maxlength="128"></td>
+						<td><input type="text" name="email" id="email" maxlength="128" onblur="return verifyEmail('email');"></td>
 					</tr>
 					<tr name="pass-field" id="pass-field">
 						<td><label>Desired Password:</label></td>
