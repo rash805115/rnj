@@ -96,7 +96,7 @@ function requiredFields(elementID)
  */
 function verifyNames(elementID)
 {
-	return requiredFields(elementID);
+	requiredFields(elementID);
 
 	if (! $("#" + elementID).val().match(/^[a-zA-Z]+$/))
 	{
@@ -114,11 +114,53 @@ function verifyNames(elementID)
  */
 function verifyZip(elementID)
 {
-	return requiredFields(elementID);
+	requiredFields(elementID);
 
 	if (! $("#" + elementID).val().match(/(^\d{5}$)/g))	//USA zip codes for this application will be only 5 digits.
 	{
 		alert("This doesn't look like a valid zip! Please enter a correct zip code.");
+		return false;
+	}
+
+	return true;
+}
+
+
+function verifyStreetAddress(elementID)
+{
+	var value = document.getElementById(elementID).value;
+
+	if (! $("#" + elementID).val().match(/^[a-z0-9A-Z_@.\-/\n\,]*$/))
+	{
+		alert("Street Address can only contain a-z A-Z 0-9 - . _ ,");
+		return false;
+	}
+
+	return true;
+}
+
+
+function verifyAlbhabeticField(elementID)
+{
+	var value = document.getElementById(elementID).value;
+
+	if (! $("#" + elementID).val().match(/^[a-zA-Z0-9]*$/))
+	{
+		alert("This field can only contain these things a-z A-Z 0-9");
+		return false;
+	}
+
+	return true;
+}
+
+
+function verifyNumericField(elementID)
+{
+	var value = document.getElementById(elementID).value;
+
+	if (! $("#" + elementID).val().match(/^(\d)*$/))
+	{
+		alert("This field can only contain digits 0-9");
 		return false;
 	}
 

@@ -104,7 +104,7 @@ function verifyUserID(elementID)
 
 	if (value.match(/^[a-z0-9A-Z_@.-]*$/) != value)
 	{
-		alert("Invalid UserID!");
+		alert("Invalid UserID! Can only contain a-z A-Z 0-9 - . _ @");
 		return false;
 	}
 

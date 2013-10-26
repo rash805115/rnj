@@ -46,7 +46,7 @@
 					</tr>
 					<tr name="streetaddr-field" id="streetaddr-field">
 						<td><label>Street Address:</label></td>
-						<td><textarea name="streetaddr" id="streetaddr" rows="5" cols="40"><?php if(isset($result[0]['streetaddr'])) echo $result[0]['streetaddr']; ?></textarea></td>
+						<td><textarea name="streetaddr" id="streetaddr" rows="5" cols="40" onblur="return verifyStreetAddress('streetaddr');"><?php if(isset($result[0]['streetaddr'])) echo $result[0]['streetaddr']; ?></textarea></td>
 					</tr>
 				</table>
 				
@@ -70,11 +70,11 @@
 					<table name="business-customer-table" id="business-customer-table">
 						<tr name="company-name-field" id="company-name-field">
 							<td><label>Company that you work for:</label></td>
-							<td><input type="text" name="company-name" id="company-name" maxlength="50" value="<?php if(isset($resultFromType[0]['companyname'])) echo $resultFromType[0]['companyname']; ?>"></td>
+							<td><input type="text" name="company-name" id="company-name" maxlength="50" onblur="return verifyAlbhabeticField('company-name')" value="<?php if(isset($resultFromType[0]['companyname'])) echo $resultFromType[0]['companyname']; ?>"></td>
 						</tr>
 						<tr name="business-annual-income-field" id="business-annual-income-field">
 							<td><label>Your Annual Income:</label></td>
-							<td><input type="text" name="business-annual-income" id="business-annual-income" maxlength="15" value="<?php if(isset($resultFromType[0]['annualincome'])) echo $resultFromType[0]['annualincome'] ?>"></td>
+							<td><input type="text" name="business-annual-income" id="business-annual-income" maxlength="15" onblur="return verifyNumericField('business-annual-income')" value="<?php if(isset($resultFromType[0]['annualincome'])) echo $resultFromType[0]['annualincome'] ?>"></td>
 						</tr>
 					</table>
 				</div>
@@ -95,7 +95,7 @@
 					<table name="home-customer-table" id="home-customer-table">
 						<tr name="annual-income-field" id="annual-income-field">
 							<td><label>Your Annual Income:</label></td>
-							<td><input type="text" name="home-annual-income" id="home-annual-income" maxlength="15" value="<?php if(isset($resultFromType[0]['income'])) echo $resultFromType[0]['income']; ?>"></td>
+							<td><input type="text" name="home-annual-income" id="home-annual-income" maxlength="15" onblur="return verifyNumericField('home-annual-income')" value="<?php if(isset($resultFromType[0]['income'])) echo $resultFromType[0]['income']; ?>"></td>
 						</tr>
 					</table>
 				</div>
@@ -104,11 +104,11 @@
 					<table name="employee-table" id="employee-table">
 						<tr name="employee-title-field" id="employee-title-field">
 							<td><label>Your designation in this company:</label></td>
-							<td><input type="text" name="employee-title" id="employee-title" maxlength="100" value="<?php if(isset($resultFromType[0]['title'])) echo $resultFromType[0]['title']; ?>"></td>
+							<td><input type="text" name="employee-title" id="employee-title" maxlength="100" onblur="return verifyAlbhabeticField('employee-title')" value="<?php if(isset($resultFromType[0]['title'])) echo $resultFromType[0]['title']; ?>"></td>
 						</tr>
 						<tr name="employee-salary-field" id="employee-salary-field">
 							<td><label>Your Annual Income:</label></td>
-							<td><input type="text" name="employee-annual-income" id="employee-annual-income" maxlength="15" value="<?php if(isset($resultFromType[0]['salary'])) echo $resultFromType[0]['salary']; ?>"></td>
+							<td><input type="text" name="employee-annual-income" id="employee-annual-income" maxlength="15" onblur="return verifyNumericField('employee-annual-income')" value="<?php if(isset($resultFromType[0]['salary'])) echo $resultFromType[0]['salary']; ?>"></td>
 						</tr>
 					</table>
 				</div>
