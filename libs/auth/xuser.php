@@ -76,6 +76,17 @@ class XUser extends User
 				throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
 			}
 		}
+		
+		$result = SQL("SELECT zip FROM XUSER WHERE USERID = ?", array($this->userID));
+		if ($result[0]['zip'] != $zip)
+		{
+			$rowsAffected = SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
+			
+			if ($rowsAffected == 0)
+			{
+				throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
+			}
+		}
 	}
 	
 	

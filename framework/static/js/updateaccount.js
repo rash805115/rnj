@@ -40,15 +40,18 @@ $("#type-of-customer-select").click(
 );
 
 
-
-
-function verifyNames(elementID)
+function requiredFields(elementID)
 {
 	if ($("#" + elementID).val() == "")
 	{
 		alert("This field is required. You cannot leave it blank!");
 		return false;
 	}
+}
+
+function verifyNames(elementID)
+{
+	return requiredFields(elementID);
 
 	if (! $("#" + elementID).val().match(/^[a-zA-Z]+$/))
 	{
@@ -61,13 +64,9 @@ function verifyNames(elementID)
 
 function verifyZip(elementID)
 {
-	if ($("#" + elementID).val() == "")
-	{
-		alert("This field is required. You cannot leave it blank!");
-		return false;
-	}
+	return requiredFields(elementID);
 
-	if (! $("#" + elementID).val().match(/(^\d{5}$)|(^\d{5}-\d{4}$)/g))	//USA zip codes can be either 5 or 9 digit
+	if (! $("#" + elementID).val().match(/(^\d{5}$)/g))	//USA zip codes can be either 5 or 9 digit
 	{
 		alert("This doesn't look like a valid zip! Please enter a correct zip code.");
 		return false;
