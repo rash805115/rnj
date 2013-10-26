@@ -1,6 +1,12 @@
 //Here the function just alerts for testing purposes. In reality, please change the alert with nice looking dialog boxes
 //and then redirect or reload the page to stop the page from submitting the data to the server
 
+
+/**
+ * Function to check for "fields" in a form.
+ * It uses other check* functions
+ * @returns {undefined}
+ */
 function check()
 {
 	var formName = arguments[0];
@@ -18,6 +24,11 @@ function check()
 	}
 }
 
+/**
+ * Function to check for blanks in a form. Applies to all the input-text/password types
+ * @param {type} formName
+ * @returns {Boolean}
+ */
 function checkForBlanks(formName)
 {
 	var allElements = document.forms[formName].getElementsByTagName("input");
@@ -36,6 +47,11 @@ function checkForBlanks(formName)
 	return true;
 }
 
+/**
+ * Function to check if passwords match in a form or not. It will check for equality in all those password fields which do not start with "_x"
+ * @param {type} formName
+ * @returns {Boolean}
+ */
 function checkForPasswordsMatch(formName)
 {
 	var allElements = document.forms[formName].getElementsByTagName("input");
@@ -63,6 +79,11 @@ function checkForPasswordsMatch(formName)
 	return true;
 }
 
+/**
+ * Function to verify an email ID
+ * @param {type} elementID
+ * @returns {Boolean}
+ */
 function verifyEmail(elementID)
 {
 	var value = document.getElementById(elementID).value;

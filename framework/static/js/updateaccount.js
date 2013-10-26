@@ -1,3 +1,7 @@
+//Javascript specific to file view/default/user/updateaccount.php
+
+
+
 $("#type-of-customer-div").hide();
 $("#business-customer-detail").hide();
 $("#home-customer-detail").hide();
@@ -39,7 +43,11 @@ $("#type-of-customer-select").click(
 	}
 );
 
-
+/**
+ * Function to be implemented by all required fields
+ * @param {type} elementID
+ * @returns {Boolean}
+ */
 function requiredFields(elementID)
 {
 	if ($("#" + elementID).val() == "")
@@ -49,6 +57,11 @@ function requiredFields(elementID)
 	}
 }
 
+/**
+ * Function to check the validity for names
+ * @param {type} elementID
+ * @returns {Boolean}
+ */
 function verifyNames(elementID)
 {
 	return requiredFields(elementID);
@@ -62,11 +75,16 @@ function verifyNames(elementID)
 	return true;
 }
 
+/**
+ * Function to check the validity for zip codes
+ * @param {type} elementID
+ * @returns {Boolean}
+ */
 function verifyZip(elementID)
 {
 	return requiredFields(elementID);
 
-	if (! $("#" + elementID).val().match(/(^\d{5}$)/g))	//USA zip codes can be either 5 or 9 digit
+	if (! $("#" + elementID).val().match(/(^\d{5}$)/g))	//USA zip codes for this application will be only 5 digits.
 	{
 		alert("This doesn't look like a valid zip! Please enter a correct zip code.");
 		return false;
