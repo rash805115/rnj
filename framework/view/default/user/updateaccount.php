@@ -28,7 +28,7 @@
 					</tr>
 					<tr name="zip-field" id="zip-field">
 						<td><label>Zip *:</label></td>
-						<td><input type="text" name="zip" id="zip" maxlength="11" onblur="return verifyZip('zip');"></td>
+						<td><input type="text" name="zip" id="zip" maxlength="5" onblur="return verifyZip('zip');"></td>
 					</tr>
 					<tr name="streetaddr-field" id="streetaddr-field">
 						<td><label>Street Address:</label></td>

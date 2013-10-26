@@ -31,16 +31,7 @@ class UserAccountUpdateController extends phpsec\framework\DefaultController
 
 						$xuserObj->setName($_POST['fname'], $_POST['lname']);
 						
-						if ( (isset($_POST['semail'])) && ($_POST['semail'] != "") )
-						{
-							if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,63})$/', $_POST['semail']))
-							{
-								$this->error .= "Invalid email address." . "<BR>";
-								return require_once(__DIR__ . "/../../view/default/user/updateaccount.php");
-							}
-							
-							$xuserObj->setSecondaryEmail($_POST['semail']);
-						}
+						
 					}
 					else
 					{

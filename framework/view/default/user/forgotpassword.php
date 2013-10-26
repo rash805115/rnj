@@ -16,7 +16,7 @@
 				<table name="forgot-password-table" id="forgot-password-table">
 					<tr name="email-field" id="email-field">
 						<td><label>Primary Email:</label></td>
-						<td><input type="text" name="email" id="email" maxlength="128"></td>
+						<td><input type="text" name="email" id="email" maxlength="128" onblur="return verifyEmail('email');"></td>
 					</tr>
 					<tr name="checkout-field" id="checkout-field">
 						<td><input type="submit" name="submit" id="submit" value="Submit"></td>

@@ -30,7 +30,7 @@ class UserSignupController extends phpsec\framework\DefaultController
 						return require_once(__DIR__ . "/../../view/default/user/signup.php");
 					}
 
-					if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,63})$/',$_POST['email']))
+					if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@([a-z0-9-])+\.([a-z0-9-]+)(\.[a-z]{2,63})?$/',$_POST['email']))
 					{
 						$this->error .= "Invalid email address." . "<BR>";
 						return require_once(__DIR__ . "/../../view/default/user/signup.php");
