@@ -3,47 +3,14 @@ namespace phpsec;
 
 
 class XUserException extends \Exception {}
+
+class InvalidFirstName extends XUserException {}
+class InvalidLastName extends XUserException {}
 class InvalidAddress extends XUserException {}
 
 
 class XUser extends User
 {
-	
-	
-	
-	/**
-	 * First name of the user
-	 * @var string
-	 */
-	public $firstName = NULL;
-	
-	
-	
-	/**
-	 * Last name of the user
-	 * @var string
-	 */
-	public $lastName = NULL;
-	
-	
-	
-	/**
-	 * Date of Birth of the user
-	 * @var int
-	 */
-	public $dob = NULL;
-	
-	
-	
-	public $type = NULL;
-	public $zip = NULL;
-	public $streetaddr = NULL;
-
-
-
-
-
-
 	/**
 	 * Minimum age that is required for all users
 	 * @var int
@@ -80,12 +47,7 @@ class XUser extends User
 		$result = SQL("SELECT zip FROM XUSER WHERE USERID = ?", array($this->userID));
 		if ($result[0]['zip'] != $zip)
 		{
-			$rowsAffected = SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
-			
-			if ($rowsAffected == 0)
-			{
-				throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
-			}
+			$this->setZip($zip);
 		}
 	}
 	
@@ -111,10 +73,17 @@ class XUser extends User
 	 */
 	public function setName($firstName, $lastName)
 	{
-		$this->firstName = $firstName;
-		$this->lastName = $lastName;
+		if (! preg_match("/^[a-zA-Z]+$/", $firstName))
+		{
+			throw new InvalidFirstName("ERROR: First Name is invalid.");
+		}
 		
-		SQL("UPDATE XUSER SET `FIRST_NAME` = ?, `LAST_NAME` = ? WHERE USERID = ?", array($this->firstName, $this->lastName, $this->userID));
+		if (! preg_match("/^[a-zA-Z]+$/", $lastName))
+		{
+			throw new InvalidLastName("ERROR: Last Name is invalid.");
+		}
+		
+		SQL("UPDATE XUSER SET `FIRST_NAME` = ?, `LAST_NAME` = ? WHERE USERID = ?", array($firstName, $lastName, $this->userID));
 	}
 	
 	
@@ -129,8 +98,7 @@ class XUser extends User
 		//here put code to convert data from given type to unix timestamp
 		if ( $dob < time() )	//The given DOB is in past because DOB's cant be in future
 		{
-			$this->dob = $dob;
-			SQL("UPDATE XUSER SET `DOB` = ? WHERE USERID = ?", array($this->dob, $this->userID));
+			SQL("UPDATE XUSER SET `DOB` = ? WHERE USERID = ?", array($dob, $this->userID));
 		}
 	}
 	
@@ -169,7 +137,6 @@ class XUser extends User
 	
 	public function setType($type)
 	{
-		$this->type = $type;
 		SQL("UPDATE XUSER SET type = ? WHERE USERID = ?", array($type, $this->userID));
 	}
 	
@@ -177,10 +144,12 @@ class XUser extends User
 	
 	public function setZip($zip)
 	{
-		$this->zip = $zip;
+		if (! preg_match("/(^\d{5}$)/", $zip))
+		{
+			throw new InvalidAddress("ERROR: Invalid Zipcode.");
+		}
 		
 		$rowsAffected = SQL("UPDATE XUSER SET zip = ? WHERE USERID = ?", array($zip, $this->userID));
-		
 		if ($rowsAffected == 0)
 			throw new InvalidAddress("ERROR: This address looks invalid. Please enter correct zipcode.");
 	}
@@ -189,7 +158,6 @@ class XUser extends User
 	
 	public function setStreetAddress($streetaddr)
 	{
-		$this->streetaddr = $streetaddr;
 		SQL("UPDATE XUSER SET streetaddr = ? WHERE USERID = ?", array($streetaddr, $this->userID));
 	}
 	
