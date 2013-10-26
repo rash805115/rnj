@@ -16,7 +16,7 @@
 				<table name="login-table" id="login-table">
 					<tr name="user-field" id="user-field">
 						<td><label>Username:</label></td>
-						<td><input type="text" name="user" id="user" maxlength="32"></td>
+						<td><input type="text" name="user" id="user" maxlength="32" onblur="return verifyUserID('user');"></td>
 					</tr>
 					<tr name="pass-field" id="pass-field">
 						<td><label>Password:</label></td>

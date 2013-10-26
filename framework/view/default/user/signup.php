@@ -16,7 +16,7 @@
 				<table name="signup-table" id="signup-table">
 					<tr name="user-field" id="user-field">
 						<td><label>Desired Username:</label></td>
-						<td><input type="text" name="user" id="user" maxlength="32"></td>
+						<td><input type="text" name="user" id="user" maxlength="32" onblur="return verifyUserID('user');"></td>
 					</tr>
 					<tr name="email-field" id="email-field">
 						<td><label>E-Mail:</label></td>

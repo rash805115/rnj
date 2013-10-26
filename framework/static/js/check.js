@@ -96,3 +96,17 @@ function verifyEmail(elementID)
 
 	return true;
 }
+
+
+function verifyUserID(elementID)
+{
+	var value = document.getElementById(elementID).value;
+
+	if (value.match(/^[a-z0-9A-Z_@.-]*$/) != value)
+	{
+		alert("Invalid UserID!");
+		return false;
+	}
+
+	return true;
+}
