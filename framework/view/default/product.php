@@ -1,5 +1,32 @@
 <?php
 
+	$columsPerRow = 2;
+
+	$catString = phpsec\SQL("SELECT kname FROM pkind WHERE kid = ?", array($cat));
+	if (count($catString) == 1)
+		$catString = $catString[0]['kname'];
+	else
+	{
+		$catString = phpsec\SQL("SELECT kname FROM pkind LIMIT 1", array());
+		$catString = $catString[0]['kname'];
+	}
+	
+	$typeString = phpsec\SQL("SELECT kkid, kkname FROM ptype WHERE kid = ?", array($cat));
+	
+	function getProductsForID($kkid, $catString)
+	{
+		$result = phpsec\SQL("SELECT * FROM product WHERE kkid = ?", array($kkid));
+		if (count($result ) > 0)
+		{
+			for ($i = 0; $i < count($result); $i++)
+			{
+				$result[$i]['imageurl'] = $catString . "/" . $result[$i]['imageurl'];
+			}
+		}
+		
+		return $result;
+	}
+	
 	function getTableElementStructure($cols, $products, $trID = NULL, $tdID = NULL)
 	{
 		$noOfProducts = count($products);
@@ -28,7 +55,7 @@
 						$tableStructure .= " name='{$temp_col}' id='{$temp_col}'";
 					}
 					$tableStructure .= " height='100px' width='100px'>";
-					$imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/" . $products[($cols*$i)+$j]['imageurl'];
+					$imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/images/" . $products[($cols*$i)+$j]['imageurl'];
 					$tableStructure .= "<img src=\"{$imageURL}\">";
 					$tableStructure .= "</td>";
 				}
@@ -39,23 +66,51 @@
 		
 		return $tableStructure;
 	}
+	
+	function getSelectionMenu($elements)
+	{
+		$selectType = "<select";
+		$selectType .= " name='select' id='select'";
+		$selectType .= ">";
+		
+		for($i = 0; $i < count($elements); $i++)
+		{
+			$selectType .= "<option value='";
+			$selectType .= $elements[$i]['kkid'] . "'>";
+			$selectType .= $elements[$i]['kkname'];
+			$selectType .= "</option>";
+		}
+		
+		$selectType .= "</select>";
+		return $selectType;
+	}
 
 ?>
 
 <div id="product-show" name="product-show">
 	<label><h1>Choose Category:</h1></label>
-	<select name="pro-cat" id="pro-cat">
-		<option name="monitor" id="monitor">Monitors</option>
-	</select>
+	<?php
+		echo getSelectionMenu($typeString);
+	?>
 	
 	<BR><BR><BR>
 	<?php
-		$products = phpsec\SQL("SELECT * FROM product", array());
-
-		$productTable = "<table border='4'>";
-		$productTable .= getTableElementStructure(10, $products, "r", "c");
-		$productTable .= "</table>";
+		$productTable = "";
+	
+		$products = array();
+		for ($i = 0; $i < count($typeString); $i++)
+		{
+			$products[$i] = getProductsForID($typeString[$i]['kkid'], $catString);
+			$tableId = $typeString[$i]['kkid'];
+			$productTable .= "<table border='4' style='display:none;'";
+			$productTable .= " name='{$tableId}' id='{$tableId}'>";
+			$productTable .= getTableElementStructure($columsPerRow, $products[$i]);
+			$productTable .= "</table>";
+		}
 		
 		echo $productTable;
 	?>
 </div>
+
+<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/jquery.js" . '"'); ?> ></script>
+<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/show-product.js" . '"'); ?> ></script>

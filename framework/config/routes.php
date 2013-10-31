@@ -8,6 +8,7 @@ namespace phpsec\framework;
  * @note: wildcards only supported at the rightmost character
  */
 
+FrontController::$Routes["products"] =			"general/productcontroller";			//controller to show products on the page
 FrontController::$Routes["home"] =			"general/indexcontroller";			//the first page for users (non-logged users)
 FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user login
 FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user logout
