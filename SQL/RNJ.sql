@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 20, 2013 at 06:19 PM
+-- Generation Time: Oct 31, 2013 at 06:20 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -55,6 +55,13 @@ CREATE TABLE IF NOT EXISTS `businesscustomer` (
   PRIMARY KEY (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `businesscustomer`
+--
+
+INSERT INTO `businesscustomer` (`USERID`, `companyname`, `annualincome`) VALUES
+('rash', 'gg', 241);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +72,13 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `USERID` varchar(32) NOT NULL,
   PRIMARY KEY (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`USERID`) VALUES
+('rash');
 
 -- --------------------------------------------------------
 
@@ -78,6 +92,13 @@ CREATE TABLE IF NOT EXISTS `employee` (
   `salary` int(15) DEFAULT NULL,
   PRIMARY KEY (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`USERID`, `title`, `salary`) VALUES
+('rash', 'agaga', 352);
 
 -- --------------------------------------------------------
 
@@ -100,11 +121,18 @@ CREATE TABLE IF NOT EXISTS `employee_workin_store` (
 
 CREATE TABLE IF NOT EXISTS `homecustomer` (
   `USERID` varchar(32) NOT NULL,
-  `marriage` char(1) DEFAULT NULL,
-  `gender` char(1) DEFAULT NULL,
+  `marriage` enum('m','s','d') DEFAULT NULL,
+  `gender` enum('m','f') DEFAULT NULL,
   `income` int(11) DEFAULT NULL,
   PRIMARY KEY (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `homecustomer`
+--
+
+INSERT INTO `homecustomer` (`USERID`, `marriage`, `gender`, `income`) VALUES
+('rash', 'd', 'f', 34);
 
 -- --------------------------------------------------------
 
@@ -146,7 +174,8 @@ CREATE TABLE IF NOT EXISTS `PASSWORD` (
 
 INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEMPTS`, `LAST_LOGIN_ATTEMPT`, `FIRST_LOGIN_ATTEMPT`, `USERID`) VALUES
 ('8bf6a90306', 1, 0, 1, 1382234585, 1382234585, 'rash'),
-('8f47155b0d97f3d01a00cec52fd461e50a7af8a2735c87fce6fe1eabb0bb49fd46ae2d8f8912279deb3cd4b8992e72bf46dd4f1509f9edd737de3be140db3baf', 0, 1382233239, 0, 0, 0, 'root');
+('8f47155b0d97f3d01a00cec52fd461e50a7af8a2735c87fce6fe1eabb0bb49fd46ae2d8f8912279deb3cd4b8992e72bf46dd4f1509f9edd737de3be140db3baf', 0, 1382233239, 0, 0, 0, 'root'),
+('2bff93df10', 1, 0, 0, 0, 0, 'jack');
 
 -- --------------------------------------------------------
 
@@ -155,10 +184,19 @@ INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEM
 --
 
 CREATE TABLE IF NOT EXISTS `pkind` (
-  `kid` int(11) NOT NULL DEFAULT '0',
+  `kid` int(4) NOT NULL AUTO_INCREMENT,
   `kname` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`kid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `pkind`
+--
+
+INSERT INTO `pkind` (`kid`, `kname`) VALUES
+(0, 'Electronics'),
+(1, 'Clothes'),
+(2, 'Books');
 
 -- --------------------------------------------------------
 
@@ -167,15 +205,52 @@ CREATE TABLE IF NOT EXISTS `pkind` (
 --
 
 CREATE TABLE IF NOT EXISTS `product` (
-  `pid` int(11) NOT NULL DEFAULT '0',
-  `kid` int(11) NOT NULL,
-  `pname` varchar(50) DEFAULT NULL,
+  `pid` int(11) NOT NULL AUTO_INCREMENT,
+  `kkid` int(4) NOT NULL,
+  `pname` text,
   `tinventory` int(11) DEFAULT NULL,
-  `price` int(11) DEFAULT NULL,
+  `price` float DEFAULT NULL,
   `imageurl` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`pid`),
+  KEY `kkid` (`kkid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`) VALUES
+(8, 1, 'Asus Monitor', 1, 200, '7.jpg'),
+(9, 1, 'LG Monitor', 1, 250, '8.jpg'),
+(10, 1, 'Samsung Monitor', 1, 275, '10.jpg'),
+(11, 3, 'Harry Potter and the Sorcerer''s Stone', 2, 14.99, '1.jpg'),
+(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.gif'),
+(13, 3, 'Harry Potter and the Prisoner of Azkaban', 3, 15.99, '3.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ptype`
+--
+
+CREATE TABLE IF NOT EXISTS `ptype` (
+  `kkid` int(4) NOT NULL AUTO_INCREMENT,
+  `kid` int(4) NOT NULL,
+  `kkname` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`kkid`),
   KEY `kid` (`kid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `ptype`
+--
+
+INSERT INTO `ptype` (`kkid`, `kid`, `kkname`) VALUES
+(1, 0, 'Monitor'),
+(2, 0, 'Laptop'),
+(3, 2, 'Fiction'),
+(4, 2, 'Personal Care'),
+(5, 2, 'Science & Technology');
 
 -- --------------------------------------------------------
 
@@ -236,6 +311,7 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('568b0e967e839825fb13029980c2f6f17c5435d55ff151d0ff530b4bc2db793b1d5cd569eff2bfcb17a8d9b501b11ad018e94fdfce06d3cc58264d7077b35fc3', 1381999778, 1381999778, 'rash'),
 ('5b9cda7d70bbb4f4822299049dbc0466fa88c6f81a35cc40fd898380d6cecb8342bdb8c72ebd0ccd917cbc76679b85fb32dc293551558eabf53a4cb6db2f06d8', 1382047006, 1382047006, 'rash'),
 ('6532106cec75b95900be5dc5346bad1c7579764029438bbeebd650abd37e5cbd18c4b45131bff53ad98ccac8e8591327a1e2cab5ad0df78c26fa3cb36b60bfc7', 1381999678, 1381999678, 'rash'),
+('6b9f99b79142a60c5e2fdc322e2c517a2b35daf7ba0655f2ed01c70bdd3b0a2ac3a0fcf07c9cfa214e98bed3a6785985a9d3e23a552f835d77329f29e4a9edcd', 1382811781, 1382811781, 'rash'),
 ('8191dc91c2d9b14307117a4c13362cc698f43d15bc4026d4bc40cf4ae127e0e30d36b0b17a7dd76e086ff04547112fcb77d05930ae9d96cb7afd50e4eb6cca53', 1382044893, 1382044893, 'rash'),
 ('9d11bfc31367eafeb7c02187f4713436f6d9b3b6a0a57eed6d8b744829b6c492315a577c09a2febc6e50b4ad85a321200bd0e44267cd55570a70d6d219b57be4', 1382097240, 1382097240, 'rash'),
 ('aeb33f4ba8a072004db2d6317e9597520fb422a0c74c208947eedd29465ef2183c17c1978f2ddc81eac23b24239de00baa0e47b1fe35665946bfecf225ea0f75', 1381999575, 1381999575, 'rash'),
@@ -327,6 +403,7 @@ CREATE TABLE IF NOT EXISTS `USER` (
 --
 
 INSERT INTO `USER` (`USERID`, `P_EMAIL`, `ACCOUNT_CREATED`, `LOCKED`, `INACTIVE`, `HASH`, `DATE_CREATED`, `ALGO`, `DYNAMIC_SALT`) VALUES
+('jack', 'rahul.chaudhary@owasp.org', 1382636773, 1, 0, '55dbd88705076de6aac4b27b53cb7495a3927f7eb076f34d7f0b10787767d12a11e8e1b36e39f5dcf93447749afd252eb4735d5900a9a6e77d859dcb7db91bf5', 1382636773, 'sha512', '9c44ce028fb26cf72681a3a0940dbbb508b8207c95121b1366e542fc2c66b3aac5dd7e8e6867b2d64ebf04c71fa123abc646cfb3f6cfc1bb4d9e2e0eade61715'),
 ('rash', 'rahul.chaudhary@owasp.org', 1381998328, 0, 0, 'b6b253f620bf3afcd56933058e2bdb3b6c015ef474a2388fe0b9c969fe5fc70906441d3c499eb06520c513807c2afd4b7c4b47d0175319fc06e5c8300b750f63', 1382233652, 'sha512', '8b140860ae9a43caa783ce1a9aabdefc21613e8dd09b1425d0dc2c1f3ec2a2559ee5419a8e4496f5bce4583415ac3ddc8cd8727e9b8e3039352d8a1e6474c024'),
 ('root', 'rac130@pitt.edu', 1382232424, 0, 1, 'c99d0727ab89828f79d81689c7a53f95a34d92bccd133ae7a38354e8bc5b737c843cecccfa949b2fcce59c141f953f1d849dd5ef7c9b965594f84cb6313bb99a', 1382232424, 'sha512', '3963caa6707112b947e1425dd408b22e47f2b28f41ac9a5fdea301a47789ecfe6df2f9988a19edd9427227fe6addc79f23af061e7b6c241c79a82e2ffa623b8d');
 
@@ -390,18 +467,22 @@ CREATE TABLE IF NOT EXISTS `user_sell_product` (
 
 CREATE TABLE IF NOT EXISTS `XUSER` (
   `USERID` varchar(32) NOT NULL,
-  `S_EMAIL` varchar(128) DEFAULT NULL,
   `FIRST_NAME` varchar(40) DEFAULT NULL,
   `LAST_NAME` varchar(40) DEFAULT NULL,
-  `type` enum('e','c') DEFAULT NULL,
+  `type` enum('e','c-b','c-h') DEFAULT NULL,
   `DOB` int(10) DEFAULT NULL,
   `zip` int(11) NOT NULL,
   `streetaddr` text,
-  `city` varchar(60) DEFAULT NULL,
-  `state` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`USERID`),
   UNIQUE KEY `zip` (`zip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `XUSER`
+--
+
+INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
+('rash', 'rah', 'cha', 'e', 13, 15213, 'agaga');
 
 -- --------------------------------------------------------
 
@@ -417,6 +498,13 @@ CREATE TABLE IF NOT EXISTS `zipcode` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `zipcode`
+--
+
+INSERT INTO `zipcode` (`zip`, `city`, `state`) VALUES
+(15213, 'Pittsburgh', 'PA');
+
+--
 -- Constraints for dumped tables
 --
 
@@ -430,7 +518,7 @@ ALTER TABLE `AUTH_TOKENS`
 -- Constraints for table `businesscustomer`
 --
 ALTER TABLE `businesscustomer`
-  ADD CONSTRAINT `businesscustomer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `businesscustomer_ibfk_3` FOREIGN KEY (`USERID`) REFERENCES `customer` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `customer`
@@ -455,7 +543,7 @@ ALTER TABLE `employee_workin_store`
 -- Constraints for table `homecustomer`
 --
 ALTER TABLE `homecustomer`
-  ADD CONSTRAINT `homecustomer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `homecustomer_ibfk_3` FOREIGN KEY (`USERID`) REFERENCES `customer` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `PASSWORD`
@@ -467,7 +555,13 @@ ALTER TABLE `PASSWORD`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`kid`) REFERENCES `pkind` (`kid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`kkid`) REFERENCES `ptype` (`kkid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ptype`
+--
+ALTER TABLE `ptype`
+  ADD CONSTRAINT `ptype_ibfk_1` FOREIGN KEY (`kid`) REFERENCES `pkind` (`kid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `region`
