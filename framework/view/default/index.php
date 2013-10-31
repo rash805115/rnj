@@ -1,6 +1,7 @@
 <?php
 
 ?>
+
 <html>
 	<head>
 		<title>RNJ: E-Commerce Portal</title>
@@ -12,5 +13,9 @@
 		<?php include (__DIR__ . "/include.php"); ?>
 		
 		This is the index page of the application for general or not-logged users.
+		
+		<BR><BR>
+		<?php include (__DIR__ . "/product.php"); ?>
+
 	</body>
 </html>
