@@ -32,7 +32,7 @@ html > body{
 /* menu @ banner*/
 #menu{
     position:absolute;
-    top:170px;
+    top:165px;
     left:80px;
 
 }
@@ -62,7 +62,7 @@ html > body{
     line-height: 30px;
 }
 
-/* Now have 4 */
+/* Now have 3 */
 #menu .but1_active
 #menu .but2_active
 #menu .but3_active
@@ -99,6 +99,13 @@ html > body{
     text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
 }
 
+#logo{
+
+    position:absolute;
+    left:100px;
+    top:150px;
+}
+
 #list{
     list-style-type:none;
     margin:11px 0 0 0;
@@ -133,8 +140,21 @@ html > body{
     float:left;
     width:750px;
 }
+
+/* picture slide in home page */
+.fadein { 
+    height:173px; 
+    width:202px; 
+    margin:0 auto;
+    padding: 10px;
+    float: left;
+ }
+.fadein img { 
+    margin:0 auto;
+}
+
 .about{
-    padding:13px 0 0 0;
+    padding:13px 0 0 45px;
     width:420px;
     float:left;
     margin:0 25px 0 10px;
@@ -156,6 +176,12 @@ html > body{
 .news p{
     padding:5px 0 0 2px
 }
+.news2
+{background-color:#ECECC5;
+border:1px solid #DFDEC0;
+width:250px;
+float:left;
+padding:13px 26px 13px 20px}
 
 .box{
     background-color:#ECECC5;
