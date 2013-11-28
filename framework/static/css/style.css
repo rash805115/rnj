@@ -247,14 +247,15 @@ html > body{
     font-size: 18px;
 }
 
-/* interest table */
-#interests td{
+/* Shopping cart and Interests's table */
+#frame td{
     text-align: center;
     padding: 5px 5px 5px 5px;
 }
-#interests table{
+#frame table{
     text-align: center;
     margin: 5px 5px 5px 15px;
+    font-family: Cambria, Georgia, serif;
 }
 
 #footer{

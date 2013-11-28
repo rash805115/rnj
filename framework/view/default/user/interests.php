@@ -19,7 +19,7 @@
                 <?php include (__DIR__ . "/../include.php"); ?>
                 <div id="content_inside">
                     
-
+                    <div id="frame">
                             <div id='interests' name='interests'>
                                     <table id='table-interests' border='1' width="95%" >
                                             <tr>
@@ -63,8 +63,7 @@
 
                                     </table>
                             </div>
-
-                    
+                    </div>
                 </div>
              </div>
 	</body>
