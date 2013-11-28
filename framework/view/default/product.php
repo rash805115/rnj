@@ -73,7 +73,7 @@
 	{
 		$selectType = "<select";
 		$selectType .= " name='select' id='select'";
-		$selectType .= ">";
+		$selectType .= "><option value='-1'>All</option>";
 		
 		for($i = 0; $i < count($elements); $i++)
 		{
@@ -90,12 +90,9 @@
 ?>
 
 <div id="product-show" name="product-show">
-	<label><h1>Choose Category:</h1></label>
-	<?php
-		echo getSelectionMenu($typeString);
-	?>
+	<label> <h2> Show Only: <?php echo getSelectionMenu($typeString); ?> </h2></label>
 	
-	<BR><BR><BR>
+	<BR>
 	<?php
 		$productTable = "";
 	

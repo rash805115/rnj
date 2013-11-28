@@ -1,10 +1,23 @@
-$('table').hide();
+function showCat()
+{
+	IDToShow = $("#select").val();
+
+	if(IDToShow == -1)
+	{
+		$('table').show();
+	}
+	else
+	{
+		$('table').hide();
+		$("#" + IDToShow).show();
+	}
+}
+
+showCat();
 
 $('#select').click(
 	function()
 	{
-		IDToShow = $("#select").val();
-		$('table').hide();
-		$("#" + IDToShow).show();
+		showCat();
 	}
 );
