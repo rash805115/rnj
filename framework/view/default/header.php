@@ -29,7 +29,8 @@
 				<ul id=\"menu\">
 					<li><a href=\"index\" class=\"but1_active\">Home</a></li>
 					<li><a href=\"cart\" class=\"but2_active\">Shopping Cart</a></li>
-					<li><a href=\"settings\" class=\"but3_active\">Settings</a></li>
+					<li><a href=\"interests\" class=\"but3_active\">Interests</a></li>
+					<li><a href=\"settings\" class=\"but4_active\">Settings</a></li>
 				</ul>
 			";
 		}

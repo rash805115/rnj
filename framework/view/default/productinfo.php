@@ -1,5 +1,9 @@
 <?php
-	
+	if(isset($_POST['addtointerests']))
+	{
+		phpsec\SQL("INSERT INTO `user_interested_product` (USERID, pid) VALUES (?, ?)", array($userID, $productID));
+		$this->info .= "Added to interest";
+	}
 ?>
 
 <html>
@@ -50,7 +54,11 @@
 				</table>
 				
 				<BR><BR><BR>
-				<input type="submit" name="submit" id="submit" value="Add to Cart" />
+				<input type="submit" name="addtocart" id="addtocart" value="Add to Cart" />
+				
+				<form name='form-interest' id='form-interest' method='POST' action=''>
+					<input type="submit" name="addtointerests" id="addtointerests" value="Add to Interests" />
+				</form>
 			</div>
 		</div>
 	</body>

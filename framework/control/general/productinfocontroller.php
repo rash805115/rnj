@@ -4,6 +4,8 @@ class ProductController extends phpsec\framework\DefaultController
 {
 	function Handle($Request)
 	{
+		$userID = require_once(__DIR__ . '/../users/isuserlogged.php');
+		
 		$productID = $_GET['pid'];
 		$productInfo = phpsec\SQL("SELECT * FROM product WHERE pid = ?", array($productID));
 		
