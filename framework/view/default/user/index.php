@@ -9,10 +9,21 @@
 	</head>
 
 	<body>
-		<?php include (__DIR__ . "/../include.php"); ?>
-		Hello, <?php echo $userID; ?>.<BR>
-		This is the index page of the application. Once the user is logged in, this page is shown
-		<BR><BR><BR>
-		Click <a <?php $logoutURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/logout"; echo "href='{$logoutURL}'"; ?> >here</a> to logout.
-	</body>
+            <div id="wrapper">
+                <?php include (__DIR__ . "/../include.php"); ?>
+                <div id="content_inside">
+                    <div id="main_block">
+                        <div class="about">
+                            <h1>Hello, <?php echo $userID; ?>.</h1><BR>
+                            <p>
+                                You are already logged in to your RNJ account.<BR>
+                                Enjoy shopping!
+                                <BR><BR><BR>
+                                Click <a <?php $logoutURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/logout"; echo "href='{$logoutURL}'"; ?> >here</a> to logout.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </body>
 </html>

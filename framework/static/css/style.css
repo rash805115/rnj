@@ -159,6 +159,7 @@ html > body{
 }
 .about p{
     padding:5px 0 0 12px;
+    font-size: 18px;
 }
 
 /* login */
