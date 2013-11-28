@@ -7,12 +7,12 @@ html{
     width:1000px;
     height:100%;
     margin: auto;
-
 }
 body{
     height:100%;
     width:1000px;
     position:relative;
+    background: url(../images/content-bg.png) left repeat-y;
 
 }
 html > body{
@@ -41,7 +41,7 @@ html > body{
 }
 #menu a{
     margin:0 1px 0 0;
-    width:200px;
+    width:170px;
     text-align:center;
     padding:8px 0 10px 0;
     display:block;
@@ -58,7 +58,7 @@ html > body{
     color:#066854;
     text-decoration:underline;
     display: block;
-    width:200px;
+    width:170px;
     line-height: 30px;
 }
 
@@ -70,28 +70,28 @@ html > body{
 
 
 /* body down here */
-
-
-
-/* body exclude sidebar */
-#main_block{
+#wrapper{
+    padding:0 0 0 0;
+    height:100%;
+    width:1000px;
     background-color:#F3F1E9;
+    min-width: 100%;
+}
+#content_inside{
+    background-color:#F3F1E9;
+    width:800px;
     padding:0 0 0 0;
     margin:0 0 0 0;
-    font-family: Cambria, Georgia, serif;
-    font-size:14px;
-    color:#464646;
     overflow:auto;
     float:left;
-    width:800px;
 }
 
 /* categories on left */
 #sidebar{
-    background-color:#EDDDD4;
     width:145px;
+    height:auto;
     float:left;
-    padding:13px 32px 0 23px;
+    padding:40px 32px 0 23px;
     margin:0 0 0 0;
     font: 400 18px/0.8 'Cookie', Helvetica, sans-serif;
     color: #cca1bd;
@@ -116,6 +116,7 @@ html > body{
 }
 #list a{
     font: 28px 'Cookie', Helvetica, sans-serif;
+    //font-family: Cambria, Georgia, serif;
     color:#0D0D0D;
     text-decoration:none
 }
@@ -129,7 +130,26 @@ html > body{
 }
 
 
+/* body exclude sidebar */
+#main_block{
+    font-family: Cambria, Georgia, serif;
+    font-size:14px;
+    color:#464646;
+    overflow:hidden;
+    float:left;
+    width:750px;
+}
 
+#error{
+    font-family: Cambria, Georgia, serif;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    width:99.5%;
+    height: 25px;
+    background-color:#ff6666;
+    border-style: dotted;;
+}
 
 /* picture slide in home page */
 .fadein { 
@@ -251,14 +271,14 @@ padding:13px 26px 13px 20px}
     padding:0 0 200px 0
 }
 
-#footer{
-    margin: 50px auto 0 auto;
-    clear:both;
+footer{
+    //margin: 50px auto 0 auto;
+    //clear:both;
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 12px;
     text-align: center;
     width:100%;
     height:10px;
     position:absolute;
-    bottom:20px;
+    bottom:0px;
 }

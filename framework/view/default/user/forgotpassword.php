@@ -9,23 +9,30 @@
 	</head>
 
 	<body>
+            <div id="wrapper">
 		<?php include (__DIR__ . "/../include.php"); ?>
-		
-		<div name="forgot-password-div" id="forgot-password-div">
-			<form method="POST" action="" name="forgot-password-form" id="forgot-password-form" onsubmit="return check('forgot-password-form', 'checkForBlanks');">
-				<table name="forgot-password-table" id="forgot-password-table">
-					<tr name="email-field" id="email-field">
-						<td><label>Primary Email:</label></td>
-						<td><input type="text" name="email" id="email" maxlength="128" onblur="return verifyEmail('email');"></td>
-					</tr>
-					<tr name="checkout-field" id="checkout-field">
-						<td><input type="submit" name="submit" id="submit" value="Submit"></td>
-						<td><input type="reset" name="reset" id="reset" value="Reset"></td>
-					</tr>
-				</table>
-			</form>
-		</div>
-
+                <div id="content_inside">
+                    <div id="main_block">
+                        <div class="news">
+                            <div name="forgot-password-div" id="forgot-password-div">
+                                <h1>Please Enter your email</h1><br/>
+                                <form method="POST" action="" name="forgot-password-form" id="forgot-password-form" onsubmit="return check('forgot-password-form', 'checkForBlanks');">
+                                        <table name="forgot-password-table" id="forgot-password-table">
+                                                <tr name="email-field" id="email-field">
+                                                        <td><label>Primary Email:</label></td>
+                                                        <td><input type="text" name="email" id="email" maxlength="128" onblur="return verifyEmail('email');"></td>
+                                                </tr>
+                                                <tr name="checkout-field" id="checkout-field">
+                                                        <td><input type="submit" name="submit" id="submit" value="Submit"></td>
+                                                        <td><input type="reset" name="reset" id="reset" value="Reset"></td>
+                                                </tr>
+                                        </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/check.js" . '"'); ?> ></script>
-	</body>
+          </div>
+      </body>
 </html>
