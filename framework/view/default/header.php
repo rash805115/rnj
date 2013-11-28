@@ -25,12 +25,17 @@
 	<?php
 		if ($userLoggedIn == TRUE)
 		{
+			$link1 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/index";
+			$link2 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/cart";
+			$link3 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/interests";
+			$link4 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/settings";
+			
 			echo "
 				<ul id=\"menu\">
-					<li><a href=\"index\" class=\"but1_active\">Home</a></li>
-					<li><a href=\"cart\" class=\"but2_active\">Shopping Cart</a></li>
-					<li><a href=\"interests\" class=\"but3_active\">Interests</a></li>
-					<li><a href=\"settings\" class=\"but4_active\">Settings</a></li>
+					<li><a href=\"{$link1}\" class=\"but1_active\">Home</a></li>
+					<li><a href=\"{$link2}\" class=\"but2_active\">Shopping Cart</a></li>
+					<li><a href=\"{$link3}\" class=\"but3_active\">Interests</a></li>
+					<li><a href=\"{$link4}\" class=\"but4_active\">Settings</a></li>
 				</ul>
 			";
 		}
