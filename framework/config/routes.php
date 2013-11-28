@@ -9,6 +9,7 @@ namespace phpsec\framework;
  */
 
 FrontController::$Routes["products"] =			"general/productcontroller";			//controller to show products on the page
+FrontController::$Routes["productinfo"] =		"general/productinfocontroller";		//controller to show info on individual product
 FrontController::$Routes["home"] =			"general/indexcontroller";			//the first page for users (non-logged users)
 FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user login
 FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user logout
