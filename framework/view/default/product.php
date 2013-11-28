@@ -1,7 +1,7 @@
 <?php
 
 	$columsPerRow = 2;
-
+        
 	$catString = phpsec\SQL("SELECT kname FROM pkind WHERE kid = ?", array($cat));
 	if (count($catString) == 1)
 		$catString = $catString[0]['kname'];
@@ -58,7 +58,7 @@
 					$tableStructure .= " height='100px' width='100px'>";
 					$imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/images/" . $products[($cols*$i)+$j]['imageurl'];
 					$productDesc = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/productinfo?pid=" . $products[($cols*$i)+$j]['pid'];
-					$tableStructure .= "<a href=\"$productDesc\"><img src=\"{$imageURL}\"></a>";
+					$tableStructure .= "<a href=\"$productDesc\"><img src=\"{$imageURL}\" width=\"303\" height=\"260\"></a>";
 					$tableStructure .= "</td>";
 				}
 			}
@@ -97,31 +97,41 @@
 	</head>
 	
 	<body>
-		<?php include (__DIR__ . "/include.php"); ?>
-		
-		<div id="product-show" name="product-show">
-			<label> <h2> Show Only: <?php echo getSelectionMenu($typeString); ?> </h2></label>
+            <div id="wrapper">
+                <?php include (__DIR__ . "/include.php"); ?>
+                <div id="content_inside">
+                    	<div id="main_block">
+                            <div id="frame">
+                                <div id="product-show" name="product-show">
+                                        <label> <h2> &emsp; <?php echo $catString; ?> > <?php echo getSelectionMenu($typeString); ?> </h2></label>
 
-			<BR>
-			<?php
-				$productTable = "";
+                                        <BR>
+                                        <?php
+                                                $productTable = "";
 
-				$products = array();
-				for ($i = 0; $i < count($typeString); $i++)
-				{
-					$products[$i] = getProductsForID($typeString[$i]['kkid'], $catString);
-					$tableId = $typeString[$i]['kkid'];
-					$productTable .= "<table border='4' style='display:none;'";
-					$productTable .= " name='{$tableId}' id='{$tableId}'>";
-					$productTable .= getTableElementStructure($columsPerRow, $products[$i]);
-					$productTable .= "</table>";
-				}
+                                                $products = array();
+                                                for ($i = 0; $i < count($typeString); $i++)
+                                                {
+                                                        $products[$i] = getProductsForID($typeString[$i]['kkid'], $catString);
+                                                        $tableId = $typeString[$i]['kkid'];
+                                                        $productTable .= "<table border='4' style='display:none;' ";
+                                                        $productTable .= " name='{$tableId}' id='{$tableId}'>";
+                                                        $productTable .= "<td width= \"50%\">{$typeString[$i][kkname]}</td>";
+                                                        $productTable .= getTableElementStructure($columsPerRow, $products[$i]);
+                                                        $productTable .= "</table>";
+                                                        
+                                         
+                                                        
+                                                }
 
-				echo $productTable;
-			?>
-		</div>
-
-		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/jquery.js" . '"'); ?> ></script>
-		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/show-product.js" . '"'); ?> ></script>
+                                                echo $productTable;
+                                        ?>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>     
+            <script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/jquery.js" . '"'); ?> ></script>
+            <script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/show-product.js" . '"'); ?> ></script>
 	</body>
 </html>
