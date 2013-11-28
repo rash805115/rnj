@@ -17,6 +17,6 @@
 		<BR><BR><BR>
 		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/passwordreset"; echo "href='{$passresetURL}'"; ?> >here</a> to reset your password.
 		<BR><BR><BR>
-		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/user/updateaccount"; echo "href='{$passresetURL}'"; ?> >here</a> to update your account.
+		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/updateaccount"; echo "href='{$passresetURL}'"; ?> >here</a> to update your account.
 	</body>
 </html>

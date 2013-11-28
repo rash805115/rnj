@@ -18,7 +18,7 @@
 				<br />
 				
 				<div class="big_view">
-					<table>
+					<table border="1">
 						<tr>
 							<td><img <?php echo "src=\"$imageURL\"" ?> ></td>
 						</tr>
