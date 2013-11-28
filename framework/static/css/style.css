@@ -247,6 +247,16 @@ html > body{
     font-size: 18px;
 }
 
+/* interest table */
+#interests td{
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+}
+#interests table{
+    text-align: center;
+    margin: 5px 5px 5px 15px;
+}
+
 #footer{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 12px;

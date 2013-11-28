@@ -10,10 +10,20 @@
 	</head>
 
 	<body>
-		<?php include (__DIR__ . "/../include.php"); ?>
-		
-		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/passwordreset"; echo "href='{$passresetURL}'"; ?> >here</a> to reset your password.
-		<BR><BR><BR>
-		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/updateaccount"; echo "href='{$passresetURL}'"; ?> >here</a> to update your account.
-	</body>
+            <div id="wrapper">
+                <?php include (__DIR__ . "/../include.php"); ?>
+                <div id="content_inside">
+                    <div id="main_block">
+                        <div class="about">
+                            <h1>Manage your account</h1><BR>
+                            <p>
+                                Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/passwordreset"; echo "href='{$passresetURL}'"; ?> >here</a> to reset your password.
+                                <BR><BR>
+                                Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/updateaccount"; echo "href='{$passresetURL}'"; ?> >here</a> to update your account.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </body>
 </html>

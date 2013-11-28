@@ -15,50 +15,57 @@
 	</head>
 
 	<body>
-		<?php include (__DIR__ . "/../include.php"); ?>
-		
-		<div id='interests' name='interests'>
-			<table id='table-interests' border='1'>
-				<tr>
-					<th>Product ID</th>
-					<th>Product Name</th>
-					<th>Product Price</th>
-					<th>Product Image</th>
-					<th>Buy</th>
-					<th>Remove</th>
-				</tr>
-				
-				<?php
-					for($i=0; $i<count($interestedProducts); $i++)
-					{
-						$productInfo = phpsec\SQL("SELECT * FROM product WHERE pid = ?", array($interestedProducts[$i]['pid']));
-						if(count($productInfo) != 0)
-						{
-							$productSubCat = phpsec\SQL("SELECT kid, kkname FROM ptype WHERE kkid = ?", array($productInfo[0]['kkid']));
-							$productCat = phpsec\SQL("SELECT kname FROM pkind WHERE kid = ?", array($productSubCat[0]['kid']));
-							$imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/images/" . $productCat[0]['kname'] . "/" . $productInfo[0]['imageurl'];
-							$productDesc = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/productinfo?pid=" . $interestedProducts[$i]['pid'];
-							
-							echo "
-								<tr>
-									<td>{$productInfo[0]['pid']}</td>
-									<td>{$productInfo[0]['pname']}</td>
-									<td>{$productInfo[0]['price']}</td>
-									<td><a href=\"$productDesc\"><img src=\"{$imageURL}\"></a></td>
-									<td><a href=\"\">Add to Cart</a></td>
-									<td>
-										<form id='form-remove-interest' name='form-remove-interest' method='POST' action=''>
-											<input type='hidden' name='pid' value={$productInfo[0]['pid']} />
-											<input type='submit' name='removefrominterests' id='removefrominterests' value='Remove From Interests' />
-										</form>
-									</td>
-								</tr>
-							";
-						}
-					}
-				?>
-				
-			</table>
-		</div>
+            <div id="wrapper">
+                <?php include (__DIR__ . "/../include.php"); ?>
+                <div id="content_inside">
+                    
+
+                            <div id='interests' name='interests'>
+                                    <table id='table-interests' border='1' width="95%" >
+                                            <tr>
+                                                    <th width="6%" >ID</th>
+                                                    <th width="12%" >Product Name</th>
+                                                    <th width="7%" >Price</th>
+                                                    <th width="45%" >Product Image</th>
+                                                    <th width="17%" >Buy</th>
+                                                    <th width="8%" >Remove</th>
+                                            </tr>
+
+                                            <?php
+                                                    for($i=0; $i<count($interestedProducts); $i++)
+                                                    {
+                                                            $productInfo = phpsec\SQL("SELECT * FROM product WHERE pid = ?", array($interestedProducts[$i]['pid']));
+                                                            if(count($productInfo) != 0)
+                                                            {
+                                                                    $productSubCat = phpsec\SQL("SELECT kid, kkname FROM ptype WHERE kkid = ?", array($productInfo[0]['kkid']));
+                                                                    $productCat = phpsec\SQL("SELECT kname FROM pkind WHERE kid = ?", array($productSubCat[0]['kid']));
+                                                                    $imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/images/" . $productCat[0]['kname'] . "/" . $productInfo[0]['imageurl'];
+                                                                    $productDesc = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/productinfo?pid=" . $interestedProducts[$i]['pid'];
+
+                                                                    echo "
+                                                                            <tr>
+                                                                                    <td>{$productInfo[0]['pid']}</td>
+                                                                                    <td>{$productInfo[0]['pname']}</td>
+                                                                                    <td>{$productInfo[0]['price']}</td>
+                                                                                    <td><a href=\"$productDesc\"><img src=\"{$imageURL}\"></a></td>
+                                                                                    <td><a href=\"\">Add to Cart</a></td>
+                                                                                    <td>
+                                                                                            <form id='form-remove-interest' name='form-remove-interest' method='POST' action=''>
+                                                                                                    <input type='hidden' name='pid' value={$productInfo[0]['pid']} />
+                                                                                                    <input type='submit' name='removefrominterests' id='removefrominterests' value='Remove' />
+                                                                                            </form>
+                                                                                    </td>
+                                                                            </tr>
+                                                                    ";
+                                                            }
+                                                    }
+                                            ?>
+
+                                    </table>
+                            </div>
+
+                    
+                </div>
+             </div>
 	</body>
 </html>
