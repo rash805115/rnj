@@ -1,6 +1,12 @@
 <?php
 	if(isset($_POST['addtointerests']))
 	{
+		if ($userID == FALSE)
+		{
+			$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/login";
+			header("Location: {$nextURL}");
+		}
+		
 		phpsec\SQL("INSERT INTO `user_interested_product` (USERID, pid) VALUES (?, ?)", array($userID, $productID));
 		$this->info .= "Added to interest";
 	}
