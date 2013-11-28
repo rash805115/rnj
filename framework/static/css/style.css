@@ -218,8 +218,9 @@ html > body{
 #item{
     width:303px;
     height:260px;
-    padding:13px 0 0 5px;
-    float:left
+    padding:13px 0 0 25px;
+    float:left;
+    
 }
 #item h4{
     font-family: Cambria, Georgia, serif;
@@ -234,21 +235,17 @@ html > body{
     border:1px solid #D6D3C7;
     background-color:#FFFFFF;
     position:relative;
-    text-align:center;
+    margin:5px 0 100px 0;
 }
-
-
 .description{
     float:left;
-    padding:100px 0 0 120px;
+    padding:100px 0 0 70px;
 }
-.description p{
+.description td{
     padding-bottom:15px;
+    font-size: 18px;
 }
-.style1{
-    padding:0 0 200px 0
-}
-/*
+
 #footer{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 12px;
@@ -258,4 +255,3 @@ html > body{
     position:absolute;
     bottom:0px;
 }
-*/

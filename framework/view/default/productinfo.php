@@ -46,54 +46,64 @@
 	</head>
 
 	<body>
-		<?php include (__DIR__ . "/include.php"); ?>
-		
-		<div id="main_block" class="style1">	
-			<div id="item">
-				<h3> <?php echo $productCat[0]['kname']; ?> > <?php echo $productSubCat[0]['kkname'] ?> </h3>
-				<br />
-				
-				<div class="big_view">
-					<table border="1">
-						<tr>
-							<td><img <?php echo "src=\"$imageURL\"" ?> ></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			
-			<div class="description">
-				<table>
-					<tr>
-						<td>Product ID:</td>
-						<td id="productid"> <?php echo $productInfo[0]['pid']; ?> </td>
-					</tr>
-					
-					<tr>
-						<td>Product Name:</td>
-						<td id="productname"> <?php echo $productInfo[0]['pname']; ?> </td>
-					</tr>
-					
-					<tr>
-						<td>Product Price:</td>
-						<td id="productprice"> <?php echo $productInfo[0]['price']; ?> </td>
-					</tr>
-					
-					<tr>
-						<td>Items Left:</td>
-						<td id="inventory"> <?php echo $productInfo[0]['tinventory']; ?> </td>
-					</tr>
-				</table>
-				
-				<BR><BR><BR>
-				<form name='form-cart' id='form-cart' method='POST' action=''>
-					<input type="submit" name="addtocart" id="addtocart" value="Add to Cart" />
-				</form>
-				
-				<form name='form-interest' id='form-interest' method='POST' action=''>
-					<input type="submit" name="addtointerests" id="addtointerests" value="Add to Interests" />
-				</form>
-			</div>
-		</div>
+            <div id="wrapper">
+                <?php include (__DIR__ . "/include.php"); ?>
+                <div id="content_inside">
+                    <div id="main_block" class="style1">	
+                            <div id="item">
+                                    <h4> <?php echo $productCat[0]['kname']; ?> > <?php echo $productSubCat[0]['kkname'] ?> </h4>
+                                    <br />
+
+                                    <div class="big_view">
+                                            <table border= "1" width="303" height="260">
+                                                    <tr>
+                                                            <td><img <?php echo "src=\"$imageURL\"" ?> width="303" height="260" ></td>
+                                                    </tr>
+                                            </table>
+                                    </div>
+                            </div>
+
+                            <div class="description">
+                                    <table width="350" >
+                                            <tr>
+                                                    <td width= "40%">Product ID:</td>
+                                                    <td id="productid"> <?php echo $productInfo[0]['pid']; ?> </td>
+                                            </tr>
+
+                                            <tr>
+                                                    <td>Product Name:</td>
+                                                    <td id="productname"> <?php echo $productInfo[0]['pname']; ?> </td>
+                                            </tr>
+
+                                            <tr>
+                                                    <td>Product Price:</td>
+                                                    <td id="productprice"> <?php echo $productInfo[0]['price']; ?> </td>
+                                            </tr>
+
+                                            <tr>
+                                                    <td>Items Left:</td>
+                                                    <td id="inventory"> <?php echo $productInfo[0]['tinventory']; ?> </td>
+                                            </tr>
+                                    </table>
+
+                                    <BR><BR>
+                                    <table width="350" >
+                                            <tr>
+                                                    <td>
+                                                        <input type="image" src= "http://localhost/rnj/framework/file/images/cart.png" alt="Submit" name="addtocart" id="addtocart" value="Add to Cart"/>
+                                                    </td>
+                                            </tr>
+                                            <tr>
+                                                    <td>
+                                                        <form name='form-interest' id='form-interest' method='POST' action=''>
+                                                                <input type="image" src= "http://localhost/rnj/framework/file/images/interest.png" name="addtointerests" id="addtointerests" value="Add to Interests"/>
+                                                        </form>
+                                                    </td>
+                                            </tr>
+                                    </table>
+                            </div>
+                    </div>
+                </div>
+            </div>
 	</body>
 </html>
