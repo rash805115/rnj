@@ -90,7 +90,9 @@
                                     <table width="350" >
                                             <tr>
                                                     <td>
-                                                        <input type="image" src= "http://localhost/rnj/framework/file/images/cart.png" alt="Submit" name="addtocart" id="addtocart" value="Add to Cart"/>
+                                                        <form name='form-cart' id='form-cart' method='POST' action=''>
+                                                                <input type="image" src= "http://localhost/rnj/framework/file/images/cart.png" alt="Submit" name="addtocart" id="addtocart" value="Add to Cart"/>
+                                                        </form>
                                                     </td>
                                             </tr>
                                             <tr>
