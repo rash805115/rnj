@@ -13,8 +13,8 @@ body{
     width:1000px;
     position:relative;
     background: url(../images/content-bg.png) left repeat-y;
-
 }
+
 html > body{
     width:1000px;
     min-height:100%;
@@ -34,14 +34,13 @@ html > body{
     position:absolute;
     top:165px;
     left:80px;
-
 }
 #menu li{
     display:inline;
 }
 #menu a{
     margin:0 1px 0 0;
-    width:170px;
+    width:200px;
     text-align:center;
     padding:8px 0 10px 0;
     display:block;
@@ -50,19 +49,18 @@ html > body{
     text-decoration:none;
     font: 400 45px/0.8 'Cookie', Helvetica, sans-serif;
     color: #333333;
-    text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
-    
+    text-shadow: 4px 4px 3px rgba(0,0,0,0.1);     
 }
 #menu a:hover
 {
     color:#066854;
     text-decoration:underline;
     display: block;
-    width:170px;
+    width:200px;
     line-height: 30px;
 }
 
-/* Now have 3 */
+/* Now have 4 */
 #menu .but1_active
 #menu .but2_active
 #menu .but3_active
@@ -74,11 +72,12 @@ html > body{
     padding:0 0 0 0;
     height:100%;
     width:1000px;
-    background-color:#F3F1E9;
     min-width: 100%;
-}
+    background-color:#F3F1E9;    
+} 
+
 #content_inside{
-    background-color:#F3F1E9;
+    background:url('../images/gradient-bg.png') repeat-x;
     width:800px;
     padding:0 0 0 0;
     margin:0 0 0 0;
@@ -98,13 +97,6 @@ html > body{
     text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
 }
 
-#logo{
-
-    position:absolute;
-    left:100px;
-    top:150px;
-}
-
 #list{
     list-style-type:none;
     margin:11px 0 0 0;
@@ -116,19 +108,15 @@ html > body{
 }
 #list a{
     font: 28px 'Cookie', Helvetica, sans-serif;
-    //font-family: Cambria, Georgia, serif;
     color:#0D0D0D;
     text-decoration:none
 }
 #list a:visited{text-decoration:none}
-#list a:hover{
-    text-decoration:underline;
-}
+#list a:hover{text-decoration:underline;}
 
 #list li{
     width:175px;
 }
-
 
 /* body exclude sidebar */
 #main_block{
@@ -173,7 +161,6 @@ html > body{
     padding:5px 0 0 12px;
 }
 
-
 /* login */
 .news{
     background-color:#ECECC5;
@@ -186,13 +173,6 @@ html > body{
 .news p{
     padding:5px 0 0 2px
 }
-.news2
-{background-color:#ECECC5;
-border:1px solid #DFDEC0;
-width:250px;
-float:left;
-padding:13px 26px 13px 20px}
-
 .box{
     background-color:#ECECC5;
     border:1px solid #DFDEC0;
@@ -203,7 +183,6 @@ padding:13px 26px 13px 20px}
 .box p{
     padding:5px 0 0 2px
 }
-
 
 /*view products from categories*/
 #items{
@@ -234,7 +213,6 @@ padding:13px 26px 13px 20px}
     text-decoration:none;
     color:#000333; 
 }
-
 
 /* view product's detail */
 #item{
@@ -270,10 +248,8 @@ padding:13px 26px 13px 20px}
 .style1{
     padding:0 0 200px 0
 }
-
-footer{
-    //margin: 50px auto 0 auto;
-    //clear:both;
+/*
+#footer{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
     font-size: 12px;
     text-align: center;
@@ -282,3 +258,4 @@ footer{
     position:absolute;
     bottom:0px;
 }
+*/
