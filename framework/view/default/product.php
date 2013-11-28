@@ -89,27 +89,39 @@
 
 ?>
 
-<div id="product-show" name="product-show">
-	<label> <h2> Show Only: <?php echo getSelectionMenu($typeString); ?> </h2></label>
+<html>
+	<head>
+		<title>RNJ - <?php echo $catString; ?></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<link rel="stylesheet" type="text/css" <?php echo('href="' . "http://localhost/rnj/framework/file/css/style.css" . '"'); ?> />
+	</head>
 	
-	<BR>
-	<?php
-		$productTable = "";
-	
-		$products = array();
-		for ($i = 0; $i < count($typeString); $i++)
-		{
-			$products[$i] = getProductsForID($typeString[$i]['kkid'], $catString);
-			$tableId = $typeString[$i]['kkid'];
-			$productTable .= "<table border='4' style='display:none;'";
-			$productTable .= " name='{$tableId}' id='{$tableId}'>";
-			$productTable .= getTableElementStructure($columsPerRow, $products[$i]);
-			$productTable .= "</table>";
-		}
+	<body>
+		<?php include (__DIR__ . "/include.php"); ?>
 		
-		echo $productTable;
-	?>
-</div>
+		<div id="product-show" name="product-show">
+			<label> <h2> Show Only: <?php echo getSelectionMenu($typeString); ?> </h2></label>
 
-<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/jquery.js" . '"'); ?> ></script>
-<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/show-product.js" . '"'); ?> ></script>
+			<BR>
+			<?php
+				$productTable = "";
+
+				$products = array();
+				for ($i = 0; $i < count($typeString); $i++)
+				{
+					$products[$i] = getProductsForID($typeString[$i]['kkid'], $catString);
+					$tableId = $typeString[$i]['kkid'];
+					$productTable .= "<table border='4' style='display:none;'";
+					$productTable .= " name='{$tableId}' id='{$tableId}'>";
+					$productTable .= getTableElementStructure($columsPerRow, $products[$i]);
+					$productTable .= "</table>";
+				}
+
+				echo $productTable;
+			?>
+		</div>
+
+		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/jquery.js" . '"'); ?> ></script>
+		<script type="text/javascript" <?php echo('src="' . "http://localhost/rnj/framework/file/js/show-product.js" . '"'); ?> ></script>
+	</body>
+</html>
