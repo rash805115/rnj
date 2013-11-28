@@ -10,6 +10,32 @@
 		phpsec\SQL("INSERT INTO `user_interested_product` (USERID, pid) VALUES (?, ?)", array($userID, $productID));
 		$this->info .= "Added to interest";
 	}
+	
+	if(isset($_POST['addtocart']))
+	{
+		if ($userID == FALSE)
+		{
+			$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/login";
+			header("Location: {$nextURL}");
+		}
+		
+		if (isset($_COOKIE['PRODUCTID']) && strlen($_COOKIE['PRODUCTID']) > 0)
+		{
+			$currentProductList = $_COOKIE['PRODUCTID'];
+			$currentProductList .= "," . $productID;
+			\setcookie("PRODUCTID", $currentProductList, \time() + 2592000, null, null, FALSE, TRUE);
+		}
+		else if (isset($_COOKIE['PRODUCTID']) && strlen($_COOKIE['PRODUCTID']) < 1)
+		{
+			\setcookie("PRODUCTID", $productID, \time() + 2592000, null, null, FALSE, TRUE);
+		}
+		else
+		{
+			\setcookie("PRODUCTID", $productID, \time() + 2592000, null, null, FALSE, TRUE);
+		}
+		
+		$this->info .= "Added to cart";
+	}
 ?>
 
 <html>
@@ -60,7 +86,9 @@
 				</table>
 				
 				<BR><BR><BR>
-				<input type="submit" name="addtocart" id="addtocart" value="Add to Cart" />
+				<form name='form-cart' id='form-cart' method='POST' action=''>
+					<input type="submit" name="addtocart" id="addtocart" value="Add to Cart" />
+				</form>
 				
 				<form name='form-interest' id='form-interest' method='POST' action=''>
 					<input type="submit" name="addtointerests" id="addtointerests" value="Add to Interests" />
