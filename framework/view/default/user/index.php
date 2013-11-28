@@ -14,9 +14,5 @@
 		This is the index page of the application. Once the user is logged in, this page is shown
 		<BR><BR><BR>
 		Click <a <?php $logoutURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/logout"; echo "href='{$logoutURL}'"; ?> >here</a> to logout.
-		<BR><BR><BR>
-		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/passwordreset"; echo "href='{$passresetURL}'"; ?> >here</a> to reset your password.
-		<BR><BR><BR>
-		Click <a <?php $passresetURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/updateaccount"; echo "href='{$passresetURL}'"; ?> >here</a> to update your account.
 	</body>
 </html>
