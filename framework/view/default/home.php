@@ -1,5 +1,19 @@
 <?php
+	try
+	{
+		$userSession = new phpsec\Session();
+		$sessionID = $userSession->existingSession();
 
+		if ($sessionID != FALSE)
+		{
+			$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/index";
+			header("Location: {$nextURL}");
+		}
+	}
+	catch (Exception $e)
+	{
+		$this->error .= $e->getMessage() . "<BR>";
+	}
 ?>
 
 <html>
