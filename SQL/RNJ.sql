@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2013 at 06:07 AM
--- Server version: 5.5.22
--- PHP Version: 5.3.10-1ubuntu3
+-- Generation Time: Nov 28, 2013 at 09:53 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -17,16 +17,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `RNJ`
+-- Database: `rnj`
 --
+CREATE DATABASE IF NOT EXISTS `rnj` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `rnj`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `AUTH_TOKENS`
+-- Table structure for table `auth_tokens`
 --
 
-CREATE TABLE IF NOT EXISTS `AUTH_TOKENS` (
+CREATE TABLE IF NOT EXISTS `auth_tokens` (
   `AUTH_ID` varchar(128) NOT NULL DEFAULT '',
   `USERID` varchar(32) NOT NULL,
   `DATE_CREATED` int(10) NOT NULL,
@@ -35,10 +37,10 @@ CREATE TABLE IF NOT EXISTS `AUTH_TOKENS` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `AUTH_TOKENS`
+-- Dumping data for table `auth_tokens`
 --
 
-INSERT INTO `AUTH_TOKENS` (`AUTH_ID`, `USERID`, `DATE_CREATED`) VALUES
+INSERT INTO `auth_tokens` (`AUTH_ID`, `USERID`, `DATE_CREATED`) VALUES
 ('26b2fda1eeea1dafa3970bab5067b5821011d65a7643bbb08fed2599f693eec1446fbee2ad724479e5156c89f371ed5722ba395db2effc45669045732a86fb1a', 'rash', 1382050547),
 ('3011c1d3f5852c9e950a2c723edbec34c3fdcbb208d66505de5b742959a79ff40a2580f3d86421a370870103f6a935aca154ed0226c1553f985ff6f4e942fb13', 'rash', 1382041225);
 
@@ -137,10 +139,10 @@ INSERT INTO `homecustomer` (`USERID`, `marriage`, `gender`, `income`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `LOGS`
+-- Table structure for table `logs`
 --
 
-CREATE TABLE IF NOT EXISTS `LOGS` (
+CREATE TABLE IF NOT EXISTS `logs` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `MESSAGE` text,
   `FILENAME` text,
@@ -154,10 +156,10 @@ CREATE TABLE IF NOT EXISTS `LOGS` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `PASSWORD`
+-- Table structure for table `password`
 --
 
-CREATE TABLE IF NOT EXISTS `PASSWORD` (
+CREATE TABLE IF NOT EXISTS `password` (
   `TEMP_PASS` varchar(128) NOT NULL,
   `USE_FLAG` tinyint(1) NOT NULL,
   `TEMP_TIME` int(10) NOT NULL,
@@ -169,10 +171,10 @@ CREATE TABLE IF NOT EXISTS `PASSWORD` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `PASSWORD`
+-- Dumping data for table `password`
 --
 
-INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEMPTS`, `LAST_LOGIN_ATTEMPT`, `FIRST_LOGIN_ATTEMPT`, `USERID`) VALUES
+INSERT INTO `password` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEMPTS`, `LAST_LOGIN_ATTEMPT`, `FIRST_LOGIN_ATTEMPT`, `USERID`) VALUES
 ('8bf6a90306', 1, 0, 1, 1382234585, 1382234585, 'rash'),
 ('8f47155b0d97f3d01a00cec52fd461e50a7af8a2735c87fce6fe1eabb0bb49fd46ae2d8f8912279deb3cd4b8992e72bf46dd4f1509f9edd737de3be140db3baf', 0, 1382233239, 0, 0, 0, 'root'),
 ('2bff93df10', 1, 0, 0, 0, 0, 'jack'),
@@ -217,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   `imageurl` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`pid`),
   KEY `kkid` (`kkid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `product`
@@ -228,10 +230,26 @@ INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`
 (9, 1, 'LG Monitor', 1, 250, '8.jpg'),
 (10, 1, 'Samsung Monitor', 1, 275, '10.jpg'),
 (11, 3, 'Harry Potter and the Sorcerer''s Stone', 2, 14.99, '1.jpg'),
-(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.gif'),
+(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.jpg'),
 (13, 3, 'Harry Potter and the Prisoner of Azkaban', 3, 15.99, '3.jpg'),
 (14, 2, 'HP Laptop', 1, 399, '3.jpg'),
-(15, 2, 'Dell Laptop', 5, 699, '4.jpg');
+(15, 2, 'Dell Laptop', 5, 699, '4.jpg'),
+(16, 4, 'Called to care', 3, 39.99, '4.jpg'),
+(17, 4, 'Clean, Green, and Lean', 6, 25.89, '5.jpg'),
+(18, 5, 'Water Technology', 5, 75, '6.jpg'),
+(19, 5, 'Materials Science and Technology', 1, 32.25, '7.jpg'),
+(20, 6, 'Hollister woman jacket', 2, 59, '1.jpg'),
+(21, 6, 'Lacoste man jacket', 2, 69, '2.jpg'),
+(22, 6, 'Columbia coat', 5, 129, '3.jpg'),
+(23, 6, 'The north face jacket', 5, 99, '4.jpg'),
+(24, 7, 'Slim jeans', 1, 29, '5.jpg'),
+(25, 7, 'Denim jacket', 6, 75, '6.jpg'),
+(26, 8, 'Pull-out Sofa', 1, 159, '1.jpg'),
+(27, 8, 'Multimedia Storage Tower', 2, 35, '2.jpg'),
+(28, 10, 'Nonstick 15-Piece Cookware Set', 2, 110, '2.jpg'),
+(29, 10, 'Keurig K75 Platinum Brewing System', 5, 34, '1.jpg'),
+(30, 9, 'Joseph Adjustable Rolling Pin Plu', 11, 9.95, '4.jpg'),
+(31, 9, 'Non-Stick 5-Piece Bakeware Set', 8, 54, '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -245,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `ptype` (
   `kkname` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`kkid`),
   KEY `kid` (`kid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `ptype`
@@ -256,7 +274,12 @@ INSERT INTO `ptype` (`kkid`, `kid`, `kkname`) VALUES
 (2, 0, 'Laptop'),
 (3, 2, 'Fiction'),
 (4, 2, 'Personal Care'),
-(5, 2, 'Science & Technology');
+(5, 2, 'Science & Technology'),
+(6, 1, 'Outerwear'),
+(7, 1, 'Denim'),
+(8, 3, 'Living Room Furniture'),
+(9, 4, 'Bakeware'),
+(10, 4, 'Cookware');
 
 -- --------------------------------------------------------
 
@@ -290,10 +313,10 @@ CREATE TABLE IF NOT EXISTS `review` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `SESSION`
+-- Table structure for table `session`
 --
 
-CREATE TABLE IF NOT EXISTS `SESSION` (
+CREATE TABLE IF NOT EXISTS `session` (
   `SESSION_ID` varchar(128) NOT NULL,
   `DATE_CREATED` int(10) NOT NULL,
   `LAST_ACTIVITY` int(10) NOT NULL,
@@ -303,10 +326,10 @@ CREATE TABLE IF NOT EXISTS `SESSION` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `SESSION`
+-- Dumping data for table `session`
 --
 
-INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) VALUES
+INSERT INTO `session` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) VALUES
 ('05cb75600c62b60cb726d1570dc27ec75ae132278e5790f1d9c90e227552bf31ff10411d4b3ab8c491b4b8e90c734a0e0de3b85e5b86a49acd40dfc1e9e872c7', 1385631311, 1385631349, 'rash'),
 ('075ec715814f84c5961ca234399a4bd0f7b73b0a6f4be2723be8722298c065ea4a14133642f40da38767a67b20554f3ee60e8686e88ee2d153c190f364567c0a', 1382041225, 1382041225, 'rash'),
 ('0fa42527dc1115e8f992d1ca3dfc6f8a8152fbf07116d2fcfdb53115842adff2464192a6ecdeae049a8bd53da46c0115fb55f0d7ada204b12b0fa157ed4fc71a', 1382041266, 1382041266, 'rash'),
@@ -341,10 +364,10 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `SESSION_DATA`
+-- Table structure for table `session_data`
 --
 
-CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
+CREATE TABLE IF NOT EXISTS `session_data` (
   `SESSION_ID` varchar(128) NOT NULL,
   `KEY` varchar(128) NOT NULL,
   `VALUE` varchar(128) DEFAULT NULL,
@@ -396,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `transaction`
@@ -407,15 +430,17 @@ INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
 (8, 12, 1385636441, 2),
 (9, 8, 1385636596, 1),
 (10, 12, 1385636596, 2),
-(18, 10, 1385636835, 1);
+(18, 10, 1385636835, 1),
+(19, 8, 1385663916, 1),
+(21, 8, 1385670515, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `USER`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `USER` (
+CREATE TABLE IF NOT EXISTS `user` (
   `USERID` varchar(32) NOT NULL,
   `P_EMAIL` varchar(128) NOT NULL,
   `ACCOUNT_CREATED` int(10) NOT NULL,
@@ -429,10 +454,10 @@ CREATE TABLE IF NOT EXISTS `USER` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `USER`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `USER` (`USERID`, `P_EMAIL`, `ACCOUNT_CREATED`, `LOCKED`, `INACTIVE`, `HASH`, `DATE_CREATED`, `ALGO`, `DYNAMIC_SALT`) VALUES
+INSERT INTO `user` (`USERID`, `P_EMAIL`, `ACCOUNT_CREATED`, `LOCKED`, `INACTIVE`, `HASH`, `DATE_CREATED`, `ALGO`, `DYNAMIC_SALT`) VALUES
 ('jack', 'rahul.chaudhary@owasp.org', 1382636773, 1, 0, '55dbd88705076de6aac4b27b53cb7495a3927f7eb076f34d7f0b10787767d12a11e8e1b36e39f5dcf93447749afd252eb4735d5900a9a6e77d859dcb7db91bf5', 1382636773, 'sha512', '9c44ce028fb26cf72681a3a0940dbbb508b8207c95121b1366e542fc2c66b3aac5dd7e8e6867b2d64ebf04c71fa123abc646cfb3f6cfc1bb4d9e2e0eade61715'),
 ('ning', 'rahul300chaudhary400@gmail.com', 1385409875, 0, 0, 'b01b0e9af71634a23aa0cfe5df52dac2311ffd278714aa4233e07243085894cefc779756f9bfb966bd5cc747639d1d8cb82d7ab31f95b3627bc7bfd7dfbb0802', 1385409875, 'sha512', '6bc3c3af402313a8899cf8367bb5c86a94c70c2b570f348987ec1da72f195d9d8e9c4a225128593c23e2c22014ff402afd6519050bbb8a7f6bb82732a401a2ad'),
 ('ning123', 'rahul300chaudhary400@gmail.com', 1385622426, 0, 0, '5c49393e3fd7c2fe67dbc7d07e9ea46ae0231d3c9b0e3288e3d24355e3f02f12291d5fd3ef509841ee4e92c1878ee29633de22a09cca55b9ec270b48d56a1f99', 1385622426, 'sha512', 'cac9896e9284c39c0d34f2bddc29734bed0b86c40ff7aeea516534a12a2a0affd34c43125d518af1a0c4bd821779d3a46f172cc2b5a4fef46eda6537023496cb'),
@@ -471,6 +496,8 @@ CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
 --
 
 INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
+(19, 'ning123'),
+(21, 'ning123'),
 (7, 'rash'),
 (8, 'rash'),
 (9, 'rash'),
@@ -495,7 +522,9 @@ CREATE TABLE IF NOT EXISTS `user_interested_product` (
 --
 
 INSERT INTO `user_interested_product` (`USERID`, `pid`) VALUES
+('ning123', 8),
 ('rash', 8),
+('ning123', 11),
 ('rash', 11),
 ('rash', 14);
 
@@ -515,10 +544,10 @@ CREATE TABLE IF NOT EXISTS `user_sell_product` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `XUSER`
+-- Table structure for table `xuser`
 --
 
-CREATE TABLE IF NOT EXISTS `XUSER` (
+CREATE TABLE IF NOT EXISTS `xuser` (
   `USERID` varchar(32) NOT NULL,
   `FIRST_NAME` varchar(40) DEFAULT NULL,
   `LAST_NAME` varchar(40) DEFAULT NULL,
@@ -531,10 +560,10 @@ CREATE TABLE IF NOT EXISTS `XUSER` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `XUSER`
+-- Dumping data for table `xuser`
 --
 
-INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
+INSERT INTO `xuser` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
 ('rash', 'rah', 'cha', 'e', 13, 15213, 'agaga');
 
 -- --------------------------------------------------------
@@ -562,10 +591,11 @@ INSERT INTO `zipcode` (`zip`, `city`, `state`) VALUES
 --
 
 --
--- Constraints for table `AUTH_TOKENS`
+-- Constraints for table `auth_tokens`
 --
-ALTER TABLE `AUTH_TOKENS`
-  ADD CONSTRAINT `AUTH_TOKENS_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `auth_tokens`
+  ADD CONSTRAINT `AUTH_TOKENS_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `auth_tokens_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `businesscustomer`
@@ -577,13 +607,13 @@ ALTER TABLE `businesscustomer`
 -- Constraints for table `customer`
 --
 ALTER TABLE `customer`
-  ADD CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `customer_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `employee`
 --
 ALTER TABLE `employee`
-  ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `employee_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `employee_workin_store`
@@ -599,10 +629,11 @@ ALTER TABLE `homecustomer`
   ADD CONSTRAINT `homecustomer_ibfk_3` FOREIGN KEY (`USERID`) REFERENCES `customer` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `PASSWORD`
+-- Constraints for table `password`
 --
-ALTER TABLE `PASSWORD`
-  ADD CONSTRAINT `PASSWORD_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `password`
+  ADD CONSTRAINT `PASSWORD_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `password_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `product`
@@ -620,26 +651,28 @@ ALTER TABLE `ptype`
 -- Constraints for table `region`
 --
 ALTER TABLE `region`
-  ADD CONSTRAINT `region_ibfk_1` FOREIGN KEY (`manager`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `region_ibfk_1` FOREIGN KEY (`manager`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `SESSION`
+-- Constraints for table `session`
 --
-ALTER TABLE `SESSION`
-  ADD CONSTRAINT `SESSION_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `session`
+  ADD CONSTRAINT `SESSION_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `SESSION_DATA`
+-- Constraints for table `session_data`
 --
-ALTER TABLE `SESSION_DATA`
-  ADD CONSTRAINT `SESSION_DATA_ibfk_1` FOREIGN KEY (`SESSION_ID`) REFERENCES `SESSION` (`SESSION_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `session_data`
+  ADD CONSTRAINT `SESSION_DATA_ibfk_1` FOREIGN KEY (`SESSION_ID`) REFERENCES `session` (`SESSION_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `session_data_ibfk_1` FOREIGN KEY (`SESSION_ID`) REFERENCES `session` (`SESSION_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `store`
@@ -647,7 +680,7 @@ ALTER TABLE `SESSION_DATA`
 ALTER TABLE `store`
   ADD CONSTRAINT `store_ibfk_3` FOREIGN KEY (`rid`) REFERENCES `region` (`rid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `store_ibfk_4` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `store_ibfk_5` FOREIGN KEY (`storemanager`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `store_ibfk_5` FOREIGN KEY (`storemanager`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `store_has_product`
@@ -666,7 +699,7 @@ ALTER TABLE `transaction`
 -- Constraints for table `user_belong_store`
 --
 ALTER TABLE `user_belong_store`
-  ADD CONSTRAINT `user_belong_store_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_belong_store_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_belong_store_ibfk_2` FOREIGN KEY (`sid`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -674,13 +707,13 @@ ALTER TABLE `user_belong_store`
 --
 ALTER TABLE `user_buy_transaction`
   ADD CONSTRAINT `user_buy_transaction_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `user_buy_transaction_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `user_buy_transaction_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `user_interested_product`
 --
 ALTER TABLE `user_interested_product`
-  ADD CONSTRAINT `user_interested_product_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user_interested_product_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `user_interested_product_ibfk_2` FOREIGN KEY (`pid`) REFERENCES `product` (`pid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -688,14 +721,16 @@ ALTER TABLE `user_interested_product`
 --
 ALTER TABLE `user_sell_product`
   ADD CONSTRAINT `user_sell_product_ibfk_3` FOREIGN KEY (`tid`) REFERENCES `transaction` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `user_sell_product_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `user_sell_product_ibfk_4` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Constraints for table `XUSER`
+-- Constraints for table `xuser`
 --
-ALTER TABLE `XUSER`
+ALTER TABLE `xuser`
   ADD CONSTRAINT `XUSER_ibfk_1` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `XUSER_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `XUSER_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `xuser_ibfk_1` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `xuser_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `user` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
