@@ -69,20 +69,20 @@ html > body{
 
 
 /* body down here */
-#wrapper{
-    padding:0 0 0 0;
-    height:100%;
-    width:1000px;
+
+
+
+/* body exclude sidebar */
+#main_block{
     background-color:#F3F1E9;
-    min-width: 100%;
-}
-#content_inside{
-    background-color:#F3F1E9;
-    width:800px;
     padding:0 0 0 0;
     margin:0 0 0 0;
+    font-family: Cambria, Georgia, serif;
+    font-size:14px;
+    color:#464646;
     overflow:auto;
     float:left;
+    width:800px;
 }
 
 /* categories on left */
@@ -92,8 +92,6 @@ html > body{
     float:left;
     padding:13px 32px 0 23px;
     margin:0 0 0 0;
-    //font-family: Cambria, Georgia, serif;
-    //font-size:14px;
     font: 400 18px/0.8 'Cookie', Helvetica, sans-serif;
     color: #cca1bd;
     text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
@@ -117,7 +115,6 @@ html > body{
 }
 #list a{
     font: 28px 'Cookie', Helvetica, sans-serif;
-    //font-family: Cambria, Georgia, serif;
     color:#0D0D0D;
     text-decoration:none
 }
@@ -131,15 +128,7 @@ html > body{
 }
 
 
-/* body exclude sidebar */
-#main_block{
-    font-family: Cambria, Georgia, serif;
-    font-size:14px;
-    color:#464646;
-    overflow:hidden;
-    float:left;
-    width:750px;
-}
+
 
 /* picture slide in home page */
 .fadein { 

@@ -7,7 +7,8 @@
 		$catString = $catString[0]['kname'];
 	else
 	{
-		$catString = phpsec\SQL("SELECT kname FROM pkind LIMIT 1", array());
+		$catString = phpsec\SQL("SELECT * FROM pkind LIMIT 1", array());
+		$cat = $catString[0]['kid'];
 		$catString = $catString[0]['kname'];
 	}
 	
@@ -56,7 +57,8 @@
 					}
 					$tableStructure .= " height='100px' width='100px'>";
 					$imageURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/file/images/" . $products[($cols*$i)+$j]['imageurl'];
-					$tableStructure .= "<img src=\"{$imageURL}\">";
+					$productDesc = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/productinfo?pid=" . $products[($cols*$i)+$j]['pid'];
+					$tableStructure .= "<a href=\"$productDesc\"><img src=\"{$imageURL}\"></a>";
 					$tableStructure .= "</td>";
 				}
 			}

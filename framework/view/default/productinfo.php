@@ -1,46 +1,57 @@
 <?php
-
+	
 ?>
 
 <html>
 	<head>
-		<title>...........(Product name)...............</title>
+		<title>RNJ - Buy <?php echo $productInfo[0]['pname']; ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 		<link rel="stylesheet" type="text/css" <?php echo('href="' . "http://localhost/rnj/framework/file/css/style.css" . '"'); ?> />
 	</head>
 
 	<body>
-<div id="wrapper">	
-	<?php include (__DIR__ . "/include.php"); ?>
-	<div id="content_inside">
+		<?php include (__DIR__ . "/include.php"); ?>
+		
 		<div id="main_block" class="style1">	
 			<div id="item">
-				<h4>
+				<h3> <?php echo $productCat[0]['kname']; ?> > <?php echo $productSubCat[0]['kkname'] ?> </h3>
+				<br />
 				
-				Show sub categories(this product is from what Category )
-				
-				</h4><br />
 				<div class="big_view">
-                                    Place product's image here.
-                                    <br />
+					<table>
+						<tr>
+							<td><img <?php echo "src=\"$imageURL\"" ?> ></td>
+						</tr>
+					</table>
 				</div>
 			</div>
+			
 			<div class="description">
-				<p style="font-size:20px;color">
-					Product Name:
-				</p>
-				<p style="font-size:20px;color">
-					Product ID:
-				</p>
-				<p style="font-size:20px;color">
-					Price:  
-				</p>
-
-                                <input type="submit" name="submit" id="submit" value="Submit">
-
+				<table>
+					<tr>
+						<td>Product ID:</td>
+						<td id="productid"> <?php echo $productInfo[0]['pid']; ?> </td>
+					</tr>
+					
+					<tr>
+						<td>Product Name:</td>
+						<td id="productname"> <?php echo $productInfo[0]['pname']; ?> </td>
+					</tr>
+					
+					<tr>
+						<td>Product Price:</td>
+						<td id="productprice"> <?php echo $productInfo[0]['price']; ?> </td>
+					</tr>
+					
+					<tr>
+						<td>Items Left:</td>
+						<td id="inventory"> <?php echo $productInfo[0]['tinventory']; ?> </td>
+					</tr>
+				</table>
+				
+				<BR><BR><BR>
+				<input type="submit" name="submit" id="submit" value="Add to Cart" />
 			</div>
 		</div>
-	</div>
-</div>
-    </body>
+	</body>
 </html>
