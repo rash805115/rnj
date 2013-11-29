@@ -10,7 +10,7 @@
 
 	<body>
             <div id="wrapper">
-                <?php include (__DIR__ . "/../include.php"); ?>
+                <?php include (__DIR__ . "/../include_employee.php"); ?>
                 <div id="content_inside">
                     <div id="main_block">
                         <div class="about">
