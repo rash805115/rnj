@@ -16,7 +16,7 @@
                     <div id="main_block">
                         <div class="news">
                             <div name="login-div" id="login-div">
-                                <h1>Customer Login</h1><br/>
+                                <h1>Login</h1><br/>
                                     <form method="POST" action="" name="login-form" id="login-form" onsubmit="return check('login-form', 'checkForBlanks');">
                                             <table name="login-table" id="login-table">
                                                     <tr name="user-field" id="user-field">
