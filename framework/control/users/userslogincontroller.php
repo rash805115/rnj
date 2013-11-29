@@ -87,9 +87,26 @@ class UsersLoginController extends phpsec\framework\DefaultController
 					$this->info .= "Its been too long since you have changed your password. For security reasons, please change your password." . "<BR>";
 				}
 				
-				$url_to_redirect = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/index";
-				header("HTTP/1.1 302 Found");
-				header('Location: '.$url_to_redirect);
+				$typeOfEmployee = phpsec\SQL("SELECT type FROM XUSER WHERE USERID = ?", array($userID));
+				
+				if( (count($typeOfEmployee) == 1) && ($typeOfEmployee[0]['type'] == 'e') )
+				{
+					$url_to_redirect = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/employee";
+					header("HTTP/1.1 302 Found");
+					header('Location: '.$url_to_redirect);
+				}
+				elseif ( (count($typeOfEmployee) == 1) && (($typeOfEmployee[0]['type'] == 'c-b') || (($typeOfEmployee[0]['type'] == 'c-h'))))
+				{
+					$url_to_redirect = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/index";
+					header("HTTP/1.1 302 Found");
+					header('Location: '.$url_to_redirect);
+				}
+				else
+				{
+					$url_to_redirect = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/updateaccount";
+					header("HTTP/1.1 302 Found");
+					header('Location: '.$url_to_redirect);
+				}
 			}
 			catch (\phpsec\SessionExpired $e)
 			{
