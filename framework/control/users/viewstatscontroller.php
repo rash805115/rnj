@@ -1,6 +1,6 @@
 <?php
 
-class UserEmployeeController extends phpsec\framework\DefaultController
+class ViewStatsController extends phpsec\framework\DefaultController
 {
 	function Handle($Request)
 	{
@@ -20,9 +20,7 @@ class UserEmployeeController extends phpsec\framework\DefaultController
 			header('Location: '.$url_to_redirect);
 		}
 		
-		$designation = phpsec\SQL("SELECT title FROM employee WHERE USERID = ?", array($userID));
-		
-		return require_once(__DIR__ . "/../../view/default/user/employee.php");
+		return require_once(__DIR__ . "/../../view/default/user/viewstats.php");
 	}
 }
 

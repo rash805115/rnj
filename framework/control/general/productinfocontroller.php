@@ -1,6 +1,6 @@
 <?php
 
-class ProductController extends phpsec\framework\DefaultController
+class ProductInfoController extends phpsec\framework\DefaultController
 {
 	function Handle($Request)
 	{

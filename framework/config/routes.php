@@ -15,6 +15,7 @@ FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user
 FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user logout
 FrontController::$Routes["users/index"] =		"users/userindexcontroller";			//the first page for users (logged users)
 FrontController::$Routes["users/employee"] =		"users/useremployeecontroller";			//the first page for employees (logged users)
+FrontController::$Routes["users/viewstats"] =		"users/viewstatscontroller";			//for employees to see stats and queries (logged users)
 FrontController::$Routes["cart"] =			"users/usercartcontroller";			//the user's shopping cart (logged users)
 FrontController::$Routes["users/interests"] =		"users/userinterestscontroller";		//the users interest page (logged users)
 FrontController::$Routes["users/settings"] =		"users/usersettingscontroller";			//the users settings page (logged users)
