@@ -12,6 +12,8 @@ class UserSettingsController extends phpsec\framework\DefaultController
 			header("Location: {$nextURL}");
 		}
 		
+		$typeOfEmployee = phpsec\SQL("SELECT type FROM XUSER WHERE USERID = ?", array($userID));
+		
 		return require_once(__DIR__ . "/../../view/default/user/settings.php");
 	}
 }

@@ -11,7 +11,14 @@
 
 	<body>
             <div id="wrapper">
-                <?php include (__DIR__ . "/../include.php"); ?>
+                <?php
+		
+		if($typeOfEmployee[0]['type'] == 'e')
+			include (__DIR__ . "/../include_employee.php");
+		else
+			include (__DIR__ . "/../include.php"); 
+		
+		?>
                 <div id="content_inside">
                     <div id="main_block">
                         <div class="about">

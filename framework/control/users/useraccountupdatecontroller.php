@@ -40,7 +40,7 @@ class UserAccountUpdateController extends phpsec\framework\DefaultController
 					}
 					
 					$previousType = phpsec\SQL("SELECT type FROM XUSER WHERE USERID = ?", array($userID));
-					if ( isset($_POST['type-of-user-select']) && (count($previousType) > 0) && ($previousType[0]['type'] != $_POST['type-of-user-select']) )
+					if ( isset($_POST['type-of-user-select']) && (count($previousType) > 0) && ($previousType[0]['type'] != NULL) && ($previousType[0]['type'] != $_POST['type-of-user-select']) )
 						throw new \Exception("ERROR: You cannot change your account type once set.");
 					
 					if ( isset($_POST['type-of-user-select']) && ($_POST['type-of-user-select'] == "customer") )
