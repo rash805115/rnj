@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2013 at 09:06 PM
+-- Generation Time: Nov 28, 2013 at 09:15 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 
 INSERT INTO `employee` (`USERID`, `title`, `salary`) VALUES
+('jacktheadmin', 'Sales Supervisor', 90000),
 ('rash', 'agaga', 352);
 
 -- --------------------------------------------------------
@@ -170,7 +171,8 @@ INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEM
 ('8f47155b0d97f3d01a00cec52fd461e50a7af8a2735c87fce6fe1eabb0bb49fd46ae2d8f8912279deb3cd4b8992e72bf46dd4f1509f9edd737de3be140db3baf', 0, 1382233239, 0, 0, 0, 'root'),
 ('2bff93df10', 1, 0, 0, 0, 0, 'jack'),
 ('59e8710928', 1, 0, 0, 0, 0, 'ning'),
-('11e7690bcc', 1, 0, 0, 0, 0, 'ning123');
+('11e7690bcc', 1, 0, 0, 0, 0, 'ning123'),
+('6933446258', 1, 0, 0, 0, 0, 'jacktheadmin');
 
 -- --------------------------------------------------------
 
@@ -330,7 +332,6 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('25fa891b2e1d8c72b68addcf1909e6193e8a264db76c2001a2e62b9f1d52d0587c8a22fe47cd70ff96a6d0f60e31e45d51aa60d9cf5ad26d860728ac25e925e2', 1382045315, 1382045315, 'rash'),
 ('2788f524094d57324b4dd1ceaae4f62705ecd8b7003c045473bc0ce79777c01bb773d11465289a2ecc20e976b5e0fbf87ff8f8d08008a4d8ade63a407265f31f', 1382041271, 1382041271, 'rash'),
 ('2f8768811ae03b184cf7002db0702c25137af17c19fddea373711c388714cb5cf5a7b77d56f3e55bc6fc3ac64df8634c2ffe63f8e1e0560258dec2ba77feb559', 1382041186, 1382041186, 'rash'),
-('343d97c001c55fc310bd42d3ab2ef2d3bda585af045e0989bffdc6f9a008337e0b5cb28de735303be5cbbab2610c28bae5ae1d98621c7854a32f4ecaa1150843', 1385690736, 1385690738, 'rash'),
 ('350987978c4808a2d47e223aadd5b0b9ce6755c0b2e354114d4380b9189a006b0110161ffce91ce91faf3bfdb5fd68de937ec4ddbe96f96aabed5aa5bd60db26', 1382044641, 1382044641, 'rash'),
 ('396b08d47358f34fcab5d4b3860df8065be15b8d10afeb54716975e298c446d89ef0f50d79212f9df6bc942046b777dca98fdf1a326892760fac97754f9df4e4', 1382050995, 1382050995, 'rash'),
 ('3ec7b85b8e243c85a840fd7ce9167aabb529473fc33c31b5f0d376741960e698dfdc77df58b5c7ed38a1e66be0d804eeeb9086bcc9b1e7388afc52760cd0591d', 1385629973, 1385630068, 'rash'),
@@ -413,7 +414,14 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
+(19, 25, 1385690887, 2);
 
 -- --------------------------------------------------------
 
@@ -440,6 +448,7 @@ CREATE TABLE IF NOT EXISTS `USER` (
 
 INSERT INTO `USER` (`USERID`, `P_EMAIL`, `ACCOUNT_CREATED`, `LOCKED`, `INACTIVE`, `HASH`, `DATE_CREATED`, `ALGO`, `DYNAMIC_SALT`) VALUES
 ('jack', 'rahul.chaudhary@owasp.org', 1382636773, 1, 0, '55dbd88705076de6aac4b27b53cb7495a3927f7eb076f34d7f0b10787767d12a11e8e1b36e39f5dcf93447749afd252eb4735d5900a9a6e77d859dcb7db91bf5', 1382636773, 'sha512', '9c44ce028fb26cf72681a3a0940dbbb508b8207c95121b1366e542fc2c66b3aac5dd7e8e6867b2d64ebf04c71fa123abc646cfb3f6cfc1bb4d9e2e0eade61715'),
+('jacktheadmin', 'rahul300chaudhary400@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
 ('ning', 'rahul300chaudhary400@gmail.com', 1385409875, 0, 0, 'b01b0e9af71634a23aa0cfe5df52dac2311ffd278714aa4233e07243085894cefc779756f9bfb966bd5cc747639d1d8cb82d7ab31f95b3627bc7bfd7dfbb0802', 1385409875, 'sha512', '6bc3c3af402313a8899cf8367bb5c86a94c70c2b570f348987ec1da72f195d9d8e9c4a225128593c23e2c22014ff402afd6519050bbb8a7f6bb82732a401a2ad'),
 ('ning123', 'rahul300chaudhary400@gmail.com', 1385622426, 0, 0, '5c49393e3fd7c2fe67dbc7d07e9ea46ae0231d3c9b0e3288e3d24355e3f02f12291d5fd3ef509841ee4e92c1878ee29633de22a09cca55b9ec270b48d56a1f99', 1385622426, 'sha512', 'cac9896e9284c39c0d34f2bddc29734bed0b86c40ff7aeea516534a12a2a0affd34c43125d518af1a0c4bd821779d3a46f172cc2b5a4fef46eda6537023496cb'),
 ('owasp', 'rash@a.com', 1384763795, 0, 1, 'b20c4f48237727ffaf05ae94ce46a3e24dd3027fbb099706d3f9657d0bc6c8aca1bf1aadbc54670359affb920433ec28457727ef3b76d47e1e8740671c9522a7', 1384763795, 'sha512', '34c79dc83ca4a897e3a353988379b41168d21a4ddb172eda0ee017f9d3d57f14abcf3ad848544b5b3a0d5880c1575525e4596ab25159713259223d8a35b253f1'),
@@ -471,6 +480,13 @@ CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
   PRIMARY KEY (`tid`),
   KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_buy_transaction`
+--
+
+INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
+(19, 'rash');
 
 -- --------------------------------------------------------
 
@@ -521,6 +537,7 @@ CREATE TABLE IF NOT EXISTS `XUSER` (
 --
 
 INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
+('jacktheadmin', 'Jaehoon', 'Jung', 'e', NULL, 15213, NULL),
 ('ning', 'Ning', 'Ning', 'c-b', NULL, 15213, NULL),
 ('rash', 'rah', 'cha', 'e', 13, 15213, 'agaga');
 
