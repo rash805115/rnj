@@ -138,7 +138,19 @@ html > body{
     background-color:#ff6666;
     border-style: dotted;;
 }
-
+/*
+#info{
+    font-family: Cambria, Georgia, serif;
+    text-align: center;
+    text-decoration-color: #d706d0;
+    margin-left:auto;
+    margin-right:auto;
+    width:99.5%;
+    height: 25px;
+    //background-color:#ff6666;
+    //border-style: dotted;;
+}
+*/
 /* picture slide in home page */
 .fadein { 
     height:173px; 
@@ -162,6 +174,38 @@ html > body{
     font-size: 18px;
 }
 
+.stats{
+    padding:13px 0 0 45px;
+    width:700px;
+    float:left;
+    margin:0 25px 0 10px;
+}
+.stats p{
+    padding:5px 0 0 12px;
+    font-size: 18px;
+}
+.stats form{
+    padding:5px 0 0 12px;
+    font-size: 16px;
+}
+.statsReport{
+    padding:13px 0 0 45px;
+    margin:0 50px 0 50px;
+}
+
+.statsReport table{
+    //padding:13px 0 0 45px;
+    margin:0 25px 0 10px;
+    font-size: 18px;
+
+}
+.statsReport td{
+    padding:8px 0 8px 10px;
+    margin:0 25px 0 10px;
+    font-size: 18px;
+    font-style: oblique;
+
+}
 /* login */
 .news{
     background-color:#ECECC5;
