@@ -1,4 +1,5 @@
 <?php
+
 if(isset($_POST["stats"]))
 {
     $selectedStat = $_POST["stats"];
@@ -19,11 +20,13 @@ function getAllProductsId()
     $result = phpsec\SQL("SELECT pid FROM product");
     return $result;
 }
+
 function getAllProductsName()
 {
     $result = phpsec\SQL("SELECT pname FROM product");
     return $result;
 }
+
 ?>
 
 <html>
@@ -32,33 +35,35 @@ function getAllProductsName()
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 		<link rel="stylesheet" type="text/css" <?php echo('href="' . "http://localhost/rnj/framework/file/css/style.css" . '"'); ?> />
                 
-                
-               <script type="text/javascript">
-                    function setTable(what){
-                    if(
-                        document.getElementById(what).style.display=="none"){
-                        document.getElementById(what).style.display="block";
+		<script type="text/javascript">
+                    function setTable(what)
+		    {
+			if(document.getElementById(what).style.display=="none")
+			{
+			    document.getElementById(what).style.display="block";
+			}
+			else if(document.getElementById(what).style.display=="block")
+			{
+			    document.getElementById(what).style.display="none";
+			}
                     }
-                    else if(
-                        document.getElementById(what).style.display=="block"){
-                        document.getElementById(what).style.display="none";
-                    }
-                    }
-              </script>
+		</script>
 
         </head>
 
 	<body>
             <div id="wrapper">
                     <?php include (__DIR__ . "/../include_employee.php"); ?>
-                    <div id="content_inside">
+                  
+		    <div id="content_inside">
                         <div id="main_block">
                             <div class="stats">
                                 <BR>
                                 <h1>Statistics</h1>
                                 <p>Please select a statistics question that you want to query from the list below.</p>
                                 <BR>
-                                <form name='form-stats' id='form-stats' method='POST' action="">
+                               
+				<form name='form-stats' id='form-stats' method='POST' action="">
                                                                         
                                     <input type="radio" name="stats" value="q1">How much does each employee sell products?<br>
                                     <input type="radio" name="stats" value="q2">Who has sold products the most?<br>
@@ -92,13 +97,13 @@ function getAllProductsName()
                                         <select name="pnameQ7">
                                             <!-- List all product's name -->
                                             <?php
-                                            $productsId = getAllProductsId();
-                                            $productsName = getAllProductsName();
-                                            for ($i = 0; $i < count($productsId); $i++)
-                                            {
-                                                echo "<option value=".$productsId[$i]['pid'].">";
-                                                echo $productsName[$i]['pname']."</option> <br>";
-                                            }                                       
+						$productsId = getAllProductsId();
+						$productsName = getAllProductsName();
+						for ($i = 0; $i < count($productsId); $i++)
+						{
+						    echo "<option value=".$productsId[$i]['pid'].">";
+						    echo $productsName[$i]['pname']."</option> <br>";
+						}                                       
                                             ?>
                                         </select>
                                         ?
@@ -172,11 +177,20 @@ function getAllProductsName()
                             {
                                 echo "<table border= \"1\" width =\"600\" height =\"100\">";
                                 if($selectedStat == "q1"){
-                                    echo "<tr>";
+                                    $query =	"SELECT X.FIRST_NAME, X.LAST_NAME, SUM(Temp.sales) AS total_sales 
+						FROM USER U, user_sell_product S, XUSER X,
+						(SELECT T.tid, P.price*T.quantity AS sales 
+						FROM product P, transaction T
+						WHERE P.pid=T.pid) AS Temp
+						WHERE U.USERID = S.USERID AND X.USERID = U.USERID AND Temp.tid = S.tid 
+						GROUP BY S.USERID";
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
                                     echo "<td>How much does each employee sell products?</td>";
                                     echo "</tr>";
                                     echo "<tr>";
-                                    echo "<td>report displayed here</td>";
+                                    echo "<td>$result</td>";
                                     echo "</tr>";
                                 }
                                 else if($selectedStat == "q2"){
@@ -196,12 +210,33 @@ function getAllProductsName()
                                     echo "</tr>";
                                 } 
                                 else if($selectedStat == "q4"){
-                                    echo "<tr>";
+                                    $query =	"SELECT X.FIRST_NAME, X.LAST_NAME,  SUM(Temp.purchase) AS total_purchase 
+						FROM USER U, user_buy_transaction S, XUSER X,
+						(SELECT T.tid, P.price*T.quantity AS purchase 
+						FROM product P, transaction T
+						WHERE P.pid=T.pid) AS Temp
+						WHERE U.USERID = S.USERID AND Temp.tid = S.tid AND X.USERID = U.USERID
+						GROUP BY S.USERID
+						HAVING SUM(Temp.purchase) =
+						(SELECT MAX(Temp2.total_purchase)
+						FROM (SELECT SUM(Temp1.purchase) AS total_purchase 
+						FROM user_buy_transaction S1, 
+						(SELECT T1.tid, P1.price*T1.quantity AS purchase 
+						FROM product P1, transaction T1
+						WHERE P1.pid=T1.pid) AS Temp1
+						WHERE Temp1.tid = S1.tid 
+						GROUP BY S1.USERID) AS Temp2)";
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
                                     echo "<td>Who has bought products the most?</td>";
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+				    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['FIRST_NAME']} {$product['LAST_NAME']} with a total purchase amount of {$product['total_purchase']}</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q5"){
                                     echo "<tr>";
@@ -268,12 +303,20 @@ function getAllProductsName()
                                     echo "</tr>";
                                 }
                                 else if($selectedStat == "q13"){
-                                    echo "<tr>";
+                                    $query =	"SELECT P.pid, P.pname 
+						FROM product P
+						WHERE P.pid NOT IN (SELECT T.pid FROM transaction T)";
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
                                     echo "<td>What are the products which have never been sold at all?</td>";     
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+				    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>The product {$product['pname']} with id = {$product['pid']} has never been sold. :(</td>";
+					echo "</tr>";
+				    }
                                 } 
                                 else if($selectedStat == "q14"){
                                     echo "<tr>";
