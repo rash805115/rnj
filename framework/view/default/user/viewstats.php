@@ -7,12 +7,39 @@ if(isset($_POST["stats"]))
     $selectedPidQ6= $_POST["pnameQ6"];
     $selectedPidQ7= $_POST["pnameQ7"];
     $selectedPidQ8= $_POST["pnameQ8"];
+    $selectedPidQ15_1= $_POST["pnameQ15_1"];
+    $selectedPidQ15= $_POST["pnameQ15"];
     
-    $selectedTimeQ6= $_POST["timeQ6"];
+    $selectedDateQ6_1= $_POST["dateQ6_1"];
+    $selectedDateQ6_2= $_POST["dateQ6_2"];
+    $selectedDateQ8_1= $_POST["dateQ8_1"];
+    $selectedDateQ8_2= $_POST["dateQ8_2"];
+    $selectedDateQ10_1= $_POST["dateQ10_1"];
+    $selectedDateQ10_2= $_POST["dateQ10_2"];
+    $selectedDateQ10_1_1= $_POST["dateQ10_1_1"];
+    $selectedDateQ10_1_2= $_POST["dateQ10_1_2"];
+    $selectedDateQ10_2_1= $_POST["dateQ10_2_1"];
+    $selectedDateQ10_2_2= $_POST["dateQ10_2_2"];
+    $selectedDateQ12_1= $_POST["dateQ12_1"];
+    $selectedDateQ12_2= $_POST["dateQ12_2"];
+    $selectedDateQ12_1_1= $_POST["dateQ12_1_1"];
+    $selectedDateQ12_1_2= $_POST["dateQ12_1_2"];
+    $selectedDateQ12_2_1= $_POST["dateQ12_2_1"];
+    $selectedDateQ12_2_2= $_POST["dateQ12_2_2"];
+    $selectedDateQ14_1= $_POST["dateQ14_1"];
+    $selectedDateQ14_2= $_POST["dateQ14_2"];
+    
     $selectedTimeQ8= $_POST["timeQ8"];
     $selectedTimeQ10= $_POST["timeQ10"];
     $selectedTimeQ12= $_POST["timeQ12"];
     $selectedTimeQ14= $_POST["timeQ14"];
+    
+    $selectedSidQ1_1= $_POST["sidQ1_1"];
+    $selectedSidQ9_2= $_POST["sidQ9_2"];
+    $selectedSidQ10_2= $_POST["sidQ10_2"];
+    $selectedSidQ11_2= $_POST["sidQ11_2"];
+    $selectedSidQ12_2= $_POST["sidQ12_2"];
+    $selectedSidQ15_1= $_POST["sidQ15_1"];
 }
 
 function getAllProductsId()
@@ -24,6 +51,12 @@ function getAllProductsId()
 function getAllProductsName()
 {
     $result = phpsec\SQL("SELECT pname FROM product");
+    return $result;
+}
+
+function getAllStoresId()
+{
+    $result = phpsec\SQL("SELECT sid FROM store");
     return $result;
 }
 
@@ -66,6 +99,19 @@ function getAllProductsName()
 				<form name='form-stats' id='form-stats' method='POST' action="">
                                                                         
                                     <input type="radio" name="stats" value="q1">How much does each employee sell products?<br>
+                                    <input type="radio" name="stats" value="q1_1">How much does each employee sell products at the store 
+                                    <select name = "sidQ1_1" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                    sells products ?
+                                    <br>
                                     <input type="radio" name="stats" value="q2">Who has sold products the most?<br>
                                     <input type="radio" name="stats" value="q3">Who has sold products the least?<br>
                                     <input type="radio" name="stats" value="q4">Who has bought products the most?<br>
@@ -84,14 +130,11 @@ function getAllProductsName()
                                             ?>
                                             
                                         </select>
-                                        in 
-                                         <select name="timeQ6">
-                                            <option value="this week">this week</option> <br>
-                                            <option value="last 14 days">last 14 days</option> <br>
-                                            <option value="last 30 days">last 30 days</option> <br>
-                                            <option value="last 60 days">last 60 days</option> <br>
-                                        </select>
-                                        ?
+                                        between 
+                                        <input type='date' name="dateQ6_1">
+                                        and 
+                                        <input type='date' name="dateQ6_2">
+                                        
                                     <br>
                                     <input type="radio" name="stats" value="q7">What are the total sales of 
                                         <select name="pnameQ7">
@@ -122,45 +165,149 @@ function getAllProductsName()
                                             }                                       
                                             ?>
                                         </select>
-                                        in 
-                                        <select name="timeQ8">
-                                            <option value="this week">this week</option> <br>
-                                            <option value="last 14 days">last 14 days</option> <br>
-                                            <option value="last 30 days">last 30 days</option> <br>
-                                            <option value="last 60 days">last 60 days</option> <br>
-                                        </select>
-                                        ?
+                                        between 
+                                        <input type='date' name="dateQ8_1">
+                                        and 
+                                        <input type='date' name="dateQ8_2">
+
                                     <br>
-                                    <input type="radio" name="stats" value="q9">What is 10 best-selling products?<br>
-                                    <input type="radio" name="stats" value="q10">What is the best-selling product in  
-                                        <select name="timeQ10">
-                                            <option value="this week">this week</option> <br>
-                                            <option value="last 14 days">last 14 days</option> <br>
-                                            <option value="last 30 days">last 30 days</option> <br>
-                                            <option value="last 60 days">last 60 days</option> <br>
-                                        </select>
-                                        ?
+                                    <input type="radio" name="stats" value="q9">What is the best-selling product?<br>
+                                    <input type="radio" name="stats" value="q9_1">What is 10 best-selling products?<br>
+                                    <input type="radio" name="stats" value="q9_2">What is 10 best-selling products of a store
+                                    <select name = "sidQ9_2" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                    ?
                                     <br>
-                                    
-                                    <input type="radio" name="stats" value="q11">What is 10 worst-selling products?<br>
-                                    <input type="radio" name="stats" value="q12">What is the worst-selling products in
-                                        <select name="timeQ12">
-                                            <option value="this week">this week</option> <br>
-                                            <option value="last 14 days">last 14 days</option> <br>
-                                            <option value="last 30 days">last 30 days</option> <br>
-                                            <option value="last 60 days">last 60 days</option> <br>
-                                        </select>
-                                        ?
+                                    <input type="radio" name="stats" value="q10">What is the best-selling product   
+                                        between 
+                                        <input type='date' name="dateQ10_1">
+                                        and 
+                                        <input type='date' name="dateQ10_2">
+                                        
+                                    <br>
+                                    <input type="radio" name="stats" value="q10_1">What is 10 best-selling product   
+                                        between 
+                                        <input type='date' name="dateQ10_1_1">
+                                        and 
+                                        <input type='date' name="dateQ10_1_2">
+                                        
+                                    <br>
+                                    <input type="radio" name="stats" value="q10_2">What is 10 best-selling product of a store
+                                    <select name = "sidQ10_2" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                        between 
+                                        <input type='date' name="dateQ10_2_1">
+                                        and 
+                                        <input type='date' name="dateQ10_2_2">
+                                        
+                                    <br>
+                                    <input type="radio" name="stats" value="q11">What is the worst-selling products?<br>
+                                    <input type="radio" name="stats" value="q11_1">What is 10 worst-selling products?<br>
+                                    <input type="radio" name="stats" value="q11_2">What is 10 best-selling products of a store
+                                    <select name = "sidQ11_2" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                    ?
+                                    <br>
+                                    <input type="radio" name="stats" value="q12">What is the worst-selling products between 
+                                        <input type='date' name="dateQ12_1">
+                                        and 
+                                        <input type='date' name="dateQ12_2"> 
+                                    <br>
+                                    <input type="radio" name="stats" value="q12_1">What is 10 worst-selling products between 
+                                        <input type='date' name="dateQ12_1_1">
+                                        and 
+                                        <input type='date' name="dateQ12_1_2"> 
+                                    <br>
+                                    <input type="radio" name="stats" value="q12_2">What is 10 worst-selling product of a store
+                                    <select name = "sidQ12_2" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                        between 
+                                        <input type='date' name="dateQ12_2_1">
+                                        and 
+                                        <input type='date' name="dateQ12_2_2">
+                                        
                                     <br>
                                     <input type="radio" name="stats" value="q13">What are the products which have never been sold at all?<br>
-                                    <input type="radio" name="stats" value="q14">What are the products which have never been sold in
-                                         <select name="timeQ14">
-                                            <option value="this week">this week</option> <br>
-                                            <option value="last 14 days">last 14 days</option> <br>
-                                            <option value="last 30 days">last 30 days</option> <br>
-                                            <option value="last 60 days">last 60 days</option> <br>
-                                        </select>
-                                        ?
+                                    <input type="radio" name="stats" value="q14">What are the products which have never been sold between 
+                                        <input type='date' name="dateQ14_1">
+                                        and 
+                                        <input type='date' name="dateQ14_2">
+                                    <br>
+                                    <input type="radio" name="stats" value="q15">What are the inventory of
+                                    <select name = "pnameQ15" >
+                                            <option value="all products">all products</option><br>
+                                            <!-- List all product's name -->
+                                            <?php
+                                            $productsId = getAllProductsId();
+                                            $productsName = getAllProductsName();
+                                            for ($i = 0; $i < count($productsId); $i++)
+                                            {
+                                                echo "<option value=".$productsId[$i]['pid'].">";
+                                                echo $productsName[$i]['pname']."</option> <br>";
+                                            }                                       
+                                            ?>
+                                     </select>
+                                    ?
+                                    <br>
+                                    <input type="radio" name="stats" value="q15_1">What are the inventory of
+                                    <select name = "pnameQ15_1" >
+                                            <option value="all products">all products</option><br>
+                                            <!-- List all product's name -->
+                                            <?php
+                                            $productsId = getAllProductsId();
+                                            $productsName = getAllProductsName();
+                                            for ($i = 0; $i < count($productsId); $i++)
+                                            {
+                                                echo "<option value=".$productsId[$i]['pid'].">";
+                                                echo $productsName[$i]['pname']."</option> <br>";
+                                            }                                       
+                                            ?>
+                                     </select>
+                                    in a store
+                                    <select name = "sidQ15_1" >
+                                            <?php
+                                            $storeId = getAllStoresId();
+                                            for ($i = 0; $i < count($storeId); $i++)
+                                            {
+                                                echo "<option value=".$storeId[$i][sid].">";
+                                                echo $storeId[$i][sid]."</option> <br>";
+                                            }                                       
+                                            ?>
+                                    </select>
+                                    ?
+                                    <br>
                                     <br>
                                     <br>
                                     <input type="submit" name="genStatsReport" id="genStatsReport" value="Generate report" />
@@ -193,6 +340,16 @@ function getAllProductsName()
                                     echo "<td>$result</td>";
                                     echo "</tr>";
                                 }
+                                
+                                else if($selectedStat == "q1_1"){
+                                    echo "<tr>";
+                                    echo "<td>How much does each employee sell products at store#".$selectedSidQ1_1." sells products ?</td>";     
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                
                                 else if($selectedStat == "q2"){
                                     echo "<tr>";
                                     echo "<td>Who has sold products the most?</td>";
@@ -248,7 +405,7 @@ function getAllProductsName()
                                 } 
                                 else if($selectedStat == "q6"){
                                     echo "<tr>";
-                                    echo "<td>How many customers have bought ".$selectedPidQ6." in ".$selectedTimeQ6."?</td>";     
+                                    echo "<td>How many customers have bought ".$selectedPidQ6." between ".$selectedDateQ6_1." and ".$selectedDateQ6_2." ?</td>";     
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
@@ -264,13 +421,23 @@ function getAllProductsName()
                                 } 
                                 else if($selectedStat == "q8"){
                                     echo "<tr>";
-                                    echo "<td>What are the total sales of ".$selectedPidQ8." in ".$selectedTimeQ8."?</td>";     
+                                    echo "<td>What are the total sales of ".$selectedPidQ8." between ".$selectedDateQ8_1." and ".$selectedDateQ8_2." ?</td>";   
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
                                     echo "</tr>";
                                 }
+                                
                                 else if($selectedStat == "q9"){
+                                    echo "<tr>";
+                                    echo "<td>What is the best-selling product?</td>";     
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                               } 
+                               
+                                else if($selectedStat == "q9_1"){
                                     echo "<tr>";
                                     echo "<td>What is 10 best-selling products?</td>";     
                                     echo "</tr>";
@@ -278,9 +445,33 @@ function getAllProductsName()
                                     echo "<td>report displayed here</td>";
                                     echo "</tr>";
                                } 
+                               else if($selectedStat == "q9_2"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 best-selling products of a store# ".$selectedSidQ9_2." ?</td>";     
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
                                 else if($selectedStat == "q10"){
                                     echo "<tr>";
-                                    echo "<td>What is the best-selling product in ".$selectedTimeQ10."?</td>";      
+                                    echo "<td>What is the best-selling product between ".$selectedDateQ10_1." and ".$selectedDateQ10_2." ?</td>";   
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q10_1"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 best-selling product between ".$selectedDateQ10_1_1." and ".$selectedDateQ10_1_2." ?</td>";   
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q10_2"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 best-selling product in a store# ".$selectedSidQ10_2."between ".$selectedDateQ10_2_1." and ".$selectedDateQ10_2_2." ?</td>";   
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
@@ -288,15 +479,47 @@ function getAllProductsName()
                                 }
                                 else if($selectedStat == "q11"){
                                     echo "<tr>";
+                                    echo "<td>What is the worst-selling products?</td>";      
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q11_1"){
+                                    echo "<tr>";
                                     echo "<td>What is 10 worst-selling products?</td>";      
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
                                     echo "</tr>";
                                 } 
+                                else if($selectedStat == "q11_2"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 worst-selling products of a store# ".$selectedSidQ11_2."?</td>";      
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
                                 else if($selectedStat == "q12"){
                                     echo "<tr>";
-                                    echo "<td>What is the worst-selling products in ".$selectedTimeQ12."?</td>";      
+                                    echo "<td>What is the worst-selling products between ".$selectedDateQ12_1." and ".$selectedDateQ12_2." ?</td>";     
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q12_1"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 worst-selling products between ".$selectedDateQ12_1_1." and ".$selectedDateQ12_1_2." ?</td>";     
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q12_2"){
+                                    echo "<tr>";
+                                    echo "<td>What is 10 worst-selling product in a store# ".$selectedSidQ12_2." between ".$selectedDateQ12_2_1." and ".$selectedDateQ12_2_2." ?</td>";   
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
@@ -320,14 +543,30 @@ function getAllProductsName()
                                 } 
                                 else if($selectedStat == "q14"){
                                     echo "<tr>";
-                                    echo "<td>What are the products which have never been sold in ".$selectedTimeQ14."?</td>";      
+                                    echo "<td>What are the products which have never been sold between ".$selectedDateQ14_1." and ".$selectedDateQ14_2." ?</td>";     
                                     echo "</tr>";
                                     echo "<tr>";
                                     echo "<td>report displayed here</td>";
                                     echo "</tr>";
                                 }
+                                else if($selectedStat == "q15"){
+                                    echo "<tr>";
+                                    echo "<td>What are the inventory of ".$selectedPidQ15." ?</td>";   
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                else if($selectedStat == "q15_1"){
+                                    echo "<tr>";
+                                    echo "<td>What are the inventory of ".$selectedPidQ15_1." in a store# ".$selectedSidQ15_1." ?</td>";   
+                                    echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>report displayed here</td>";
+                                    echo "</tr>";
+                                }
+                                
                                 $selectedStat = null;
-
                                 echo " </table>";  
                             }
 
