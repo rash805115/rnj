@@ -16,29 +16,8 @@
 	
 	if(isset($_POST['checkout']))
 	{
-		$allPID = explode(",", $_POST['pids']);
-		$pidGroup = array();
-		
-		for($i=0; $i<count($allPID); $i++)
-		{
-			if (array_key_exists($allPID[$i], $pidGroup))
-			{
-				$pidGroup[$allPID[$i]] += 1;
-			}
-			else
-			{
-				$pidGroup[$allPID[$i]] = 1;
-			}
-		}
-		
-		foreach($pidGroup as $key=>$value)
-		{
-			$lastInsertedTID = phpsec\SQL("INSERT INTO transaction (pid, date, quantity) VALUES (?, ?, ?)", array($key, phpsec\time(), $value));
-			phpsec\SQL("INSERT INTO `user_buy_transaction` (tid, USERID) VALUES (?, ?)", array($lastInsertedTID, $userID));
-		}
-		
-		\setcookie("PRODUCTID", "", \time() - 3600);
-		$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
+		$userSession->setData("productids", $_POST['pids']);
+		$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/payments";
 		header("Location: {$nextURL}");
 	}
 ?>

@@ -13,6 +13,7 @@ FrontController::$Routes["productinfo"] =		"general/productinfocontroller";		//c
 FrontController::$Routes["home"] =			"general/showasiscontroller";			//the first page for users (non-logged users)
 FrontController::$Routes["login"] =			"users/userslogincontroller";			//for user login
 FrontController::$Routes["logout"] =			"users/userlogoutcontroller";			//for user logout
+FrontController::$Routes["payments"] =			"users/userpaymentcontroller";			//the page for payments for users (logged users)
 FrontController::$Routes["users/index"] =		"users/userindexcontroller";			//the first page for users (logged users)
 FrontController::$Routes["users/employee"] =		"users/useremployeecontroller";			//the first page for employees (logged users)
 FrontController::$Routes["users/viewstats"] =		"users/viewstatscontroller";			//for employees to see stats and queries (logged users)
