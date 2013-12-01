@@ -36,6 +36,13 @@
 		
 		$this->info .= "Added to cart";
 	}
+	
+	if(isset($_POST['comment-submit']))
+	{
+		phpsec\SQL("INSERT INTO review (USERID, pid, comments, rate) VALUES (?, ?, ?, ?)", array($userID, $productID, $_POST['usercomment'], $_POST['userrate']));
+		$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/productinfo?pid=" . $productID;
+		header("Location: {$nextURL}");
+	}
 ?>
 
 <html>
@@ -105,7 +112,65 @@
                                     </table>
                             </div>
                     </div>
-                </div>
+			
+		    <div name='review-block' id='review-block'>
+			    <?php
+			    
+			    if ($userID != FALSE)
+			    {
+				    echo "
+					    <form name='user-comment' id='user-comment' method='POST' action=''>
+						Please rate this product:
+						<select name='userrate'>
+							<option value='1'>1</option>
+							<option value='2'>2</option>
+							<option value='3'>3</option>
+							<option value='4'>4</option>
+							<option value='5'>5</option>
+						</select>
+						<BR>
+						<textarea rows='5' cols='55' name='usercomment'>Please Enter your comments here</textarea>
+						<input type='submit' name='comment-submit' id='comment-submit' value='Comment' />
+					    </form>
+					    <BR><BR><BR>
+				    ";
+			    }
+			    
+			    $result = phpsec\SQL("SELECT * FROM review WHERE pid = ?", array($productID));
+			    
+			    if(count($result) == 0)
+			    {
+				    echo "No comments on this product. Be the first one to comment!<BR>You need to be signed in to comment.";
+			    }
+			    else
+			    {
+				echo "
+					<table border='1'>
+					    <tr>
+						    <td>Username</td>
+						    <td>Comment</td>
+						    <td>Rating (?/5)</td>
+					    </tr>
+				";
+
+				foreach($result as $comment)
+				{
+					echo "
+						<tr>
+						    <td>{$comment['USERID']}</td>
+						    <td>{$comment['comments']}</td>
+						    <td>{$comment['rate']}</td>
+						</tr>
+					";
+				}
+
+				echo "
+					</table>
+				";
+			    }
+			    
+			    ?>
+                    </div>
             </div>
 	</body>
 </html>
