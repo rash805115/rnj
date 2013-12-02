@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 01, 2013 at 08:04 PM
+-- Generation Time: Dec 02, 2013 at 04:05 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -294,7 +294,7 @@ CREATE TABLE IF NOT EXISTS `region` (
   `manager` varchar(32) NOT NULL,
   PRIMARY KEY (`rid`),
   KEY `manager` (`manager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `region`
@@ -302,7 +302,14 @@ CREATE TABLE IF NOT EXISTS `region` (
 
 INSERT INTO `region` (`rid`, `rname`, `manager`) VALUES
 (1, 'Pittsburgh', 'rash'),
-(2, 'New York', 'ning');
+(2, 'New York', 'ning'),
+(3, 'Northeast', 'jack'),
+(4, 'Eastern', 'jack'),
+(5, 'Southwest', 'jack'),
+(6, 'Southeast', 'jack'),
+(7, 'Atlantic', 'jack'),
+(8, 'Western', 'jack'),
+(9, 'Pacific', 'jack');
 
 -- --------------------------------------------------------
 
@@ -364,7 +371,6 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('556c80f6fcc7006efa13a8d4a07064cddaf6c82d383dab77c26cb957f8c3d4ce0657903a9fba53495fc52895e7c0c1162b6f82be608377eedd8da4fa62cc9f39', 1385630981, 1385631061, 'rash'),
 ('568b0e967e839825fb13029980c2f6f17c5435d55ff151d0ff530b4bc2db793b1d5cd569eff2bfcb17a8d9b501b11ad018e94fdfce06d3cc58264d7077b35fc3', 1381999778, 1381999778, 'rash'),
 ('5b9cda7d70bbb4f4822299049dbc0466fa88c6f81a35cc40fd898380d6cecb8342bdb8c72ebd0ccd917cbc76679b85fb32dc293551558eabf53a4cb6db2f06d8', 1382047006, 1382047006, 'rash'),
-('5f75aae77f0dfad8749b97336e46de04163e21eae2ec279a3a510e8d3b5a8c91550a0a8a0c5e928a8a24716810951fa6e7ff78becd8fe63dfda4967230dec875', 1385939430, 1385946087, 'rash'),
 ('6532106cec75b95900be5dc5346bad1c7579764029438bbeebd650abd37e5cbd18c4b45131bff53ad98ccac8e8591327a1e2cab5ad0df78c26fa3cb36b60bfc7', 1381999678, 1381999678, 'rash'),
 ('69ff0a20d48cf2c81e31850014e60543cda898abafd4870c7f5ad5978b17f549cab45ec863c137cd8f447d37812852e02c91d2244542ec0bd1037b2b418b5e1b', 1385689930, 1385689930, 'ning'),
 ('6b4473fc5732584a6301fc6d0e61ace9db053a9c5de5edb83c417e2a8282ec859fc2576ae6ba81164fdcb5c3a80f1d45b50f4dd2b2fb4cc431665b8f6488dbc2', 1385627391, 1385627391, 'rash'),
@@ -372,6 +378,7 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('74b6e2dd7f2c5bb08cd30f468abca2892bfb84b148bd678123338a9c9eb903e1e6759bd88caab8a870c65e7fa1f85f8038f8003e7db9dfd44ec801b6a7fe5a3a', 1385630922, 1385630946, 'rash'),
 ('776641bee2326853fe9539fb0042fd50c845c57b9aa5fa2bcdc3dd9732afddc81f156054a36a92d56587258864aeb7f9e2798448fd9ae907e8bd828c46b26bf8', 1385629694, 1385629762, 'rash'),
 ('8191dc91c2d9b14307117a4c13362cc698f43d15bc4026d4bc40cf4ae127e0e30d36b0b17a7dd76e086ff04547112fcb77d05930ae9d96cb7afd50e4eb6cca53', 1382044893, 1382044893, 'rash'),
+('88ff5906aba4cf785ef4f28910ef4440ebd414f5a3b0fc333b25f88071cd6661337454cc21fee3b2165dc4da212e2796b457f2c9a9b4bedc71819174a9662363', 1386014436, 1386016621, 'rash'),
 ('9d11bfc31367eafeb7c02187f4713436f6d9b3b6a0a57eed6d8b744829b6c492315a577c09a2febc6e50b4ad85a321200bd0e44267cd55570a70d6d219b57be4', 1382097240, 1382097240, 'rash'),
 ('aeb33f4ba8a072004db2d6317e9597520fb422a0c74c208947eedd29465ef2183c17c1978f2ddc81eac23b24239de00baa0e47b1fe35665946bfecf225ea0f75', 1381999575, 1381999575, 'rash'),
 ('b21d332d9eff86aae39437fb3ad01c846801b8f9d352b8ec06d00ef404cf5764e4bcbc1675d4b0809335a54c8255289bcc5b97bc164ea5df3f7d3c3dfdba5795', 1381999727, 1381999727, 'rash'),
@@ -394,6 +401,13 @@ CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
   KEY `SESSION_ID` (`SESSION_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `SESSION_DATA`
+--
+
+INSERT INTO `SESSION_DATA` (`SESSION_ID`, `KEY`, `VALUE`) VALUES
+('88ff5906aba4cf785ef4f28910ef4440ebd414f5a3b0fc333b25f88071cd6661337454cc21fee3b2165dc4da212e2796b457f2c9a9b4bedc71819174a9662363', 'productids', '20');
+
 -- --------------------------------------------------------
 
 --
@@ -410,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   KEY `rid` (`rid`),
   KEY `zip` (`zip`),
   KEY `storemanager` (`storemanager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `store`
@@ -418,7 +432,18 @@ CREATE TABLE IF NOT EXISTS `store` (
 
 INSERT INTO `store` (`sid`, `rid`, `streetaddr`, `zip`, `storemanager`) VALUES
 (1, 1, 'Centre', 15213, 'ning'),
-(2, 2, 'Fifth', 15213, 'rash');
+(2, 2, 'Fifth', 15213, 'rash'),
+(3, 1, '421 8th Ave Rm 4202-J1', 10199, 'jack'),
+(4, 1, '25 Dorchester Ave', 12288, 'jack'),
+(5, 2, '1001 California Ave', 15290, 'jack'),
+(6, 2, '2970 Market Street', 19104, 'jack'),
+(7, 3, '433 W Harrison 4th Floor', 60607, 'jack'),
+(8, 4, 'One Post Office Drive', 78284, 'jack'),
+(9, 4, '7499 Northwest 31st St', 33122, 'jack'),
+(10, 5, '900 Brentwood RD NE', 20066, 'jack'),
+(11, 5, '2901 Scott Futrell Drive', 28228, 'jack'),
+(12, 6, '1001 E. Sunset Rd', 89199, 'jack'),
+(13, 7, '7001 S. Central Ave. Room 338B', 90052, 'jack');
 
 -- --------------------------------------------------------
 
@@ -447,7 +472,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Dumping data for table `transaction`
@@ -456,7 +481,8 @@ CREATE TABLE IF NOT EXISTS `transaction` (
 INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
 (24, 21, 1385928760, 1),
 (25, 30, 1385928760, 1),
-(26, 20, 1385929416, 1);
+(26, 20, 1385929416, 1),
+(27, 25, 1386014564, 1);
 
 -- --------------------------------------------------------
 
@@ -523,7 +549,8 @@ CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
 INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
 (24, 'ning'),
 (25, 'ning'),
-(26, 'ning');
+(26, 'ning'),
+(27, 'rash');
 
 -- --------------------------------------------------------
 
@@ -584,7 +611,7 @@ CREATE TABLE IF NOT EXISTS `XUSER` (
 INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
 ('jacktheadmin', 'Jaehoon', 'Jung', 'e', NULL, 15213, NULL),
 ('ning', 'Ning', 'Ning', 'c-b', NULL, 15213, NULL),
-('rash', 'rah', 'cha', 'e', 13, 15213, 'agaga');
+('rash', 'Rahul', 'Chaudhary', 'e', 8, 15213, '3229 Hardie Way');
 
 -- --------------------------------------------------------
 
@@ -604,7 +631,48 @@ CREATE TABLE IF NOT EXISTS `zipcode` (
 --
 
 INSERT INTO `zipcode` (`zip`, `city`, `state`) VALUES
-(15213, 'Pittsburgh', 'PA');
+(10199, 'NY', 'NY'),
+(11256, 'Brooklyn', 'NY'),
+(12288, 'Boston', 'MA'),
+(15213, 'Pittsburgh', 'PA'),
+(15290, 'Pittsburgh', 'PA'),
+(16515, 'Erie', 'PA'),
+(17107, 'Harrisburg', 'PA'),
+(19104, 'Philadelphia', 'PA'),
+(20066, 'Washington', 'DC'),
+(21233, 'Baltimore', 'MD'),
+(23232, 'Richmond', 'VA'),
+(27676, 'Raleigh', 'NC'),
+(28228, 'Charlotte', 'NC'),
+(29292, 'Columbia', 'SC'),
+(32799, 'Mid-Florida', 'FL'),
+(33122, 'Miami', 'FL'),
+(33607, 'Tampa', 'FL'),
+(43216, 'Columbus', 'OH'),
+(44101, 'Cleveland', 'OH'),
+(45234, 'Cincinnati', 'OH'),
+(46298, 'Indianapolis', 'IN'),
+(53201, 'Milwaukee', 'WI'),
+(60607, 'Chicago', 'IL'),
+(63155, 'St Louis', 'MO'),
+(64108, 'Kansas City', 'MO'),
+(72205, 'Little Rock', 'AR'),
+(73198, 'Oklahoma City', 'OK'),
+(75099, 'Coppell', 'TX'),
+(76161, 'Fort Worth', 'TX'),
+(77067, 'Houston', 'TX'),
+(78284, 'San Antonio', 'TX'),
+(80266, 'Denver', 'CO'),
+(84199, 'Salt Lake City', 'UT'),
+(85026, 'Phoenix', 'AZ'),
+(87101, 'Albuquerque', 'NM'),
+(89199, 'Las Vegas', 'NV'),
+(90052, 'Los Angeles', 'CA'),
+(92199, 'San Diego', 'CA'),
+(94120, 'San Francisco', 'CA'),
+(95799, 'West Sacramento', 'CA'),
+(97208, 'Portland', 'OR'),
+(98109, 'Seattle', 'WA');
 
 --
 -- Constraints for dumped tables
