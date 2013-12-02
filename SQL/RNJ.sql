@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2013 at 09:15 PM
+-- Generation Time: Dec 01, 2013 at 08:04 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -113,6 +113,14 @@ CREATE TABLE IF NOT EXISTS `employee_workin_store` (
   KEY `sid` (`sid`),
   KEY `employeeid` (`employeeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee_workin_store`
+--
+
+INSERT INTO `employee_workin_store` (`employeeid`, `sid`) VALUES
+('jacktheadmin', 1),
+('rash', 1);
 
 -- --------------------------------------------------------
 
@@ -281,12 +289,20 @@ INSERT INTO `ptype` (`kkid`, `kid`, `kkname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `region` (
-  `rid` int(11) NOT NULL DEFAULT '0',
+  `rid` int(11) NOT NULL AUTO_INCREMENT,
   `rname` varchar(30) DEFAULT NULL,
   `manager` varchar(32) NOT NULL,
   PRIMARY KEY (`rid`),
   KEY `manager` (`manager`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `region`
+--
+
+INSERT INTO `region` (`rid`, `rname`, `manager`) VALUES
+(1, 'Pittsburgh', 'rash'),
+(2, 'New York', 'ning');
 
 -- --------------------------------------------------------
 
@@ -302,6 +318,14 @@ CREATE TABLE IF NOT EXISTS `review` (
   PRIMARY KEY (`USERID`,`pid`),
   KEY `pid` (`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`USERID`, `pid`, `comments`, `rate`) VALUES
+('ning', 13, 'Good Book!!', 4),
+('rash', 13, 'Awesome!!', 5);
 
 -- --------------------------------------------------------
 
@@ -340,6 +364,7 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('556c80f6fcc7006efa13a8d4a07064cddaf6c82d383dab77c26cb957f8c3d4ce0657903a9fba53495fc52895e7c0c1162b6f82be608377eedd8da4fa62cc9f39', 1385630981, 1385631061, 'rash'),
 ('568b0e967e839825fb13029980c2f6f17c5435d55ff151d0ff530b4bc2db793b1d5cd569eff2bfcb17a8d9b501b11ad018e94fdfce06d3cc58264d7077b35fc3', 1381999778, 1381999778, 'rash'),
 ('5b9cda7d70bbb4f4822299049dbc0466fa88c6f81a35cc40fd898380d6cecb8342bdb8c72ebd0ccd917cbc76679b85fb32dc293551558eabf53a4cb6db2f06d8', 1382047006, 1382047006, 'rash'),
+('5f75aae77f0dfad8749b97336e46de04163e21eae2ec279a3a510e8d3b5a8c91550a0a8a0c5e928a8a24716810951fa6e7ff78becd8fe63dfda4967230dec875', 1385939430, 1385946087, 'rash'),
 ('6532106cec75b95900be5dc5346bad1c7579764029438bbeebd650abd37e5cbd18c4b45131bff53ad98ccac8e8591327a1e2cab5ad0df78c26fa3cb36b60bfc7', 1381999678, 1381999678, 'rash'),
 ('69ff0a20d48cf2c81e31850014e60543cda898abafd4870c7f5ad5978b17f549cab45ec863c137cd8f447d37812852e02c91d2244542ec0bd1037b2b418b5e1b', 1385689930, 1385689930, 'ning'),
 ('6b4473fc5732584a6301fc6d0e61ace9db053a9c5de5edb83c417e2a8282ec859fc2576ae6ba81164fdcb5c3a80f1d45b50f4dd2b2fb4cc431665b8f6488dbc2', 1385627391, 1385627391, 'rash'),
@@ -376,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
 --
 
 CREATE TABLE IF NOT EXISTS `store` (
-  `sid` int(11) NOT NULL DEFAULT '0',
+  `sid` int(11) NOT NULL AUTO_INCREMENT,
   `rid` int(11) NOT NULL,
   `streetaddr` varchar(100) DEFAULT NULL,
   `zip` int(11) NOT NULL,
@@ -385,7 +410,15 @@ CREATE TABLE IF NOT EXISTS `store` (
   KEY `rid` (`rid`),
   KEY `zip` (`zip`),
   KEY `storemanager` (`storemanager`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `store`
+--
+
+INSERT INTO `store` (`sid`, `rid`, `streetaddr`, `zip`, `storemanager`) VALUES
+(1, 1, 'Centre', 15213, 'ning'),
+(2, 2, 'Fifth', 15213, 'rash');
 
 -- --------------------------------------------------------
 
@@ -414,14 +447,16 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `transaction`
 --
 
 INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
-(19, 25, 1385690887, 2);
+(24, 21, 1385928760, 1),
+(25, 30, 1385928760, 1),
+(26, 20, 1385929416, 1);
 
 -- --------------------------------------------------------
 
@@ -486,7 +521,9 @@ CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
 --
 
 INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
-(19, 'rash');
+(24, 'ning'),
+(25, 'ning'),
+(26, 'ning');
 
 -- --------------------------------------------------------
 
@@ -513,6 +550,14 @@ CREATE TABLE IF NOT EXISTS `user_sell_product` (
   PRIMARY KEY (`tid`),
   KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_sell_product`
+--
+
+INSERT INTO `user_sell_product` (`tid`, `USERID`) VALUES
+(25, 'ning'),
+(24, 'rash');
 
 -- --------------------------------------------------------
 
