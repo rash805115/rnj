@@ -153,7 +153,7 @@ function getAllStoresId()
                                     <br>
                                     <input type="radio" name="stats" value="q8">What are the total sales of 
                                         <select name = "pnameQ8" >
-                                            <option value="all products">all products</option><br>
+                                            <option value="all">all products</option><br>
                                             <!-- List all product's name -->
                                             <?php
                                             $productsId = getAllProductsId();
@@ -515,20 +515,41 @@ function getAllStoresId()
 				    }
                                 } 
                                 else if($selectedStat == "q8"){
-                                    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales
-						FROM product P, transaction T 
-						WHERE P.pid=T.pid AND T.date >={$selectedDateQ8_1} AND T.date <={$selectedDateQ8_2} AND P.pname='{$selectedPidQ8}'";
-					
-				    $result = phpsec\SQL($query, array());
-				    
-				    echo "<tr>";
-                                    echo "<td>What are the total sales of ".$selectedPidQ8." between ".$_POST["dateQ8_1"]." and ".$_POST["dateQ8_2"]." ?</td>";   
-                                    echo "</tr>";
-                                    foreach($result as $product)
+                                    if($selectedPidQ8 == "all")
 				    {
-					echo "<tr>";
-					echo "<td>{$product['total_sales']} number of customer(s).</td>";
-					echo "</tr>";
+					    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales
+							FROM product P, transaction T 
+							WHERE P.pid=T.pid AND T.date >={$selectedDateQ8_1} AND T.date <={$selectedDateQ8_2} GROUP BY T.pid";
+							
+						$result = phpsec\SQL($query, array());
+				    
+						echo "<tr>";
+						echo "<td>What are the total sales of ".$selectedPidQ8." between ".$_POST["dateQ8_1"]." and ".$_POST["dateQ8_2"]." ?</td>";   
+						echo "</tr>";
+						foreach($result as $product)
+						{
+						    echo "<tr>";
+						    echo "<td>{$product['pname']} is sold {$product['total_sales']} times.</td>";
+						    echo "</tr>";
+						}
+				    }
+				    else
+				    {
+					    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales
+							FROM product P, transaction T 
+							WHERE P.pid=T.pid AND T.date >={$selectedDateQ8_1} AND T.date <={$selectedDateQ8_2} AND P.pname='{$selectedPidQ8}'";
+							
+					    $result = phpsec\SQL($query, array());
+				    
+						echo "<tr>";
+						echo "<td>What are the total sales of ".$selectedPidQ8." between ".$_POST["dateQ8_1"]." and ".$_POST["dateQ8_2"]." ?</td>";   
+						echo "</tr>";
+						foreach($result as $product)
+						{
+						    echo "<tr>";
+						    echo "<td>{$product['total_sales']} number of customer(s).</td>";
+						    echo "</tr>";
+						}
 				    }
                                 }
                                 
