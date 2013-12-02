@@ -91,7 +91,7 @@ html > body{
     height:auto;
     float:left;
     padding:40px 32px 0 23px;
-    margin:0 0 0 0;
+    margin:50 0 0 0;
     font: 400 18px/0.8 'Cookie', Helvetica, sans-serif;
     color: #cca1bd;
     text-shadow: 4px 4px 3px rgba(0,0,0,0.1); 
@@ -136,9 +136,9 @@ html > body{
     width:99.5%;
     height: 25px;
     background-color:#ff6666;
-    border-style: dotted;;
+    border-style: dotted;
 }
-/*
+
 #info{
     font-family: Cambria, Georgia, serif;
     text-align: center;
@@ -147,10 +147,10 @@ html > body{
     margin-right:auto;
     width:99.5%;
     height: 25px;
-    //background-color:#ff6666;
-    //border-style: dotted;;
+    background-color:green;
+    border-style: dotted;;
 }
-*/
+
 /* picture slide in home page */
 .fadein { 
     height:173px; 
