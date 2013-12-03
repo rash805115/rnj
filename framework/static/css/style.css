@@ -32,22 +32,22 @@ html > body{
 /* menu @ banner*/
 #menu{
     position:absolute;
-    top:165px;
-    left:80px;
+    top:170px;
+    left:50px;
 }
 #menu li{
     display:inline;
 }
 #menu a{
     margin:0 1px 0 0;
-    width:200px;
+    width:180px;
     text-align:center;
     padding:8px 0 10px 0;
     display:block;
     float:left;
     font-weight: bold;
     text-decoration:none;
-    font: 400 45px/0.8 'Cookie', Helvetica, sans-serif;
+    font: 400 35px/0.8 'Cookie', Helvetica, sans-serif;
     color: #333333;
     text-shadow: 4px 4px 3px rgba(0,0,0,0.1);     
 }
@@ -133,22 +133,21 @@ html > body{
     text-align: center;
     margin-left:auto;
     margin-right:auto;
-    width:99.5%;
+    width:100%;
     height: 25px;
     background-color:#ff6666;
-    border-style: dotted;
+    //border-style: dotted;
 }
-
 #info{
     font-family: Cambria, Georgia, serif;
     text-align: center;
     text-decoration-color: #d706d0;
     margin-left:auto;
     margin-right:auto;
-    width:99.5%;
+    width:100%;
     height: 25px;
-    background-color:green;
-    border-style: dotted;;
+    background-color:#ECECC5;
+    //border-style: dotted;
 }
 
 /* picture slide in home page */
@@ -291,6 +290,23 @@ html > body{
     font-size: 18px;
 }
 
+.review-block{
+    float:left;
+    margin:0px 0 0 70px;
+    
+}
+.review-block table{
+    padding:15px;
+    font-size: 18px;
+    width: 600px;
+    border-style: dotted;
+}
+.review-block p{
+    padding:15px;
+    font-size: 18px;
+    color: blue;
+}
+
 /* Shopping cart and Interests's table */
 #frame {
     margin-left:auto;
@@ -298,7 +314,7 @@ html > body{
     width:95%;
     padding: 15px 5px 5px 15px;
 }
-#frame td{
+#frame tr{
     text-align: center;
     padding: 5px 5px 5px 5px;
 }

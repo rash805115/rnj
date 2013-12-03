@@ -120,16 +120,17 @@
                                             </tr>
                                     </table>
                             </div>
-                    </div>
+                    
 			
-		    <div name='review-block' id='review-block'>
+		    <div name='review-block' class='review-block'>
 			    <?php
 			    
 			    if ($userID != FALSE)
 			    {
 				    echo "
 					    <form name='user-comment' id='user-comment' method='POST' action=''>
-						Please rate this product:
+						
+                                                <span style='font-weight:bold; font-size: 16px;'>Please rate this product: </span>
 						<select name='userrate'>
 							<option value='1'>1</option>
 							<option value='2'>2</option>
@@ -137,11 +138,11 @@
 							<option value='4'>4</option>
 							<option value='5'>5</option>
 						</select>
-						<BR>
+						<BR><BR>
 						<textarea rows='5' cols='55' name='usercomment'>Please Enter your comments here</textarea>
 						<input type='submit' name='comment-submit' id='comment-submit' value='Comment' />
 					    </form>
-					    <BR><BR><BR>
+					   
 				    ";
 			    }
 			    
@@ -149,26 +150,30 @@
 			    
 			    if(count($result) == 0)
 			    {
-				    echo "No comments on this product. Be the first one to comment!<BR>You need to be signed in to comment.";
+				    echo "<p>No comments on this product. <br> Be the first one to comment!<BR>You need to be signed in to comment.</p>";
 			    }
 			    else
 			    {
 				echo "
-					<table border='1'>
+                                    <BR>
+                                    <BR>
+					<table >
 					    <tr>
-						    <td>Username</td>
-						    <td>Comment</td>
-						    <td>Rating (?/5)</td>
+                                                    
+						    <td><span style='font-weight:bold;'>Username</span><br></td>
+						    <td><span style='font-weight:bold;'>Comment</span><br></td>
+						    <td><span style='font-weight:bold;'>Rating</span><br></td>
 					    </tr>
 				";
 
 				foreach($result as $comment)
 				{
 					echo "
+                                            
 						<tr>
-						    <td>{$comment['USERID']}</td>
-						    <td>{$comment['comments']}</td>
-						    <td>{$comment['rate']}</td>
+						    <td width = \"25%\">{$comment['USERID']} : </td>
+						    <td width = \"65%\">{$comment['comments']}</td>
+						    <td width = \"10%\">{$comment['rate']} / 5</td>
 						</tr>
 					";
 				}
@@ -180,6 +185,8 @@
 			    
 			    ?>
                     </div>
+                        </div>
+                </div>
             </div>
 	</body>
 </html>
