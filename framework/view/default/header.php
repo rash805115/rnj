@@ -29,6 +29,7 @@
 			$link2 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
 			$link3 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/interests";
 			$link4 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/settings";
+			$link5 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/purchasehistory";
 			
 			echo "
 				<ul id=\"menu\">
@@ -36,6 +37,7 @@
 					<li><a href=\"{$link2}\" class=\"but2_active\">Shopping Cart</a></li>
 					<li><a href=\"{$link3}\" class=\"but3_active\">Interests</a></li>
 					<li><a href=\"{$link4}\" class=\"but4_active\">Settings</a></li>
+					<li><a href=\"{$link5}\" class=\"but4_active\">Purchase History</a></li>
 				</ul>
 			";
 		}
