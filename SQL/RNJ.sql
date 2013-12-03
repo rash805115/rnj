@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 02, 2013 at 04:05 PM
+-- Generation Time: Dec 03, 2013 at 05:25 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `LOGS` (
   `DATETIME` text,
   `LINE` int(10) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -218,39 +218,41 @@ CREATE TABLE IF NOT EXISTS `product` (
   `tinventory` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `imageurl` varchar(100) DEFAULT NULL,
+  `store` int(5) NOT NULL DEFAULT '1',
   PRIMARY KEY (`pid`),
-  KEY `kkid` (`kkid`)
+  KEY `kkid` (`kkid`),
+  KEY `store` (`store`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`) VALUES
-(8, 1, 'Asus Monitor', 1, 200, '7.jpg'),
-(9, 1, 'LG Monitor', 1, 250, '8.jpg'),
-(10, 1, 'Samsung Monitor', 1, 275, '10.jpg'),
-(11, 3, 'Harry Potter and the Sorcerer''s Stone', 2, 14.99, '1.jpg'),
-(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.jpg'),
-(13, 3, 'Harry Potter and the Prisoner of Azkaban', 3, 15.99, '3.jpg'),
-(14, 2, 'HP Laptop', 1, 399, '3.jpg'),
-(15, 2, 'Dell Laptop', 5, 699, '4.jpg'),
-(16, 4, 'Called to care', 3, 39.99, '4.jpg'),
-(17, 4, 'Clean, Green, and Lean', 6, 25.89, '5.jpg'),
-(18, 5, 'Water Technology', 5, 75, '6.jpg'),
-(19, 5, 'Materials Science and Technology', 1, 32.25, '7.jpg'),
-(20, 6, 'Hollister woman jacket', 2, 59, '1.jpg'),
-(21, 6, 'Lacoste man jacket', 2, 69, '2.jpg'),
-(22, 6, 'Columbia coat', 5, 129, '3.jpg'),
-(23, 6, 'The north face jacket', 5, 99, '4.jpg'),
-(24, 7, 'Slim jeans', 1, 29, '5.jpg'),
-(25, 7, 'Denim jacket', 6, 75, '6.jpg'),
-(26, 8, 'Pull-out Sofa', 1, 159, '1.jpg'),
-(27, 8, 'Multimedia Storage Tower', 2, 35, '2.jpg'),
-(28, 10, 'Nonstick 15-Piece Cookware Set', 2, 110, '2.jpg'),
-(29, 10, 'Keurig K75 Platinum Brewing System', 5, 34, '1.jpg'),
-(30, 9, 'Joseph Adjustable Rolling Pin Plu', 11, 9.95, '4.jpg'),
-(31, 9, 'Non-Stick 5-Piece Bakeware Set', 8, 54, '3.jpg');
+INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`, `store`) VALUES
+(8, 1, 'Asus Monitor', 0, 200, '7.jpg', 14),
+(9, 1, 'LG Monitor', 1, 250, '8.jpg', 14),
+(10, 1, 'Samsung Monitor', 1, 275, '10.jpg', 14),
+(11, 3, 'Harry Potter and the Sorcerer''s Stone', 2, 14.99, '1.jpg', 1),
+(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.jpg', 1),
+(13, 3, 'Harry Potter and the Prisoner of Azkaban', 3, 15.99, '3.jpg', 1),
+(14, 2, 'HP Laptop', 1, 399, '3.jpg', 1),
+(15, 2, 'Dell Laptop', 5, 699, '4.jpg', 1),
+(16, 4, 'Called to care', 3, 39.99, '4.jpg', 1),
+(17, 4, 'Clean, Green, and Lean', 6, 25.89, '5.jpg', 10),
+(18, 5, 'Water Technology', 5, 75, '6.jpg', 1),
+(19, 5, 'Materials Science and Technology', 1, 32.25, '7.jpg', 1),
+(20, 6, 'Hollister woman jacket', 1, 59, '1.jpg', 1),
+(21, 6, 'Lacoste man jacket', 2, 69, '2.jpg', 14),
+(22, 6, 'Columbia coat', 5, 129, '3.jpg', 14),
+(23, 6, 'The north face jacket', 5, 99, '4.jpg', 1),
+(24, 7, 'Slim jeans', 1, 29, '5.jpg', 1),
+(25, 7, 'Denim jacket', 6, 75, '6.jpg', 1),
+(26, 8, 'Pull-out Sofa', 1, 159, '1.jpg', 1),
+(27, 8, 'Multimedia Storage Tower', 2, 35, '2.jpg', 1),
+(28, 10, 'Nonstick 15-Piece Cookware Set', 2, 110, '2.jpg', 1),
+(29, 10, 'Keurig K75 Platinum Brewing System', 5, 34, '1.jpg', 1),
+(30, 9, 'Joseph Adjustable Rolling Pin Plu', 11, 9.95, '4.jpg', 1),
+(31, 9, 'Non-Stick 5-Piece Bakeware Set', 8, 54, '3.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +296,7 @@ CREATE TABLE IF NOT EXISTS `region` (
   `manager` varchar(32) NOT NULL,
   PRIMARY KEY (`rid`),
   KEY `manager` (`manager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `region`
@@ -309,7 +311,8 @@ INSERT INTO `region` (`rid`, `rname`, `manager`) VALUES
 (6, 'Southeast', 'jack'),
 (7, 'Atlantic', 'jack'),
 (8, 'Western', 'jack'),
-(9, 'Pacific', 'jack');
+(9, 'Pacific', 'jack'),
+(10, 'www', 'root');
 
 -- --------------------------------------------------------
 
@@ -360,6 +363,7 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('18d1a63486418ab79cc93daea53d508716d19c3c522256ccf10fc3ab2e5087430c0c23c712e4e5a81870c7bb64011a7ff0f80a3053206ec150b1a887bde6aba1', 1385629611, 1385629637, 'rash'),
 ('19651b63aeada323a6a810dbef46b5523311841689357cb8c5b72e3a9688ac4f41db8353db40ec5ca41bca7487ef97f832d6d43b4bf756949bb2adf72531fd32', 1385685299, 1385685299, 'ning123'),
 ('1bcd9c97ae9a1b5565b1c8ad08779df68b8b4bc1b1ea15befb12210a639f573e22be5c41166063ed0a2b7e6d0b1a43b73df1adb508a38f6cd39c740759d9c735', 1385689080, 1385689080, 'ning'),
+('1f9faad0528384472b801edc7b0ffa3f7bcae1eba8ae68105a8abd6bc94fa847770f307f8c65b50393cdcd2abb469f5ed7b6bc3549a997a12414176e7377c649', 1386101296, 1386109327, 'rash'),
 ('25fa891b2e1d8c72b68addcf1909e6193e8a264db76c2001a2e62b9f1d52d0587c8a22fe47cd70ff96a6d0f60e31e45d51aa60d9cf5ad26d860728ac25e925e2', 1382045315, 1382045315, 'rash'),
 ('2788f524094d57324b4dd1ceaae4f62705ecd8b7003c045473bc0ce79777c01bb773d11465289a2ecc20e976b5e0fbf87ff8f8d08008a4d8ade63a407265f31f', 1382041271, 1382041271, 'rash'),
 ('2f8768811ae03b184cf7002db0702c25137af17c19fddea373711c388714cb5cf5a7b77d56f3e55bc6fc3ac64df8634c2ffe63f8e1e0560258dec2ba77feb559', 1382041186, 1382041186, 'rash'),
@@ -378,7 +382,6 @@ INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) 
 ('74b6e2dd7f2c5bb08cd30f468abca2892bfb84b148bd678123338a9c9eb903e1e6759bd88caab8a870c65e7fa1f85f8038f8003e7db9dfd44ec801b6a7fe5a3a', 1385630922, 1385630946, 'rash'),
 ('776641bee2326853fe9539fb0042fd50c845c57b9aa5fa2bcdc3dd9732afddc81f156054a36a92d56587258864aeb7f9e2798448fd9ae907e8bd828c46b26bf8', 1385629694, 1385629762, 'rash'),
 ('8191dc91c2d9b14307117a4c13362cc698f43d15bc4026d4bc40cf4ae127e0e30d36b0b17a7dd76e086ff04547112fcb77d05930ae9d96cb7afd50e4eb6cca53', 1382044893, 1382044893, 'rash'),
-('88ff5906aba4cf785ef4f28910ef4440ebd414f5a3b0fc333b25f88071cd6661337454cc21fee3b2165dc4da212e2796b457f2c9a9b4bedc71819174a9662363', 1386014436, 1386016621, 'rash'),
 ('9d11bfc31367eafeb7c02187f4713436f6d9b3b6a0a57eed6d8b744829b6c492315a577c09a2febc6e50b4ad85a321200bd0e44267cd55570a70d6d219b57be4', 1382097240, 1382097240, 'rash'),
 ('aeb33f4ba8a072004db2d6317e9597520fb422a0c74c208947eedd29465ef2183c17c1978f2ddc81eac23b24239de00baa0e47b1fe35665946bfecf225ea0f75', 1381999575, 1381999575, 'rash'),
 ('b21d332d9eff86aae39437fb3ad01c846801b8f9d352b8ec06d00ef404cf5764e4bcbc1675d4b0809335a54c8255289bcc5b97bc164ea5df3f7d3c3dfdba5795', 1381999727, 1381999727, 'rash'),
@@ -406,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
 --
 
 INSERT INTO `SESSION_DATA` (`SESSION_ID`, `KEY`, `VALUE`) VALUES
-('88ff5906aba4cf785ef4f28910ef4440ebd414f5a3b0fc333b25f88071cd6661337454cc21fee3b2165dc4da212e2796b457f2c9a9b4bedc71819174a9662363', 'productids', '20');
+('1f9faad0528384472b801edc7b0ffa3f7bcae1eba8ae68105a8abd6bc94fa847770f307f8c65b50393cdcd2abb469f5ed7b6bc3549a997a12414176e7377c649', 'productids', '8');
 
 -- --------------------------------------------------------
 
@@ -424,7 +427,7 @@ CREATE TABLE IF NOT EXISTS `store` (
   KEY `rid` (`rid`),
   KEY `zip` (`zip`),
   KEY `storemanager` (`storemanager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `store`
@@ -443,7 +446,8 @@ INSERT INTO `store` (`sid`, `rid`, `streetaddr`, `zip`, `storemanager`) VALUES
 (10, 5, '900 Brentwood RD NE', 20066, 'jack'),
 (11, 5, '2901 Scott Futrell Drive', 28228, 'jack'),
 (12, 6, '1001 E. Sunset Rd', 89199, 'jack'),
-(13, 7, '7001 S. Central Ave. Room 338B', 90052, 'jack');
+(13, 7, '7001 S. Central Ave. Room 338B', 90052, 'jack'),
+(14, 10, 'online', 10199, 'root');
 
 -- --------------------------------------------------------
 
@@ -472,7 +476,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `transaction`
@@ -482,7 +486,10 @@ INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
 (24, 21, 1385928760, 1),
 (25, 30, 1385928760, 1),
 (26, 20, 1385929416, 1),
-(27, 25, 1386014564, 1);
+(27, 25, 1386014564, 1),
+(28, 20, 1386101328, 1),
+(29, 8, 1386101328, 1),
+(30, 8, 1386101359, 1);
 
 -- --------------------------------------------------------
 
@@ -550,7 +557,10 @@ INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
 (24, 'ning'),
 (25, 'ning'),
 (26, 'ning'),
-(27, 'rash');
+(27, 'rash'),
+(28, 'rash'),
+(29, 'rash'),
+(30, 'rash');
 
 -- --------------------------------------------------------
 
@@ -725,6 +735,7 @@ ALTER TABLE `PASSWORD`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
+  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`store`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`kkid`) REFERENCES `ptype` (`kkid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

@@ -91,6 +91,10 @@
                                                     <td>Items Left:</td>
                                                     <td id="inventory"> <?php echo $productInfo[0]['tinventory']; ?> </td>
                                             </tr>
+					    <tr>
+                                                    <td>In store:</td>
+                                                    <td id="store"> <?php $result1 = phpsec\SQL("SELECT streetaddr FROM store WHERE sid = ?", array($productInfo[0]['store'])); echo $result1[0]['streetaddr']; ?> </td>
+                                            </tr>
                                     </table>
 
                                     <BR><BR>
