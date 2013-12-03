@@ -219,7 +219,7 @@ function getAllStoresId()
                                     <br>
                                     <input type="radio" name="stats" value="q11">What is the worst-selling products?<br>
                                     <input type="radio" name="stats" value="q11_1">What is 10 worst-selling products?<br>
-                                    <input type="radio" name="stats" value="q11_2">What is 10 best-selling products of a store
+                                    <input type="radio" name="stats" value="q11_2">What is 10 worst-selling products of a store
                                     <select name = "sidQ11_2" >
                                             <?php
                                             $storeId = getAllStoresId();
@@ -267,7 +267,6 @@ function getAllStoresId()
                                     <br>
                                     <input type="radio" name="stats" value="q15">What are the inventory of
                                     <select name = "pnameQ15" >
-                                            <option value="all products">all products</option><br>
                                             <!-- List all product's name -->
                                             <?php
                                             $productsId = getAllProductsId();
@@ -283,7 +282,6 @@ function getAllStoresId()
                                     <br>
                                     <input type="radio" name="stats" value="q15_1">What are the inventory of
                                     <select name = "pnameQ15_1" >
-                                            <option value="all products">all products</option><br>
                                             <!-- List all product's name -->
                                             <?php
                                             $productsId = getAllProductsId();
@@ -618,52 +616,129 @@ function getAllStoresId()
 				    }
                                 }
                                 else if($selectedStat == "q10"){
-                                    echo "<tr>";
-                                    echo "<td>What is the best-selling product between ".$selectedDateQ10_1." and ".$selectedDateQ10_2." ?</td>";   
+                                    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales 
+						FROM product P, transaction T
+						WHERE P.pid=T.pid AND T.date >={$selectedDateQ10_1} AND T.date <= {$selectedDateQ10_2}
+						GROUP BY T.pid
+						HAVING SUM(T.quantity) =
+						(SELECT MAX(total_sales)
+						FROM (SELECT SUM(T1.quantity) AS total_sales 
+						FROM transaction T1
+						GROUP BY T1.pid) AS temp)";
+					
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
+                                    echo "<td>What is the best-selling product between ".$_POST["dateQ10_1"]." and ".$_POST["dateQ10_2"]." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q10_1"){
-                                    echo "<tr>";
-                                    echo "<td>What is 10 best-selling product between ".$selectedDateQ10_1_1." and ".$selectedDateQ10_1_2." ?</td>";   
+                                    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales 
+						FROM product P, transaction T
+						WHERE P.pid=T.pid AND T.date >={$selectedDateQ10_1_1} AND T.date <= {$selectedDateQ10_1_2}
+						GROUP BY T.pid
+						HAVING SUM(T.quantity) =
+						(SELECT MAX(total_sales)
+						FROM (SELECT SUM(T1.quantity) AS total_sales 
+						FROM transaction T1
+						GROUP BY T1.pid) AS temp)";
+					
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
+                                    echo "<td>What is the 10 best-selling product between ".$_POST["dateQ10_1_1"]." and ".$_POST["dateQ10_1_2"]." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q10_2"){
-                                    echo "<tr>";
-                                    echo "<td>What is 10 best-selling product in a store# ".$selectedSidQ10_2."between ".$selectedDateQ10_2_1." and ".$selectedDateQ10_2_2." ?</td>";   
+                                    $query =	"SELECT Temp.sid, P.pname, SUM(T.quantity) AS total_sales 
+						FROM product P, transaction T, user_sell_product S, 
+						(SELECT employeeid, sid
+						FROM employee_workin_store 
+						WHERE sid=".$selectedSidQ10_2.") AS Temp
+						WHERE P.pid=T.pid AND T.tid=S.tid AND Temp.employeeid=S.USERID
+						AND T.date >={$selectedDateQ10_2_1} AND T.date <= {$selectedDateQ10_2_1}
+						GROUP BY T.pid
+						ORDER BY total_sales DESC
+						LIMIT 10";
+					
+				    $result = phpsec\SQL($query, array());
+						
+				    echo "<tr>";
+                                    echo "<td>What is 10 best-selling product in a store# ".$selectedSidQ10_2."between ".$_POST["dateQ10_2_1"]." and ".$_POST["dateQ10_2_2"]." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q11"){
-                                    echo "<tr>";
+                                    $query =	"SELECT P.pname
+						FROM product P WHERE pid NOT IN(select pid from transaction where 1)";
+				    
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
                                     echo "<td>What is the worst-selling products?</td>";      
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold 0 time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q11_1"){
-                                    echo "<tr>";
-                                    echo "<td>What is 10 worst-selling products?</td>";      
+                                    $query =	"SELECT P.pname
+						FROM product P WHERE pid NOT IN(select pid from transaction where 1) LIMIT 10";
+				    
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
+                                    echo "<td>What is the 10 worst-selling products?</td>";      
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold 0 time(s).</td>";
+					echo "</tr>";
+				    }
                                 } 
                                 else if($selectedStat == "q11_2"){
-                                    echo "<tr>";
+                                    $query =	"SELECT Temp.sid, P.pname, SUM(T.quantity) AS total_sales 
+						FROM product P, transaction T, user_sell_product S, 
+						(SELECT employeeid, sid
+						FROM employee_workin_store 
+						WHERE sid={$selectedSidQ11_2}) AS Temp
+						WHERE P.pid=T.pid AND T.tid=S.tid AND Temp.employeeid=S.USERID
+						GROUP BY T.pid
+						ORDER BY total_sales ASC
+						LIMIT 10";
+					
+				    $result = phpsec\SQL($query, array());
+						
+				    echo "<tr>";
                                     echo "<td>What is 10 worst-selling products of a store# ".$selectedSidQ11_2."?</td>";      
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q12"){
                                     echo "<tr>";
@@ -714,20 +789,35 @@ function getAllStoresId()
                                     echo "</tr>";
                                 }
                                 else if($selectedStat == "q15"){
-                                    echo "<tr>";
+                                    $query = "SELECT P.pname, P.tinventory 
+					FROM product P where P.pid = $selectedPidQ15";
+				    
+				    $result = phpsec\SQL($query, array());
+				    
+				    echo "<tr>";
                                     echo "<td>What are the inventory of ".$selectedPidQ15." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>The product {$product['pname']} has inventory of {$product['tinventory']}</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q15_1"){
-                                    echo "<tr>";
+                                    $query = "SELECT P.pname, H.sinventory 
+						FROM product P, store_has_product H
+						WHERE P.pid=H.pid AND H.sid={$selectedSidQ15_1} AND P.pname={$selectedPidQ15_1}";
+					$result = phpsec\SQL($query, array());
+					echo "<tr>";
                                     echo "<td>What are the inventory of ".$selectedPidQ15_1." in a store# ".$selectedSidQ15_1." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                   foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>The product {$product['pname']} has inventory of {$product['sinventory']}</td>";
+					echo "</tr>";
+				    }
                                 }
                                 
                                 $selectedStat = null;
