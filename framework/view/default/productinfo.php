@@ -98,7 +98,12 @@
                                             <tr>
                                                     <td>
                                                         <form name='form-cart' id='form-cart' method='POST' action=''>
-                                                                <input type="image" src= "http://localhost/rnj/framework/file/images/cart.png" alt="Submit" name="addtocart" id="addtocart" value="Add to Cart"/>
+								<?php
+									if($productInfo[0]['tinventory']>0)
+										echo "<input type=\"image\" src= \"http://localhost/rnj/framework/file/images/cart.png\" alt=\"Submit\" name=\"addtocart\" id=\"addtocart\" value=\"Add to Cart\" />";
+									else
+										echo "This item is not currently available. Add it to your wishlist for future updates.";
+								?>
                                                         </form>
                                                     </td>
                                             </tr>
