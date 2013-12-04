@@ -323,6 +323,14 @@ html > body{
     margin: 5px 5px 5px 15px;
     font-family: Cambria, Georgia, serif;
 }
+#frame th{
+    text-align: center;
+    padding: 15px 15px 15px 15px;
+}
+#frame td{
+    text-align: center;
+    padding: 5px;
+}
 
 #footer{
     font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;

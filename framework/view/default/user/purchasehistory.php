@@ -11,12 +11,15 @@
 
 	<body>
 		<div id="wrapper">
-			<?php include (__DIR__ . "/../include.php"); ?>
-			<table border="1">
+                    <?php include (__DIR__ . "/../include.php"); ?>
+                    <div id="content_inside">
+                        <div id="frame">
+                            <h1>Your Purchase History</h1><br/>
+                            <table border="1" width ="95%">
 				<tr>
-					<th>Product Name</th>
-					<th>Purchase Date</th>
-					<th>Quantity</th>
+					<th width="40%" >Product Name</th>
+					<th width="40%" >Purchase Date</th>
+					<th width="15%" >Quantity</th>
 				</tr>
 				<?php
 				foreach($result as $history)
@@ -30,6 +33,8 @@
 				}
 				?>
 			</table>
-		</div>
+                    </div>
+                </div>
+            </div>
 	</body>
 </html>
