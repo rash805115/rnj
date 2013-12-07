@@ -21,16 +21,27 @@ if(isset($_POST['submit']))
 	
 	foreach($pidGroup as $key=>$value)
 	{
-		$result = phpsec\SQL("SELECT tinventory, store FROM product WHERE pid = ?", array($key));
+		$result = phpsec\SQL("SELECT tinventory FROM product WHERE pid = ?", array($key));
 		if($result[0]['tinventory'] > 0)
 		{
-                                      
-                        
-			$lastInsertedTID = phpsec\SQL("INSERT INTO transaction (pid, date, quantity) VALUES (?, ?, ?)", array($key, phpsec\time(), $value));
+                        $lastInsertedTID = phpsec\SQL("INSERT INTO transaction (pid, date, quantity) VALUES (?, ?, ?)", array($key, phpsec\time(), $value));
 			phpsec\SQL("INSERT INTO `user_buy_transaction` (tid, USERID) VALUES (?, ?)", array($lastInsertedTID, $userID));
 			phpsec\SQL("UPDATE product SET `tinventory` = `tinventory` - 1 WHERE pid = ?", array($key));
-			phpsec\SQL("UPDATE store SET `sinventory` = `sinventory` - 1 WHERE sid = ? AND pid = ?", array($result[0]['store'], $key));
-                        echo "<script>alert('Transaction completed.')</script>";
+			
+			$typeOfEmployee = phpsec\SQL("SELECT type FROM XUSER WHERE USERID = ?", array($userID));
+			
+			
+			if($typeOfEmployee[0]['type'] == 'e')
+			{
+				$result = phpsec\SQL("SELECT sid FROM `employee_workin_store` WHERE employeeid = ?", array($userID));
+				phpsec\SQL("UPDATE `store_has_product` SET `sinventory` = `sinventory` - 1 WHERE sid = ? AND pid = ?", array($result[0]['sid'], $key));
+				
+			}
+			else
+			{
+				phpsec\SQL("UPDATE store SET `sinventory` = `sinventory` - 1 WHERE sid = 1 AND pid = ?", array($key));
+				echo "<script>alert('Transaction completed.')</script>";
+			}
 		}
 		else
 		{
@@ -42,12 +53,12 @@ if(isset($_POST['submit']))
 	}
 
 	if($shouldCartEmpty)
-   {
-            
-			\setcookie("PRODUCTID", "", \time() - 3600);
-			$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
-			header("Location: {$nextURL}");
-   }
+	{
+
+			     \setcookie("PRODUCTID", "", \time() - 3600);
+			     $nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
+			     header("Location: {$nextURL}");
+	}
 }
 
 ?>
@@ -67,11 +78,7 @@ if(isset($_POST['submit']))
                         <div class="about">
                            <h1>Payment</h1><br/>
                            <form method="POST" action="" name="payment" id="payment">
-				   <select name="mode" id="mode">
-					   <option value="offline">Off Line</option>
-					   <option value="online">On Line</option>
-				   </select><BR>
-				   Store Bought From: <input type="text" name="storeid" id="storeid" maxlength="11" /><BR>
+				   
                                    <table name="table-payment" id="table-payment">
                                            <tr>
                                                    <td>Card Number:</td>
