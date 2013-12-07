@@ -101,7 +101,7 @@
                 <?php include (__DIR__ . "/include.php"); ?>
                 <div id="content_inside">
                     	<div id="main_block">
-                            <div id="frame">
+			<div id="frame">
                                 <div id="product-show" name="product-show">
                                         <label> <h2> &emsp; <?php echo $catString; ?> > <?php echo getSelectionMenu($typeString); ?> </h2></label>
 
