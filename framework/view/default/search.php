@@ -48,7 +48,14 @@
 		
 		function show_table($ta)
 		{
-			$table = "<table><tr><th>Product ID</th><th>Product Name</th><th>Inventory</th><th>Price</th><th>Store</th></tr>";
+			$table = "<table border='1' width=\"85%\">"
+                                . "<tr>"
+                                . "<th width=\"8%\">ID</th>"
+                                . "<th width=\"47%\">Product Name</th>"
+                                . "<th width=\"10%\">Inventory</th>"
+                                . "<th width=\"10%\">Price</th>"
+                                . "<th width=\"10%\">Store</th>"
+                                . "</tr>";
 			foreach($ta as $t)
 			{
 				$link = "http://localhost/rnj/framework/productinfo?pid=" . $t['pid'];
@@ -72,31 +79,45 @@
 	<body>
             <div id="wrapper">
                 <?php include (__DIR__ . "/include.php"); ?>
-		    
-		    <div id="search-div">
-			<form method="POST" action="" id="search-form" name="search-form">
-				<input type="text" name="search-bar" id="search-bar" maxlength="128" />
-				<input type="submit" name="search" id="search" value="Search" />
-			</form>
-		    </div>
-		    <div id="answer">
-			    <?php
-				if(count($search1_res) > 0)
-				{
-					show_table($search1_res);
-				}
+		   <div id="content_inside">
+                    <div id="main_block">
+                        <div class="news"> 
+                            <div id="search-div">
+                                <h1>Search</h1><br/><br/>
+                                
+                                <form method="POST" action="" id="search-form" name="search-form">
+                                    enter your keyword here...
+                                        <input type="text" name="search-bar" id="search-bar" maxlength="128" size="80" />
+                                        <input type="submit" name="search" id="search" value="Go" />
+                                </form>
+                                <br/>
+                            </div>
+                         </div> 
+                        
+                        
+                         <div id="frame">
+                            
+                            <div id="answer">
+                                    <?php
+                                        if(count($search1_res) > 0)
+                                        {
+                                                show_table($search1_res);
+                                        }
 
-				if(count($search2_res) > 0)
-				{
-					show_table($search2_res);
-				}
+                                        if(count($search2_res) > 0)
+                                        {
+                                                show_table($search2_res);
+                                        }
 
-				if(count($search3_res) > 0)
-				{
-					show_table($search3_res);
-				}
-			    ?>
-		    </div>
+                                        if(count($search3_res) > 0)
+                                        {
+                                                show_table($search3_res);
+                                        }
+                                    ?>
+                            </div>
+                         </div>   
+                    </div>
+                </div>
 	    </div>
 	</body>
 </html>

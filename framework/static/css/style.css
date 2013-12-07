@@ -212,7 +212,7 @@ html > body{
     width:500px;
     float:left;
     padding:15px 15px 15px 15px;
-    margin:10px 0 0 10px;
+    margin:10px 0 10px 10px;
 }
 .news p{
     padding:5px 0 0 2px
