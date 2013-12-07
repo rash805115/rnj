@@ -1,5 +1,27 @@
 <?php
 
+if(isset($_POST['submit']))
+{
+	$pkind = substr($_POST['pkind'], 6);
+	$ptype = substr($_POST['ptype'], 6);
+	$goodToGo = false;
+	$result = phpsec\SQL("SELECT kkid FROM ptype WHERE kid = ?", array($pkind));
+	foreach($result as $kkids)
+	{
+		if($kkids['kkid'] == $ptype)
+		{
+			$goodToGo = true;
+			break;
+		}
+	}
+	
+	if($goodToGo)
+	{
+		phpsec\SQL("INSERT INTO product (pid, kkid, pname, tinventory, price) VALUES (?, ?, ?, ?, ?)", array($pkind, $ptype, $_POST['proname'], $_POST['proinv'], $_POST['proprice']));
+		$this->info .= "Product Added";
+	}
+}
+
 ?>
 
 <html>
@@ -19,7 +41,7 @@
 				<?php
 					$result = phpsec\SQL("select * from pkind", array());
 					
-					$select = "<select>";
+					$select = "<select name='pkind'>";
 					foreach($result as $s)
 					{
 						$select .= "<option value='pkind_{$s['kid']}'>{$s['kname']}</option>";
@@ -35,7 +57,7 @@
 				<?php
 					$result = phpsec\SQL("select * from ptype", array());
 					
-					$select = "<select>";
+					$select = "<select name='ptype'>";
 					foreach($result as $s)
 					{
 						$select .= "<option value='ptype_{$s['kkid']}'>{$s['kkname']}</option>";
@@ -50,7 +72,6 @@
 				Enter Product Name: <input type="text" maxlength="128" name="proname" id="proname" />
 				Enter Product Inventory: <input type="text" maxlength="11" name="proinv" id="proinv" />
 				Enter Product Price: <input type="text" maxlength="11" name="proprice" id="proprice" />
-				Enter Product Store: <input type="text" maxlength="128" name="prostore" id="prostore" />
 				
 				
 			</div>

@@ -34,13 +34,15 @@ if(isset($_POST['submit']))
 			if($typeOfEmployee[0]['type'] == 'e')
 			{
 				$result = phpsec\SQL("SELECT sid FROM `employee_workin_store` WHERE employeeid = ?", array($userID));
-				phpsec\SQL("UPDATE `store_has_product` SET `sinventory` = `sinventory` - 1 WHERE sid = ? AND pid = ?", array($result[0]['sid'], $key));
-				
+				$query = "UPDATE `store_has_product` SET `sinventory` = `sinventory` - {$value} WHERE sid = ? AND pid = ?";
+				phpsec\SQL($query, array($result[0]['sid'], $key));
+				$this->info .= "Transasction Completed.";
 			}
 			else
 			{
-				phpsec\SQL("UPDATE store SET `sinventory` = `sinventory` - 1 WHERE sid = 1 AND pid = ?", array($key));
-				echo "<script>alert('Transaction completed.')</script>";
+				$query = "UPDATE store SET `sinventory` = `sinventory` - {$value} WHERE sid = 1 AND pid = ?";
+				phpsec\SQL($query, array($key));
+				$this->info .= "Transasction Completed.";
 			}
 		}
 		else
@@ -56,8 +58,8 @@ if(isset($_POST['submit']))
 	{
 
 			     \setcookie("PRODUCTID", "", \time() - 3600);
-			     $nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
-			     header("Location: {$nextURL}");
+//			     $nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
+//			     header("Location: {$nextURL}");
 	}
 }
 
