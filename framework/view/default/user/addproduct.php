@@ -34,52 +34,55 @@ if(isset($_POST['submit']))
 	<body>
             <div id="wrapper">
                 <?php include (__DIR__ . "/../include.php"); ?>
-		    
-		    <form id="addpro" name="addpro" method="POST" action="">
-			<div id="kind">
-				Please choose a category:
-				<?php
-					$result = phpsec\SQL("select * from pkind", array());
-					
-					$select = "<select name='pkind'>";
-					foreach($result as $s)
-					{
-						$select .= "<option value='pkind_{$s['kid']}'>{$s['kname']}</option>";
-					}
-					$select .= "</select>";
-					
-					echo $select;
-				?>
-			</div>
+                <div id="content_inside">
+                    <div id="main_block">
+                        <div class="about">
+                        <h1>Add new inventory here...</h1><BR>
+                        <form id="addpro" name="addpro" method="POST" action="">
+                            <div id="kind" style="font-size: 18px">
+                                    <br>Please choose a category: 
+                                    <?php
+                                            $result = phpsec\SQL("select * from pkind", array());
 
-			<div id="type">
-				Please choose a sub-category:
-				<?php
-					$result = phpsec\SQL("select * from ptype", array());
-					
-					$select = "<select name='ptype'>";
-					foreach($result as $s)
-					{
-						$select .= "<option value='ptype_{$s['kkid']}'>{$s['kkname']}</option>";
-					}
-					$select .= "</select>";
-					
-					echo $select;
-				?>
-			</div>
+                                            $select = "<select name='pkind'>";
+                                            foreach($result as $s)
+                                            {
+                                                    $select .= "<option value='pkind_{$s['kid']}'>{$s['kname']}</option>";
+                                            }
+                                            $select .= "</select>";
 
-			<div id="item-details">
-				Enter Product Name: <input type="text" maxlength="128" name="proname" id="proname" />
-				Enter Product Inventory: <input type="text" maxlength="11" name="proinv" id="proinv" />
-				Enter Product Price: <input type="text" maxlength="11" name="proprice" id="proprice" />
-				
-				
-			</div>
-			    
-			<div id="submit">
-				<input type="submit" name="submit" id="submit" value="Add Product" />
-			</div>
-		    </form>
-	    </div>
+                                            echo $select;
+                                    ?>
+                            </div>
+
+                            <div id="type" style="font-size: 18px">
+                                    <br>Please choose a sub-category:
+                                    <?php
+                                            $result = phpsec\SQL("select * from ptype", array());
+
+                                            $select = "<select name='ptype'>";
+                                            foreach($result as $s)
+                                            {
+                                                    $select .= "<option value='ptype_{$s['kkid']}'>{$s['kkname']}</option>";
+                                            }
+                                            $select .= "</select>";
+
+                                            echo $select;
+                                    ?>
+                            </div>
+
+                            <div id="item-details" style="font-size: 18px">
+                                    <br>Enter Product Name: <input type="text" maxlength="128" name="proname" id="proname" />
+                                    <br>Enter Product Inventory: <input type="text" maxlength="11" name="proinv" id="proinv" />
+                                    <br>Enter Product Price: <input type="text" maxlength="11" name="proprice" id="proprice" />
+
+
+                            </div>
+
+                            <div id="submit">
+                                    <input type="submit" name="submit" id="submit" value="Add Product" />
+                            </div>
+                        </form>
+	    </div></div></div></div>
 	</body>
 </html>
