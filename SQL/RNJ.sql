@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 07, 2013 at 12:22 PM
+-- Generation Time: Dec 07, 2013 at 12:52 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -107,7 +107,7 @@ INSERT INTO `employee` (`USERID`, `title`, `salary`) VALUES
 ('jordan', NULL, NULL),
 ('jordan3', NULL, NULL),
 ('jordan4', NULL, NULL),
-('peter', NULL, NULL),
+('peter', 'Sales', 50000),
 ('peter3', NULL, NULL),
 ('peter4', NULL, NULL),
 ('vemployee', 'Sales', 34822);
@@ -199,7 +199,8 @@ CREATE TABLE IF NOT EXISTS `PASSWORD` (
 --
 
 INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEMPTS`, `LAST_LOGIN_ATTEMPT`, `FIRST_LOGIN_ATTEMPT`, `USERID`) VALUES
-('85dc887d00', 1, 0, 1, 1386435191, 1386435191, 'jacktheadmin');
+('85dc887d00', 1, 0, 1, 1386435191, 1386435191, 'jacktheadmin'),
+('6ac76ee070', 1, 0, 0, 0, 0, 'peter');
 
 -- --------------------------------------------------------
 
@@ -239,14 +240,14 @@ CREATE TABLE IF NOT EXISTS `product` (
   `imageurl` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`pid`),
   KEY `kkid` (`kkid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`) VALUES
-(8, 1, 'Asus Monitor', 1492, 200, '7.jpg'),
+(8, 1, 'Asus Monitor', 1486, 200, '7.jpg'),
 (9, 1, 'LG Monitor', 1499, 250, '8.jpg'),
 (10, 1, 'Samsung Monitor', 1499, 275, '10.jpg'),
 (11, 3, 'Harry Potter and the Sorcerer''s Stone', 1499, 14.99, '1.jpg'),
@@ -269,7 +270,8 @@ INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`
 (28, 10, 'Nonstick 15-Piece Cookware Set', 1500, 110, '2.jpg'),
 (29, 10, 'Keurig K75 Platinum Brewing System', 1500, 34, '1.jpg'),
 (30, 9, 'Joseph Adjustable Rolling Pin Plu', 1500, 9.95, '4.jpg'),
-(31, 9, 'Non-Stick 5-Piece Bakeware Set', 1500, 54, '3.jpg');
+(31, 9, 'Non-Stick 5-Piece Bakeware Set', 1500, 54, '3.jpg'),
+(32, 1, 'Zenith Monitor', 32, 399, NULL);
 
 -- --------------------------------------------------------
 
@@ -364,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `SESSION` (
 
 INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) VALUES
 ('6db1d2b6993a71169ba2759d1fcce0bc4697d3dac0bb2e061d98c70234606b26b571a1b4f6d3ebd31afb006dcc9167690eeee9b32b1e8dc361bb0dd1d2dd9a19', 1386381145, 1386381562, 'jacktheadmin'),
-('cb1abc58f79a59f4310e8e5343daa2ad0ffac4cf3f9213f034f09651f34936959bf47f9c3aeea3a997f53a2fde4847dd201c4b4f3953be7422956e6aaca0d423', 1386435946, 1386436770, 'vemployee');
+('8aa99186f031224dc085c25139fd7074b0892f16416b939b05358ba8487458afd9ee8a908da7d8e04850d16cfb1f25ccb61099737723f426c6030bb518605d60', 1386437387, 1386438658, 'peter');
 
 -- --------------------------------------------------------
 
@@ -384,7 +386,7 @@ CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
 --
 
 INSERT INTO `SESSION_DATA` (`SESSION_ID`, `KEY`, `VALUE`) VALUES
-('cb1abc58f79a59f4310e8e5343daa2ad0ffac4cf3f9213f034f09651f34936959bf47f9c3aeea3a997f53a2fde4847dd201c4b4f3953be7422956e6aaca0d423', 'productids', '8');
+('8aa99186f031224dc085c25139fd7074b0892f16416b939b05358ba8487458afd9ee8a908da7d8e04850d16cfb1f25ccb61099737723f426c6030bb518605d60', 'productids', '8,8');
 
 -- --------------------------------------------------------
 
@@ -464,7 +466,7 @@ INSERT INTO `store_has_product` (`sid`, `pid`, `sinventory`) VALUES
 (1, 29, 500),
 (1, 30, 500),
 (1, 31, 500),
-(2, 8, 100),
+(2, 8, 93),
 (2, 9, 100),
 (2, 10, 100),
 (2, 11, 100),
@@ -718,7 +720,7 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
 
 --
 -- Dumping data for table `transaction`
@@ -767,7 +769,13 @@ INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
 (58, 8, 1386436131, 1),
 (59, 8, 1386436421, 3),
 (60, 8, 1386436522, 1),
-(61, 8, 1386436589, 1);
+(61, 8, 1386436589, 1),
+(62, 8, 1386437436, 1),
+(63, 8, 1386437497, 1),
+(64, 8, 1386437519, 1),
+(65, 8, 1386437579, 1),
+(66, 8, 1386437615, 1),
+(67, 8, 1386437817, 2);
 
 -- --------------------------------------------------------
 
@@ -896,6 +904,12 @@ INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
 (55, 'jacktheadmin'),
 (24, 'peter'),
 (25, 'peter'),
+(62, 'peter'),
+(63, 'peter'),
+(64, 'peter'),
+(65, 'peter'),
+(66, 'peter'),
+(67, 'peter'),
 (56, 'vemployee'),
 (57, 'vemployee'),
 (58, 'vemployee'),
@@ -1005,7 +1019,7 @@ INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, 
 ('jordan', 'jordan', 'jordan', NULL, NULL, 15213, NULL),
 ('jordan3', 'jordan3', 'jordan3', NULL, NULL, 15213, NULL),
 ('jordan4', 'jordan4', 'jordan4', NULL, NULL, 15213, NULL),
-('peter', 'peter', 'peter', NULL, NULL, 15213, NULL),
+('peter', 'peter', 'peter', 'e', NULL, 15213, NULL),
 ('peter3', 'peter3', 'peter3', NULL, NULL, 15213, NULL),
 ('peter4', 'peter4', 'peter4', NULL, NULL, 15213, NULL),
 ('vemployee', 'vemployee', 'vemployee', 'e', NULL, 15213, NULL);
