@@ -24,10 +24,13 @@ if(isset($_POST['submit']))
 		$result = phpsec\SQL("SELECT tinventory, store FROM product WHERE pid = ?", array($key));
 		if($result[0]['tinventory'] > 0)
 		{
+                                      
+                        
 			$lastInsertedTID = phpsec\SQL("INSERT INTO transaction (pid, date, quantity) VALUES (?, ?, ?)", array($key, phpsec\time(), $value));
 			phpsec\SQL("INSERT INTO `user_buy_transaction` (tid, USERID) VALUES (?, ?)", array($lastInsertedTID, $userID));
 			phpsec\SQL("UPDATE product SET `tinventory` = `tinventory` - 1 WHERE pid = ?", array($key));
 			phpsec\SQL("UPDATE store SET `sinventory` = `sinventory` - 1 WHERE sid = ? AND pid = ?", array($result[0]['store'], $key));
+                        echo "<script>alert('Transaction completed.')</script>";
 		}
 		else
 		{
@@ -40,6 +43,7 @@ if(isset($_POST['submit']))
 
 	if($shouldCartEmpty)
    {
+            
 			\setcookie("PRODUCTID", "", \time() - 3600);
 			$nextURL = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/cart";
 			header("Location: {$nextURL}");
