@@ -33,14 +33,14 @@ html > body{
 #menu{
     position:absolute;
     top:170px;
-    left:50px;
+    left:10px;
 }
 #menu li{
     display:inline;
 }
 #menu a{
     margin:0 1px 0 0;
-    width:180px;
+    width:160px;
     text-align:center;
     padding:8px 0 10px 0;
     display:block;
@@ -56,7 +56,7 @@ html > body{
     color:#066854;
     text-decoration:underline;
     display: block;
-    width:200px;
+    width:160px;
     line-height: 30px;
 }
 

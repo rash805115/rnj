@@ -38,7 +38,7 @@
 					<li><a href=\"{$link2}\" class=\"but2_active\">Shopping Cart</a></li>
 					<li><a href=\"{$link3}\" class=\"but3_active\">Interests</a></li>
 					<li><a href=\"{$link4}\" class=\"but4_active\">Settings</a></li>
-					<li><a href=\"{$link5}\" class=\"but5_active\">Purchase History</a></li>
+					<li><a href=\"{$link5}\" class=\"but5_active\">Order History</a></li>
 					<li><a href=\"{$link6}\" class=\"but6_active\">Search</a></li>
 				</ul>
 			";
