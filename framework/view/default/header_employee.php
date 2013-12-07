@@ -12,14 +12,16 @@
 		$link2 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/viewstats";
 		$link3 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/settings";
 		$link4 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/index";
+		$link5 = \phpsec\HttpRequest::Protocol() . "://" . \phpsec\HttpRequest::Host() . \phpsec\HttpRequest::PortReadable() . "/rnj/framework/users/addproduct";
 			
 	
 		echo "
 			<ul id=\"menu\">
 				<li><a href=\"{$link1}\" class=\"but1_active\">Home</a></li>
 				<li><a href=\"{$link2}\" class=\"but2_active\">View Stats</a></li>
-				<li><a href=\"{$link3}\" class=\"but4_active\">Settings</a></li>
+				<li><a href=\"{$link3}\" class=\"but3_active\">Settings</a></li>
 				<li><a href=\"{$link4}\" class=\"but4_active\">Shop</a></li>
+				<li><a href=\"{$link5}\" class=\"but5_active\">Add Product</a></li>
 			</ul>
 		";
 	?>
