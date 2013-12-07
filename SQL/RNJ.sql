@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 03, 2013 at 05:25 PM
+-- Generation Time: Dec 07, 2013 at 12:22 PM
 -- Server version: 5.5.22
 -- PHP Version: 5.3.10-1ubuntu3
 
@@ -33,14 +33,6 @@ CREATE TABLE IF NOT EXISTS `AUTH_TOKENS` (
   PRIMARY KEY (`AUTH_ID`),
   KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `AUTH_TOKENS`
---
-
-INSERT INTO `AUTH_TOKENS` (`AUTH_ID`, `USERID`, `DATE_CREATED`) VALUES
-('26b2fda1eeea1dafa3970bab5067b5821011d65a7643bbb08fed2599f693eec1446fbee2ad724479e5156c89f371ed5722ba395db2effc45669045732a86fb1a', 'rash', 1382050547),
-('3011c1d3f5852c9e950a2c723edbec34c3fdcbb208d66505de5b742959a79ff40a2580f3d86421a370870103f6a935aca154ed0226c1553f985ff6f4e942fb13', 'rash', 1382041225);
 
 -- --------------------------------------------------------
 
@@ -78,6 +70,14 @@ CREATE TABLE IF NOT EXISTS `customer` (
 --
 
 INSERT INTO `customer` (`USERID`) VALUES
+('caleks'),
+('caleks3'),
+('cdixon'),
+('cdixon3'),
+('cjordan'),
+('cjordan3'),
+('cpeter'),
+('cpeter3'),
 ('ning');
 
 -- --------------------------------------------------------
@@ -98,8 +98,19 @@ CREATE TABLE IF NOT EXISTS `employee` (
 --
 
 INSERT INTO `employee` (`USERID`, `title`, `salary`) VALUES
-('jacktheadmin', 'Sales Supervisor', 90000),
-('rash', 'agaga', 352);
+('aleks', NULL, NULL),
+('aleks3', NULL, NULL),
+('aleks4', NULL, NULL),
+('dixon', NULL, NULL),
+('dixon3', NULL, NULL),
+('dixon4', NULL, NULL),
+('jordan', NULL, NULL),
+('jordan3', NULL, NULL),
+('jordan4', NULL, NULL),
+('peter', NULL, NULL),
+('peter3', NULL, NULL),
+('peter4', NULL, NULL),
+('vemployee', 'Sales', 34822);
 
 -- --------------------------------------------------------
 
@@ -110,6 +121,7 @@ INSERT INTO `employee` (`USERID`, `title`, `salary`) VALUES
 CREATE TABLE IF NOT EXISTS `employee_workin_store` (
   `employeeid` varchar(32) NOT NULL,
   `sid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`employeeid`),
   KEY `sid` (`sid`),
   KEY `employeeid` (`employeeid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -119,8 +131,19 @@ CREATE TABLE IF NOT EXISTS `employee_workin_store` (
 --
 
 INSERT INTO `employee_workin_store` (`employeeid`, `sid`) VALUES
-('jacktheadmin', 1),
-('rash', 1);
+('vemployee', 1),
+('aleks', 2),
+('dixon', 2),
+('jordan', 2),
+('peter', 2),
+('aleks3', 3),
+('dixon3', 3),
+('jordan3', 3),
+('peter3', 3),
+('aleks4', 4),
+('dixon4', 4),
+('jordan4', 4),
+('peter4', 4);
 
 -- --------------------------------------------------------
 
@@ -151,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `LOGS` (
   `DATETIME` text,
   `LINE` int(10) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -167,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `PASSWORD` (
   `LAST_LOGIN_ATTEMPT` int(10) NOT NULL DEFAULT '0',
   `FIRST_LOGIN_ATTEMPT` int(10) NOT NULL DEFAULT '0',
   `USERID` varchar(32) NOT NULL,
+  PRIMARY KEY (`USERID`),
   KEY `USERID` (`USERID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -175,12 +199,7 @@ CREATE TABLE IF NOT EXISTS `PASSWORD` (
 --
 
 INSERT INTO `PASSWORD` (`TEMP_PASS`, `USE_FLAG`, `TEMP_TIME`, `TOTAL_LOGIN_ATTEMPTS`, `LAST_LOGIN_ATTEMPT`, `FIRST_LOGIN_ATTEMPT`, `USERID`) VALUES
-('8bf6a90306', 1, 0, 1, 1382234585, 1382234585, 'rash'),
-('8f47155b0d97f3d01a00cec52fd461e50a7af8a2735c87fce6fe1eabb0bb49fd46ae2d8f8912279deb3cd4b8992e72bf46dd4f1509f9edd737de3be140db3baf', 0, 1382233239, 0, 0, 0, 'root'),
-('2bff93df10', 1, 0, 0, 0, 0, 'jack'),
-('59e8710928', 1, 0, 0, 0, 0, 'ning'),
-('11e7690bcc', 1, 0, 0, 0, 0, 'ning123'),
-('6933446258', 1, 0, 0, 0, 0, 'jacktheadmin');
+('85dc887d00', 1, 0, 1, 1386435191, 1386435191, 'jacktheadmin');
 
 -- --------------------------------------------------------
 
@@ -218,41 +237,39 @@ CREATE TABLE IF NOT EXISTS `product` (
   `tinventory` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
   `imageurl` varchar(100) DEFAULT NULL,
-  `store` int(5) NOT NULL DEFAULT '1',
   PRIMARY KEY (`pid`),
-  KEY `kkid` (`kkid`),
-  KEY `store` (`store`)
+  KEY `kkid` (`kkid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`, `store`) VALUES
-(8, 1, 'Asus Monitor', 0, 200, '7.jpg', 14),
-(9, 1, 'LG Monitor', 1, 250, '8.jpg', 14),
-(10, 1, 'Samsung Monitor', 1, 275, '10.jpg', 14),
-(11, 3, 'Harry Potter and the Sorcerer''s Stone', 2, 14.99, '1.jpg', 1),
-(12, 3, 'Harry Potter and the Chamber of Secrets', 5, 13.99, '2.jpg', 1),
-(13, 3, 'Harry Potter and the Prisoner of Azkaban', 3, 15.99, '3.jpg', 1),
-(14, 2, 'HP Laptop', 1, 399, '3.jpg', 1),
-(15, 2, 'Dell Laptop', 5, 699, '4.jpg', 1),
-(16, 4, 'Called to care', 3, 39.99, '4.jpg', 1),
-(17, 4, 'Clean, Green, and Lean', 6, 25.89, '5.jpg', 10),
-(18, 5, 'Water Technology', 5, 75, '6.jpg', 1),
-(19, 5, 'Materials Science and Technology', 1, 32.25, '7.jpg', 1),
-(20, 6, 'Hollister woman jacket', 1, 59, '1.jpg', 1),
-(21, 6, 'Lacoste man jacket', 2, 69, '2.jpg', 14),
-(22, 6, 'Columbia coat', 5, 129, '3.jpg', 14),
-(23, 6, 'The north face jacket', 5, 99, '4.jpg', 1),
-(24, 7, 'Slim jeans', 1, 29, '5.jpg', 1),
-(25, 7, 'Denim jacket', 6, 75, '6.jpg', 1),
-(26, 8, 'Pull-out Sofa', 1, 159, '1.jpg', 1),
-(27, 8, 'Multimedia Storage Tower', 2, 35, '2.jpg', 1),
-(28, 10, 'Nonstick 15-Piece Cookware Set', 2, 110, '2.jpg', 1),
-(29, 10, 'Keurig K75 Platinum Brewing System', 5, 34, '1.jpg', 1),
-(30, 9, 'Joseph Adjustable Rolling Pin Plu', 11, 9.95, '4.jpg', 1),
-(31, 9, 'Non-Stick 5-Piece Bakeware Set', 8, 54, '3.jpg', 1);
+INSERT INTO `product` (`pid`, `kkid`, `pname`, `tinventory`, `price`, `imageurl`) VALUES
+(8, 1, 'Asus Monitor', 1492, 200, '7.jpg'),
+(9, 1, 'LG Monitor', 1499, 250, '8.jpg'),
+(10, 1, 'Samsung Monitor', 1499, 275, '10.jpg'),
+(11, 3, 'Harry Potter and the Sorcerer''s Stone', 1499, 14.99, '1.jpg'),
+(12, 3, 'Harry Potter and the Chamber of Secrets', 1497, 13.99, '2.jpg'),
+(13, 3, 'Harry Potter and the Prisoner of Azkaban', 1495, 15.99, '3.jpg'),
+(14, 2, 'HP Laptop', 1497, 399, '3.jpg'),
+(15, 2, 'Dell Laptop', 1497, 699, '4.jpg'),
+(16, 4, 'Called to care', 1490, 39.99, '4.jpg'),
+(17, 4, 'Clean, Green, and Lean', 1498, 25.89, '5.jpg'),
+(18, 5, 'Water Technology', 1494, 75, '6.jpg'),
+(19, 5, 'Materials Science and Technology', 1491, 32.25, '7.jpg'),
+(20, 6, 'Hollister woman jacket', 1497, 59, '1.jpg'),
+(21, 6, 'Lacoste man jacket', 1496, 69, '2.jpg'),
+(22, 6, 'Columbia coat', 1494, 129, '3.jpg'),
+(23, 6, 'The north face jacket', 1498, 99, '4.jpg'),
+(24, 7, 'Slim jeans', 1488, 29, '5.jpg'),
+(25, 7, 'Denim jacket', 1487, 75, '6.jpg'),
+(26, 8, 'Pull-out Sofa', 1500, 159, '1.jpg'),
+(27, 8, 'Multimedia Storage Tower', 1500, 35, '2.jpg'),
+(28, 10, 'Nonstick 15-Piece Cookware Set', 1500, 110, '2.jpg'),
+(29, 10, 'Keurig K75 Platinum Brewing System', 1500, 34, '1.jpg'),
+(30, 9, 'Joseph Adjustable Rolling Pin Plu', 1500, 9.95, '4.jpg'),
+(31, 9, 'Non-Stick 5-Piece Bakeware Set', 1500, 54, '3.jpg');
 
 -- --------------------------------------------------------
 
@@ -291,28 +308,25 @@ INSERT INTO `ptype` (`kkid`, `kid`, `kkname`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `region` (
-  `rid` int(11) NOT NULL AUTO_INCREMENT,
+  `rid` int(11) NOT NULL DEFAULT '0',
   `rname` varchar(30) DEFAULT NULL,
   `manager` varchar(32) NOT NULL,
   PRIMARY KEY (`rid`),
   KEY `manager` (`manager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `region`
 --
 
 INSERT INTO `region` (`rid`, `rname`, `manager`) VALUES
-(1, 'Pittsburgh', 'rash'),
-(2, 'New York', 'ning'),
-(3, 'Northeast', 'jack'),
-(4, 'Eastern', 'jack'),
-(5, 'Southwest', 'jack'),
-(6, 'Southeast', 'jack'),
-(7, 'Atlantic', 'jack'),
-(8, 'Western', 'jack'),
-(9, 'Pacific', 'jack'),
-(10, 'www', 'root');
+(1, 'Northeast', 'jack'),
+(2, 'Eastern', 'jack'),
+(3, 'Southwest', 'jack'),
+(4, 'Southeast', 'jack'),
+(5, 'Atlantic', 'jack'),
+(6, 'Western', 'jack'),
+(7, 'Pacific', 'jack');
 
 -- --------------------------------------------------------
 
@@ -328,14 +342,6 @@ CREATE TABLE IF NOT EXISTS `review` (
   PRIMARY KEY (`USERID`,`pid`),
   KEY `pid` (`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `review`
---
-
-INSERT INTO `review` (`USERID`, `pid`, `comments`, `rate`) VALUES
-('ning', 13, 'Good Book!!', 4),
-('rash', 13, 'Awesome!!', 5);
 
 -- --------------------------------------------------------
 
@@ -357,39 +363,8 @@ CREATE TABLE IF NOT EXISTS `SESSION` (
 --
 
 INSERT INTO `SESSION` (`SESSION_ID`, `DATE_CREATED`, `LAST_ACTIVITY`, `USERID`) VALUES
-('05cb75600c62b60cb726d1570dc27ec75ae132278e5790f1d9c90e227552bf31ff10411d4b3ab8c491b4b8e90c734a0e0de3b85e5b86a49acd40dfc1e9e872c7', 1385631311, 1385631349, 'rash'),
-('075ec715814f84c5961ca234399a4bd0f7b73b0a6f4be2723be8722298c065ea4a14133642f40da38767a67b20554f3ee60e8686e88ee2d153c190f364567c0a', 1382041225, 1382041225, 'rash'),
-('0fa42527dc1115e8f992d1ca3dfc6f8a8152fbf07116d2fcfdb53115842adff2464192a6ecdeae049a8bd53da46c0115fb55f0d7ada204b12b0fa157ed4fc71a', 1382041266, 1382041266, 'rash'),
-('18d1a63486418ab79cc93daea53d508716d19c3c522256ccf10fc3ab2e5087430c0c23c712e4e5a81870c7bb64011a7ff0f80a3053206ec150b1a887bde6aba1', 1385629611, 1385629637, 'rash'),
-('19651b63aeada323a6a810dbef46b5523311841689357cb8c5b72e3a9688ac4f41db8353db40ec5ca41bca7487ef97f832d6d43b4bf756949bb2adf72531fd32', 1385685299, 1385685299, 'ning123'),
-('1bcd9c97ae9a1b5565b1c8ad08779df68b8b4bc1b1ea15befb12210a639f573e22be5c41166063ed0a2b7e6d0b1a43b73df1adb508a38f6cd39c740759d9c735', 1385689080, 1385689080, 'ning'),
-('1f9faad0528384472b801edc7b0ffa3f7bcae1eba8ae68105a8abd6bc94fa847770f307f8c65b50393cdcd2abb469f5ed7b6bc3549a997a12414176e7377c649', 1386101296, 1386109327, 'rash'),
-('25fa891b2e1d8c72b68addcf1909e6193e8a264db76c2001a2e62b9f1d52d0587c8a22fe47cd70ff96a6d0f60e31e45d51aa60d9cf5ad26d860728ac25e925e2', 1382045315, 1382045315, 'rash'),
-('2788f524094d57324b4dd1ceaae4f62705ecd8b7003c045473bc0ce79777c01bb773d11465289a2ecc20e976b5e0fbf87ff8f8d08008a4d8ade63a407265f31f', 1382041271, 1382041271, 'rash'),
-('2f8768811ae03b184cf7002db0702c25137af17c19fddea373711c388714cb5cf5a7b77d56f3e55bc6fc3ac64df8634c2ffe63f8e1e0560258dec2ba77feb559', 1382041186, 1382041186, 'rash'),
-('350987978c4808a2d47e223aadd5b0b9ce6755c0b2e354114d4380b9189a006b0110161ffce91ce91faf3bfdb5fd68de937ec4ddbe96f96aabed5aa5bd60db26', 1382044641, 1382044641, 'rash'),
-('396b08d47358f34fcab5d4b3860df8065be15b8d10afeb54716975e298c446d89ef0f50d79212f9df6bc942046b777dca98fdf1a326892760fac97754f9df4e4', 1382050995, 1382050995, 'rash'),
-('3ec7b85b8e243c85a840fd7ce9167aabb529473fc33c31b5f0d376741960e698dfdc77df58b5c7ed38a1e66be0d804eeeb9086bcc9b1e7388afc52760cd0591d', 1385629973, 1385630068, 'rash'),
-('4edc7ab93dcba918293021fdb0a6bf80feb8b7b2f1cba535b6b3314c5024ea59c02d5305d24e97b2e6163e10a2c461878aa203ef6ba7a1e06c6fbb702e59b3aa', 1385630651, 1385630653, 'rash'),
-('516c069f11a1e2ca987f1309eb074927f358ab444222632ea4b8e1d11f11796e467ad22d980f2d380e17143f710acfaf54e07bf534e81340216b8317b30f25df', 1385630157, 1385630212, 'rash'),
-('556c80f6fcc7006efa13a8d4a07064cddaf6c82d383dab77c26cb957f8c3d4ce0657903a9fba53495fc52895e7c0c1162b6f82be608377eedd8da4fa62cc9f39', 1385630981, 1385631061, 'rash'),
-('568b0e967e839825fb13029980c2f6f17c5435d55ff151d0ff530b4bc2db793b1d5cd569eff2bfcb17a8d9b501b11ad018e94fdfce06d3cc58264d7077b35fc3', 1381999778, 1381999778, 'rash'),
-('5b9cda7d70bbb4f4822299049dbc0466fa88c6f81a35cc40fd898380d6cecb8342bdb8c72ebd0ccd917cbc76679b85fb32dc293551558eabf53a4cb6db2f06d8', 1382047006, 1382047006, 'rash'),
-('6532106cec75b95900be5dc5346bad1c7579764029438bbeebd650abd37e5cbd18c4b45131bff53ad98ccac8e8591327a1e2cab5ad0df78c26fa3cb36b60bfc7', 1381999678, 1381999678, 'rash'),
-('69ff0a20d48cf2c81e31850014e60543cda898abafd4870c7f5ad5978b17f549cab45ec863c137cd8f447d37812852e02c91d2244542ec0bd1037b2b418b5e1b', 1385689930, 1385689930, 'ning'),
-('6b4473fc5732584a6301fc6d0e61ace9db053a9c5de5edb83c417e2a8282ec859fc2576ae6ba81164fdcb5c3a80f1d45b50f4dd2b2fb4cc431665b8f6488dbc2', 1385627391, 1385627391, 'rash'),
-('6b9f99b79142a60c5e2fdc322e2c517a2b35daf7ba0655f2ed01c70bdd3b0a2ac3a0fcf07c9cfa214e98bed3a6785985a9d3e23a552f835d77329f29e4a9edcd', 1382811781, 1382811781, 'rash'),
-('74b6e2dd7f2c5bb08cd30f468abca2892bfb84b148bd678123338a9c9eb903e1e6759bd88caab8a870c65e7fa1f85f8038f8003e7db9dfd44ec801b6a7fe5a3a', 1385630922, 1385630946, 'rash'),
-('776641bee2326853fe9539fb0042fd50c845c57b9aa5fa2bcdc3dd9732afddc81f156054a36a92d56587258864aeb7f9e2798448fd9ae907e8bd828c46b26bf8', 1385629694, 1385629762, 'rash'),
-('8191dc91c2d9b14307117a4c13362cc698f43d15bc4026d4bc40cf4ae127e0e30d36b0b17a7dd76e086ff04547112fcb77d05930ae9d96cb7afd50e4eb6cca53', 1382044893, 1382044893, 'rash'),
-('9d11bfc31367eafeb7c02187f4713436f6d9b3b6a0a57eed6d8b744829b6c492315a577c09a2febc6e50b4ad85a321200bd0e44267cd55570a70d6d219b57be4', 1382097240, 1382097240, 'rash'),
-('aeb33f4ba8a072004db2d6317e9597520fb422a0c74c208947eedd29465ef2183c17c1978f2ddc81eac23b24239de00baa0e47b1fe35665946bfecf225ea0f75', 1381999575, 1381999575, 'rash'),
-('b21d332d9eff86aae39437fb3ad01c846801b8f9d352b8ec06d00ef404cf5764e4bcbc1675d4b0809335a54c8255289bcc5b97bc164ea5df3f7d3c3dfdba5795', 1381999727, 1381999727, 'rash'),
-('b622693dcb4a2bf900068751510f4d29683dd3d63041460c0659a0e94b87d150645d7e8811f280b4e1bde395e42fda59a3613ef7aeecd4bcc1355ee93cd0ad12', 1382041251, 1382041251, 'rash'),
-('be9f7411d113ff3c75b9a26bb158cff03a6e11a6e70dd81dacc8d10883fcf6001be81262e13ecb7fe3323e3087c2de59e1e2e6ec344935a2d7e7fdef6e7fbd00', 1385630671, 1385630689, 'rash'),
-('dac93bd8384ce8fe2c492231c0af2cc0dc036c4edda17b1bb1800c15cf054e355b13409603e1c31c3ebe6943cd5dba704b09bdea993ca0f8cb9c56e0435953ef', 1385629953, 1385629953, 'rash'),
-('e2d46885a63b55cceca5df77310fb177498ba0af3fcc59a005d13e3023d3ebe064f39eaf763a18007847768a3ec973c323f7035a2625df5def2b55855c6bfa52', 1385630397, 1385630429, 'rash'),
-('f770b481aeb079ec5a089fd4dc169a01df059f39774f3fa0ebd3969681f89c6c63f174a9724936d4fa5e016cf82589fdccec10a2f01de9fed379a2b9a8664ede', 1382046316, 1382046316, 'rash');
+('6db1d2b6993a71169ba2759d1fcce0bc4697d3dac0bb2e061d98c70234606b26b571a1b4f6d3ebd31afb006dcc9167690eeee9b32b1e8dc361bb0dd1d2dd9a19', 1386381145, 1386381562, 'jacktheadmin'),
+('cb1abc58f79a59f4310e8e5343daa2ad0ffac4cf3f9213f034f09651f34936959bf47f9c3aeea3a997f53a2fde4847dd201c4b4f3953be7422956e6aaca0d423', 1386435946, 1386436770, 'vemployee');
 
 -- --------------------------------------------------------
 
@@ -409,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `SESSION_DATA` (
 --
 
 INSERT INTO `SESSION_DATA` (`SESSION_ID`, `KEY`, `VALUE`) VALUES
-('1f9faad0528384472b801edc7b0ffa3f7bcae1eba8ae68105a8abd6bc94fa847770f307f8c65b50393cdcd2abb469f5ed7b6bc3549a997a12414176e7377c649', 'productids', '8');
+('cb1abc58f79a59f4310e8e5343daa2ad0ffac4cf3f9213f034f09651f34936959bf47f9c3aeea3a997f53a2fde4847dd201c4b4f3953be7422956e6aaca0d423', 'productids', '8');
 
 -- --------------------------------------------------------
 
@@ -418,7 +393,7 @@ INSERT INTO `SESSION_DATA` (`SESSION_ID`, `KEY`, `VALUE`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `store` (
-  `sid` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL DEFAULT '0',
   `rid` int(11) NOT NULL,
   `streetaddr` varchar(100) DEFAULT NULL,
   `zip` int(11) NOT NULL,
@@ -427,27 +402,24 @@ CREATE TABLE IF NOT EXISTS `store` (
   KEY `rid` (`rid`),
   KEY `zip` (`zip`),
   KEY `storemanager` (`storemanager`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `store`
 --
 
 INSERT INTO `store` (`sid`, `rid`, `streetaddr`, `zip`, `storemanager`) VALUES
-(1, 1, 'Centre', 15213, 'ning'),
-(2, 2, 'Fifth', 15213, 'rash'),
-(3, 1, '421 8th Ave Rm 4202-J1', 10199, 'jack'),
-(4, 1, '25 Dorchester Ave', 12288, 'jack'),
-(5, 2, '1001 California Ave', 15290, 'jack'),
-(6, 2, '2970 Market Street', 19104, 'jack'),
-(7, 3, '433 W Harrison 4th Floor', 60607, 'jack'),
-(8, 4, 'One Post Office Drive', 78284, 'jack'),
-(9, 4, '7499 Northwest 31st St', 33122, 'jack'),
-(10, 5, '900 Brentwood RD NE', 20066, 'jack'),
-(11, 5, '2901 Scott Futrell Drive', 28228, 'jack'),
-(12, 6, '1001 E. Sunset Rd', 89199, 'jack'),
-(13, 7, '7001 S. Central Ave. Room 338B', 90052, 'jack'),
-(14, 10, 'online', 10199, 'root');
+(1, 1, '421 8th Ave Rm 4202-J1', 10199, 'jack'),
+(2, 1, '25 Dorchester Ave', 12288, 'jack'),
+(3, 2, '1001 California Ave', 15290, 'jack'),
+(4, 2, '2970 Market Street', 19104, 'jack'),
+(5, 3, '433 W Harrison 4th Floor', 60607, 'jack'),
+(6, 4, 'One Post Office Drive', 78284, 'jack'),
+(7, 4, '7499 Northwest 31st St', 33122, 'jack'),
+(8, 5, '900 Brentwood RD NE', 20066, 'jack'),
+(9, 5, '2901 Scott Futrell Drive', 28228, 'jack'),
+(10, 6, '1001 E. Sunset Rd', 89199, 'jack'),
+(11, 7, '7001 S. Central Ave. Room 338B', 90052, 'jack');
 
 -- --------------------------------------------------------
 
@@ -463,6 +435,276 @@ CREATE TABLE IF NOT EXISTS `store_has_product` (
   KEY `pid` (`pid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `store_has_product`
+--
+
+INSERT INTO `store_has_product` (`sid`, `pid`, `sinventory`) VALUES
+(1, 8, 498),
+(1, 9, 499),
+(1, 10, 499),
+(1, 11, 499),
+(1, 12, 497),
+(1, 13, 495),
+(1, 14, 500),
+(1, 15, 500),
+(1, 16, 500),
+(1, 17, 500),
+(1, 18, 500),
+(1, 19, 500),
+(1, 20, 500),
+(1, 21, 500),
+(1, 22, 500),
+(1, 23, 500),
+(1, 24, 500),
+(1, 25, 500),
+(1, 26, 500),
+(1, 27, 500),
+(1, 28, 500),
+(1, 29, 500),
+(1, 30, 500),
+(1, 31, 500),
+(2, 8, 100),
+(2, 9, 100),
+(2, 10, 100),
+(2, 11, 100),
+(2, 12, 100),
+(2, 13, 100),
+(2, 14, 497),
+(2, 15, 497),
+(2, 16, 490),
+(2, 17, 498),
+(2, 18, 494),
+(2, 19, 491),
+(2, 20, 499),
+(2, 21, 498),
+(2, 22, 497),
+(2, 23, 499),
+(2, 24, 494),
+(2, 25, 492),
+(2, 26, 100),
+(2, 27, 100),
+(2, 28, 100),
+(2, 29, 100),
+(2, 30, 100),
+(2, 31, 100),
+(3, 8, 100),
+(3, 9, 100),
+(3, 10, 100),
+(3, 11, 100),
+(3, 12, 100),
+(3, 13, 100),
+(3, 14, 100),
+(3, 15, 100),
+(3, 16, 100),
+(3, 17, 100),
+(3, 18, 100),
+(3, 19, 100),
+(3, 20, 499),
+(3, 21, 498),
+(3, 22, 497),
+(3, 23, 499),
+(3, 24, 494),
+(3, 25, 495),
+(3, 26, 100),
+(3, 27, 100),
+(3, 28, 100),
+(3, 29, 100),
+(3, 30, 100),
+(3, 31, 100),
+(4, 8, 100),
+(4, 9, 100),
+(4, 10, 100),
+(4, 11, 100),
+(4, 12, 100),
+(4, 13, 100),
+(4, 14, 100),
+(4, 15, 100),
+(4, 16, 100),
+(4, 17, 100),
+(4, 18, 100),
+(4, 19, 100),
+(4, 20, 100),
+(4, 21, 100),
+(4, 22, 100),
+(4, 23, 100),
+(4, 24, 100),
+(4, 25, 100),
+(4, 26, 100),
+(4, 27, 100),
+(4, 28, 100),
+(4, 29, 100),
+(4, 30, 100),
+(4, 31, 100),
+(5, 8, 100),
+(5, 9, 100),
+(5, 10, 100),
+(5, 11, 100),
+(5, 12, 100),
+(5, 13, 100),
+(5, 14, 100),
+(5, 15, 100),
+(5, 16, 100),
+(5, 17, 100),
+(5, 18, 100),
+(5, 19, 100),
+(5, 20, 100),
+(5, 21, 100),
+(5, 22, 100),
+(5, 23, 100),
+(5, 24, 100),
+(5, 25, 100),
+(5, 26, 100),
+(5, 27, 100),
+(5, 28, 100),
+(5, 29, 100),
+(5, 30, 100),
+(5, 31, 100),
+(6, 8, 100),
+(6, 9, 100),
+(6, 10, 100),
+(6, 11, 100),
+(6, 12, 100),
+(6, 13, 100),
+(6, 14, 100),
+(6, 15, 100),
+(6, 16, 100),
+(6, 17, 100),
+(6, 18, 100),
+(6, 19, 100),
+(6, 20, 100),
+(6, 21, 100),
+(6, 22, 100),
+(6, 23, 100),
+(6, 24, 100),
+(6, 25, 100),
+(6, 26, 100),
+(6, 27, 100),
+(6, 28, 100),
+(6, 29, 100),
+(6, 30, 100),
+(6, 31, 100),
+(7, 8, 100),
+(7, 9, 100),
+(7, 10, 100),
+(7, 11, 100),
+(7, 12, 100),
+(7, 13, 100),
+(7, 14, 100),
+(7, 15, 100),
+(7, 16, 100),
+(7, 17, 100),
+(7, 18, 100),
+(7, 19, 100),
+(7, 20, 100),
+(7, 21, 100),
+(7, 22, 100),
+(7, 23, 100),
+(7, 24, 100),
+(7, 25, 100),
+(7, 26, 100),
+(7, 27, 100),
+(7, 28, 100),
+(7, 29, 100),
+(7, 30, 100),
+(7, 31, 100),
+(8, 8, 100),
+(8, 9, 100),
+(8, 10, 100),
+(8, 11, 100),
+(8, 12, 100),
+(8, 13, 100),
+(8, 14, 100),
+(8, 15, 100),
+(8, 16, 100),
+(8, 17, 100),
+(8, 18, 100),
+(8, 19, 100),
+(8, 20, 100),
+(8, 21, 100),
+(8, 22, 100),
+(8, 23, 100),
+(8, 24, 100),
+(8, 25, 100),
+(8, 26, 100),
+(8, 27, 100),
+(8, 28, 100),
+(8, 29, 100),
+(8, 30, 100),
+(8, 31, 100),
+(9, 8, 100),
+(9, 9, 100),
+(9, 10, 100),
+(9, 11, 100),
+(9, 12, 100),
+(9, 13, 100),
+(9, 14, 100),
+(9, 15, 100),
+(9, 16, 100),
+(9, 17, 100),
+(9, 18, 100),
+(9, 19, 100),
+(9, 20, 100),
+(9, 21, 100),
+(9, 22, 100),
+(9, 23, 100),
+(9, 24, 100),
+(9, 25, 100),
+(9, 26, 100),
+(9, 27, 100),
+(9, 28, 100),
+(9, 29, 100),
+(9, 30, 100),
+(9, 31, 100),
+(10, 8, 100),
+(10, 9, 100),
+(10, 10, 100),
+(10, 11, 100),
+(10, 12, 100),
+(10, 13, 100),
+(10, 14, 100),
+(10, 15, 100),
+(10, 16, 100),
+(10, 17, 100),
+(10, 18, 100),
+(10, 19, 100),
+(10, 20, 100),
+(10, 21, 100),
+(10, 22, 100),
+(10, 23, 100),
+(10, 24, 100),
+(10, 25, 100),
+(10, 26, 100),
+(10, 27, 100),
+(10, 28, 100),
+(10, 29, 100),
+(10, 30, 100),
+(10, 31, 100),
+(11, 8, 100),
+(11, 9, 100),
+(11, 10, 100),
+(11, 11, 100),
+(11, 12, 100),
+(11, 13, 100),
+(11, 14, 100),
+(11, 15, 100),
+(11, 16, 100),
+(11, 17, 100),
+(11, 18, 100),
+(11, 19, 100),
+(11, 20, 100),
+(11, 21, 100),
+(11, 22, 100),
+(11, 23, 100),
+(11, 24, 100),
+(11, 25, 100),
+(11, 26, 100),
+(11, 27, 100),
+(11, 28, 100),
+(11, 29, 100),
+(11, 30, 100),
+(11, 31, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -476,20 +718,56 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `quantity` int(5) DEFAULT NULL,
   PRIMARY KEY (`tid`),
   KEY `pid` (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 --
 -- Dumping data for table `transaction`
 --
 
 INSERT INTO `transaction` (`tid`, `pid`, `date`, `quantity`) VALUES
-(24, 21, 1385928760, 1),
-(25, 30, 1385928760, 1),
-(26, 20, 1385929416, 1),
-(27, 25, 1386014564, 1),
-(28, 20, 1386101328, 1),
-(29, 8, 1386101328, 1),
-(30, 8, 1386101359, 1);
+(19, 25, 1385690887, 2),
+(20, 26, 1385826059, 1),
+(21, 12, 11111111, 1),
+(22, 13, 11111111, 1),
+(23, 25, 1386311391, 1),
+(24, 10, 1386374532, 1),
+(25, 8, 1386374533, 1),
+(26, 8, 1385826059, 1),
+(27, 9, 1385691041, 1),
+(28, 10, 1385826059, 1),
+(29, 11, 1385826059, 1),
+(30, 12, 1385691041, 3),
+(31, 13, 1385826059, 5),
+(32, 14, 1385691041, 1),
+(33, 15, 1385826059, 2),
+(34, 16, 1385826059, 7),
+(35, 17, 1385691041, 1),
+(36, 18, 1385826059, 6),
+(37, 19, 1385826059, 9),
+(38, 20, 1385409875, 1),
+(39, 21, 1385691041, 2),
+(40, 22, 1385409875, 3),
+(41, 23, 1385409875, 1),
+(42, 24, 1385691041, 6),
+(43, 25, 1385409875, 8),
+(44, 20, 1385409875, 1),
+(45, 21, 1385691041, 2),
+(46, 22, 1385691041, 3),
+(47, 23, 1385409875, 1),
+(48, 24, 1385691041, 6),
+(49, 25, 1385691041, 5),
+(50, 14, 1385691041, 2),
+(51, 15, 1385826059, 1),
+(52, 16, 1385691041, 3),
+(53, 17, 1385826059, 1),
+(54, 20, 1386435877, 1),
+(55, 8, 1386435877, 1),
+(56, 8, 1386435997, 1),
+(57, 8, 1386436089, 1),
+(58, 8, 1386436131, 1),
+(59, 8, 1386436421, 3),
+(60, 8, 1386436522, 1),
+(61, 8, 1386436589, 1);
 
 -- --------------------------------------------------------
 
@@ -515,13 +793,31 @@ CREATE TABLE IF NOT EXISTS `USER` (
 --
 
 INSERT INTO `USER` (`USERID`, `P_EMAIL`, `ACCOUNT_CREATED`, `LOCKED`, `INACTIVE`, `HASH`, `DATE_CREATED`, `ALGO`, `DYNAMIC_SALT`) VALUES
+('aleks', 'aleks@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('aleks3', 'aleks3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('aleks4', 'aleks4@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('caleks', 'caleks@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('caleks3', 'caleks3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cdixon', 'cdixon@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cdixon3', 'cdixon3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cjordan', 'cjordan@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cjordan3', 'cjordan3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cpeter', 'cpeter@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('cpeter3', 'cpeter3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('dixon', 'dixon@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('dixon3', 'dixon3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('dixon4', 'dixon4@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
 ('jack', 'rahul.chaudhary@owasp.org', 1382636773, 1, 0, '55dbd88705076de6aac4b27b53cb7495a3927f7eb076f34d7f0b10787767d12a11e8e1b36e39f5dcf93447749afd252eb4735d5900a9a6e77d859dcb7db91bf5', 1382636773, 'sha512', '9c44ce028fb26cf72681a3a0940dbbb508b8207c95121b1366e542fc2c66b3aac5dd7e8e6867b2d64ebf04c71fa123abc646cfb3f6cfc1bb4d9e2e0eade61715'),
 ('jacktheadmin', 'rahul300chaudhary400@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('jordan', 'jordan@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('jordan3', 'jordan3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('jordan4', 'jordan4@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
 ('ning', 'rahul300chaudhary400@gmail.com', 1385409875, 0, 0, 'b01b0e9af71634a23aa0cfe5df52dac2311ffd278714aa4233e07243085894cefc779756f9bfb966bd5cc747639d1d8cb82d7ab31f95b3627bc7bfd7dfbb0802', 1385409875, 'sha512', '6bc3c3af402313a8899cf8367bb5c86a94c70c2b570f348987ec1da72f195d9d8e9c4a225128593c23e2c22014ff402afd6519050bbb8a7f6bb82732a401a2ad'),
 ('ning123', 'rahul300chaudhary400@gmail.com', 1385622426, 0, 0, '5c49393e3fd7c2fe67dbc7d07e9ea46ae0231d3c9b0e3288e3d24355e3f02f12291d5fd3ef509841ee4e92c1878ee29633de22a09cca55b9ec270b48d56a1f99', 1385622426, 'sha512', 'cac9896e9284c39c0d34f2bddc29734bed0b86c40ff7aeea516534a12a2a0affd34c43125d518af1a0c4bd821779d3a46f172cc2b5a4fef46eda6537023496cb'),
-('owasp', 'rash@a.com', 1384763795, 0, 1, 'b20c4f48237727ffaf05ae94ce46a3e24dd3027fbb099706d3f9657d0bc6c8aca1bf1aadbc54670359affb920433ec28457727ef3b76d47e1e8740671c9522a7', 1384763795, 'sha512', '34c79dc83ca4a897e3a353988379b41168d21a4ddb172eda0ee017f9d3d57f14abcf3ad848544b5b3a0d5880c1575525e4596ab25159713259223d8a35b253f1'),
-('rash', 'rahul.chaudhary@owasp.org', 1381998328, 0, 0, 'b6b253f620bf3afcd56933058e2bdb3b6c015ef474a2388fe0b9c969fe5fc70906441d3c499eb06520c513807c2afd4b7c4b47d0175319fc06e5c8300b750f63', 1382233652, 'sha512', '8b140860ae9a43caa783ce1a9aabdefc21613e8dd09b1425d0dc2c1f3ec2a2559ee5419a8e4496f5bce4583415ac3ddc8cd8727e9b8e3039352d8a1e6474c024'),
-('root', 'rac130@pitt.edu', 1382232424, 0, 1, 'c99d0727ab89828f79d81689c7a53f95a34d92bccd133ae7a38354e8bc5b737c843cecccfa949b2fcce59c141f953f1d849dd5ef7c9b965594f84cb6313bb99a', 1382232424, 'sha512', '3963caa6707112b947e1425dd408b22e47f2b28f41ac9a5fdea301a47789ecfe6df2f9988a19edd9427227fe6addc79f23af061e7b6c241c79a82e2ffa623b8d');
+('peter', 'peter@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('peter3', 'peter3@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('peter4', 'peter4@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b'),
+('vemployee', 'vemployee@gmail.com', 1385691041, 0, 0, '5eadde61bdc3669f007bf6849091f110f5c599102d9eefa8b51826f9e0c3e9084602ffba3bfa7d79a77eed8a822b89cfd6504e77ef1968c2a82e4451da3f2995', 1385691041, 'sha512', 'a0c93442ba23051a59c705712a9e4fb9de67873d84b0c760ee1e8df98ca2ed254e58d12b47d24adab3069d5fe56ee56f3fd20d6041bce016907c0cbde131738b');
 
 -- --------------------------------------------------------
 
@@ -535,6 +831,20 @@ CREATE TABLE IF NOT EXISTS `user_belong_store` (
   PRIMARY KEY (`USERID`,`sid`),
   KEY `sid` (`sid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_belong_store`
+--
+
+INSERT INTO `user_belong_store` (`USERID`, `sid`) VALUES
+('caleks', 2),
+('cdixon', 2),
+('cjordan', 2),
+('cpeter', 2),
+('caleks3', 3),
+('cdixon3', 3),
+('cjordan3', 3),
+('cpeter3', 3);
 
 -- --------------------------------------------------------
 
@@ -554,13 +864,44 @@ CREATE TABLE IF NOT EXISTS `user_buy_transaction` (
 --
 
 INSERT INTO `user_buy_transaction` (`tid`, `USERID`) VALUES
-(24, 'ning'),
-(25, 'ning'),
-(26, 'ning'),
-(27, 'rash'),
-(28, 'rash'),
-(29, 'rash'),
-(30, 'rash');
+(26, 'caleks'),
+(27, 'caleks'),
+(32, 'caleks'),
+(33, 'caleks'),
+(38, 'caleks'),
+(39, 'caleks'),
+(44, 'caleks'),
+(45, 'caleks'),
+(50, 'caleks3'),
+(51, 'caleks3'),
+(30, 'cjordan'),
+(31, 'cjordan'),
+(36, 'cjordan'),
+(37, 'cjordan'),
+(42, 'cjordan'),
+(43, 'cjordan'),
+(48, 'cjordan'),
+(49, 'cjordan'),
+(28, 'cpeter'),
+(29, 'cpeter'),
+(34, 'cpeter'),
+(35, 'cpeter'),
+(40, 'cpeter'),
+(41, 'cpeter'),
+(46, 'cpeter'),
+(47, 'cpeter'),
+(52, 'cpeter3'),
+(53, 'cpeter3'),
+(54, 'jacktheadmin'),
+(55, 'jacktheadmin'),
+(24, 'peter'),
+(25, 'peter'),
+(56, 'vemployee'),
+(57, 'vemployee'),
+(58, 'vemployee'),
+(59, 'vemployee'),
+(60, 'vemployee'),
+(61, 'vemployee');
 
 -- --------------------------------------------------------
 
@@ -593,8 +934,35 @@ CREATE TABLE IF NOT EXISTS `user_sell_product` (
 --
 
 INSERT INTO `user_sell_product` (`tid`, `USERID`) VALUES
-(25, 'ning'),
-(24, 'rash');
+(32, 'aleks'),
+(33, 'aleks'),
+(34, 'aleks'),
+(35, 'aleks'),
+(36, 'aleks'),
+(37, 'aleks'),
+(50, 'aleks'),
+(51, 'aleks'),
+(52, 'aleks'),
+(53, 'aleks'),
+(19, 'jacktheadmin'),
+(44, 'jordan3'),
+(45, 'jordan3'),
+(46, 'jordan3'),
+(47, 'jordan3'),
+(48, 'jordan3'),
+(49, 'jordan3'),
+(38, 'peter'),
+(39, 'peter'),
+(40, 'peter'),
+(41, 'peter'),
+(42, 'peter'),
+(43, 'peter'),
+(26, 'vemployee'),
+(27, 'vemployee'),
+(28, 'vemployee'),
+(29, 'vemployee'),
+(30, 'vemployee'),
+(31, 'vemployee');
 
 -- --------------------------------------------------------
 
@@ -619,9 +987,28 @@ CREATE TABLE IF NOT EXISTS `XUSER` (
 --
 
 INSERT INTO `XUSER` (`USERID`, `FIRST_NAME`, `LAST_NAME`, `type`, `DOB`, `zip`, `streetaddr`) VALUES
+('aleks', 'Aleks', 'Aleks', NULL, NULL, 15213, NULL),
+('aleks3', 'aleks3', 'aleks3', NULL, NULL, 15213, NULL),
+('aleks4', 'aleks4', 'aleks4', NULL, NULL, 15213, NULL),
+('caleks', 'caleks', 'caleks', NULL, NULL, 15213, NULL),
+('caleks3', 'caleks3', 'caleks3', NULL, NULL, 15213, NULL),
+('cdixon', 'cdixon', 'cdixon', NULL, NULL, 15213, NULL),
+('cdixon3', 'cdixon3', 'cdixon3', NULL, NULL, 15213, NULL),
+('cjordan', 'cjordan', 'cjordan', NULL, NULL, 15213, NULL),
+('cjordan3', 'cjordan3', 'cjordan3', NULL, NULL, 15213, NULL),
+('cpeter', 'cpeter', 'cpeter', NULL, NULL, 15213, NULL),
+('cpeter3', 'cpeter3', 'cpeter3', NULL, NULL, 15213, NULL),
+('dixon', 'dixon', 'dixon', NULL, NULL, 15213, NULL),
+('dixon3', 'dixon3', 'dixon3', NULL, NULL, 15213, NULL),
+('dixon4', 'dixon4', 'dixon4', NULL, NULL, 15213, NULL),
 ('jacktheadmin', 'Jaehoon', 'Jung', 'e', NULL, 15213, NULL),
-('ning', 'Ning', 'Ning', 'c-b', NULL, 15213, NULL),
-('rash', 'Rahul', 'Chaudhary', 'e', 8, 15213, '3229 Hardie Way');
+('jordan', 'jordan', 'jordan', NULL, NULL, 15213, NULL),
+('jordan3', 'jordan3', 'jordan3', NULL, NULL, 15213, NULL),
+('jordan4', 'jordan4', 'jordan4', NULL, NULL, 15213, NULL),
+('peter', 'peter', 'peter', NULL, NULL, 15213, NULL),
+('peter3', 'peter3', 'peter3', NULL, NULL, 15213, NULL),
+('peter4', 'peter4', 'peter4', NULL, NULL, 15213, NULL),
+('vemployee', 'vemployee', 'vemployee', 'e', NULL, 15213, NULL);
 
 -- --------------------------------------------------------
 
@@ -692,7 +1079,7 @@ INSERT INTO `zipcode` (`zip`, `city`, `state`) VALUES
 -- Constraints for table `AUTH_TOKENS`
 --
 ALTER TABLE `AUTH_TOKENS`
-  ADD CONSTRAINT `AUTH_TOKENS_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `auth_tokens_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `businesscustomer`
@@ -735,7 +1122,6 @@ ALTER TABLE `PASSWORD`
 -- Constraints for table `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_3` FOREIGN KEY (`store`) REFERENCES `store` (`sid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `product_ibfk_2` FOREIGN KEY (`kkid`) REFERENCES `ptype` (`kkid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -761,13 +1147,13 @@ ALTER TABLE `review`
 -- Constraints for table `SESSION`
 --
 ALTER TABLE `SESSION`
-  ADD CONSTRAINT `SESSION_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `session_ibfk_1` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `SESSION_DATA`
 --
 ALTER TABLE `SESSION_DATA`
-  ADD CONSTRAINT `SESSION_DATA_ibfk_1` FOREIGN KEY (`SESSION_ID`) REFERENCES `SESSION` (`SESSION_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `session_data_ibfk_1` FOREIGN KEY (`SESSION_ID`) REFERENCES `SESSION` (`SESSION_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `store`
@@ -822,8 +1208,8 @@ ALTER TABLE `user_sell_product`
 -- Constraints for table `XUSER`
 --
 ALTER TABLE `XUSER`
-  ADD CONSTRAINT `XUSER_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `XUSER_ibfk_3` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `xuser_ibfk_2` FOREIGN KEY (`USERID`) REFERENCES `USER` (`USERID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `xuser_ibfk_3` FOREIGN KEY (`zip`) REFERENCES `zipcode` (`zip`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
