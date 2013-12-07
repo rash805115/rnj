@@ -217,7 +217,7 @@ function getAllStoresId()
                                         <input type='date' name="dateQ10_2_2">
                                         
                                     <br>
-                                    <input type="radio" name="stats" value="q11">What is the worst-selling products?<br>
+                                    <input type="radio" name="stats" value="q11">What is the bottom product among products which has been sold more than 1?<br>
                                     <input type="radio" name="stats" value="q11_1">What is 10 worst-selling products?<br>
                                     <input type="radio" name="stats" value="q11_2">What is 10 worst-selling products of a store
                                     <select name = "sidQ11_2" >
@@ -232,16 +232,12 @@ function getAllStoresId()
                                     </select>
                                     ?
                                     <br>
-                                    <input type="radio" name="stats" value="q12">What is the worst-selling product between 
+                                    <input type="radio" name="stats" value="q12">What is the bottom product among products which has been sold more than 1 between 
                                         <input type='date' name="dateQ12_1">
                                         and 
                                         <input type='date' name="dateQ12_2"> 
                                     <br>
-                                    <input type="radio" name="stats" value="q12_1">What are the 10 worst-selling products between 
-                                        <input type='date' name="dateQ12_1_1">
-                                        and 
-                                        <input type='date' name="dateQ12_1_2"> 
-                                    <br>
+                                    
                                     <input type="radio" name="stats" value="q12_2">What are the 10 worst-selling products of a store
                                     <select name = "sidQ12_2" >
                                             <?php
@@ -260,11 +256,7 @@ function getAllStoresId()
                                         
                                     <br>
                                     <input type="radio" name="stats" value="q13">What are the products which have never been sold at all?<br>
-                                    <input type="radio" name="stats" value="q14">What are the products which have never been sold between 
-                                        <input type='date' name="dateQ14_1">
-                                        and 
-                                        <input type='date' name="dateQ14_2">
-                                    <br>
+                                    
                                     <input type="radio" name="stats" value="q15">What are the inventory of
                                     <select name = "pnameQ15" >
                                             <!-- List all product's name -->
@@ -518,7 +510,7 @@ function getAllStoresId()
 					    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales
 							FROM product P, transaction T 
 							WHERE P.pid=T.pid AND T.date >={$selectedDateQ8_1} AND T.date <={$selectedDateQ8_2} GROUP BY T.pid";
-							
+                                                       
 						$result = phpsec\SQL($query, array());
 				    
 						echo "<tr>";
@@ -545,7 +537,7 @@ function getAllStoresId()
 						foreach($result as $product)
 						{
 						    echo "<tr>";
-						    echo "<td>{$product['total_sales']} number of customer(s).</td>";
+						    echo "<td>{$product['total_sales']} number of customer(s) bought this product.</td>";
 						    echo "</tr>";
 						}
 				    }
@@ -553,16 +545,20 @@ function getAllStoresId()
                                 
                                 else if($selectedStat == "q9"){
                                     $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales 
-						FROM product P, transaction T
-						WHERE P.pid=T.pid 
-						GROUP BY T.pid
-						ORDER BY total_sales DESC
-						";
+                                                FROM product P, transaction T
+                                                WHERE P.pid=T.pid 
+                                                GROUP BY T.pid
+                                                HAVING SUM(T.quantity) =
+                                                (SELECT MAX(total_sales)
+                                                FROM (SELECT SUM(T1.quantity) AS total_sales 
+                                                FROM transaction T1
+                                                GROUP BY T1.pid) AS temp)"
+                                                ;
 					
 				    $result = phpsec\SQL($query, array());
 				    
 				    echo "<tr>";
-                                    echo "<td>What are the best-selling products?</td>";     
+                                    echo "<td>What is the best-selling product?</td>";     
                                     echo "</tr>";
                                     foreach($result as $product)
 				    {
@@ -578,7 +574,7 @@ function getAllStoresId()
 						WHERE P.pid=T.pid 
 						GROUP BY T.pid
 						ORDER BY total_sales DESC
-						";
+						LIMIT 10";
 					
 				    $result = phpsec\SQL($query, array());
 				    
@@ -639,20 +635,20 @@ function getAllStoresId()
 				    }
                                 }
                                 else if($selectedStat == "q10_1"){
-                                    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales 
-						FROM product P, transaction T
-						WHERE P.pid=T.pid AND T.date >={$selectedDateQ10_1_1} AND T.date <= {$selectedDateQ10_1_2}
-						GROUP BY T.pid
-						HAVING SUM(T.quantity) =
-						(SELECT MAX(total_sales)
-						FROM (SELECT SUM(T1.quantity) AS total_sales 
-						FROM transaction T1
-						GROUP BY T1.pid) AS temp)";
+                                    $query =	
+                                                
+                                                "SELECT P.pname, SUM(T.quantity) AS total_sales 
+                                                FROM product P, transaction T
+                                                WHERE P.pid=T.pid AND T.date >={$selectedDateQ10_1_1} AND T.date <= {$selectedDateQ10_1_2}
+                                                GROUP BY T.pid
+                                                ORDER BY total_sales DESC
+                                                LIMIT 10";
+
 					
 				    $result = phpsec\SQL($query, array());
 				    
 				    echo "<tr>";
-                                    echo "<td>What is the 10 best-selling product between ".$_POST["dateQ10_1_1"]." and ".$_POST["dateQ10_1_2"]." ?</td>";   
+                                    echo "<td>What is 10 best-selling product between ".$_POST["dateQ10_1_1"]." and ".$_POST["dateQ10_1_2"]." ?</td>";   
                                     echo "</tr>";
                                     foreach($result as $product)
 				    {
@@ -686,24 +682,36 @@ function getAllStoresId()
 				    }
                                 }
                                 else if($selectedStat == "q11"){
-                                    $query =	"SELECT P.pname
-						FROM product P WHERE pid NOT IN(select pid from transaction where 1)";
-				    
+                                    $query ="SELECT P.pname, SUM(T.quantity) AS total_sales 
+                                            FROM product P, transaction T
+                                            WHERE P.pid=T.pid 
+                                            GROUP BY T.pid
+                                            HAVING SUM(T.quantity) =
+                                            (SELECT MIN(total_sales)
+                                            FROM (SELECT SUM(T1.quantity) AS total_sales 
+                                            FROM transaction T1
+                                            GROUP BY T1.pid) AS temp)";
+			    
 				    $result = phpsec\SQL($query, array());
 				    
 				    echo "<tr>";
-                                    echo "<td>What is the worst-selling products?</td>";      
+                                    echo "<td>What is the bottom product among products which has been sold more than 1?</td>";      
                                     echo "</tr>";
                                     foreach($result as $product)
 				    {
 					echo "<tr>";
-					echo "<td>{$product['pname']} is sold 0 time(s).</td>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s). </td>";
 					echo "</tr>";
 				    }
                                 }
                                 else if($selectedStat == "q11_1"){
-                                    $query =	"SELECT P.pname
-						FROM product P WHERE pid NOT IN(select pid from transaction where 1) LIMIT 10";
+                                    $query =	"SELECT P.pname, SUM(T.quantity) AS total_sales 
+FROM product P, transaction T
+WHERE P.pid=T.pid 
+GROUP BY T.pid
+ORDER BY total_sales ASC
+LIMIT 10";
+
 				    
 				    $result = phpsec\SQL($query, array());
 				    
@@ -741,28 +749,48 @@ function getAllStoresId()
 				    }
                                 }
                                 else if($selectedStat == "q12"){
+                                    $query = "SELECT P.pname, SUM(T.quantity) AS total_sales 
+                                            FROM product P, transaction T
+                                            WHERE P.pid=T.pid AND T.date >= {$selectedDateQ12_1} AND T.date <= {$selectedDateQ12_2}
+                                            GROUP BY T.pid
+                                            HAVING SUM(T.quantity) =
+                                            (SELECT MIN(total_sales)
+                                            FROM (SELECT SUM(T1.quantity) AS total_sales 
+                                            FROM transaction T1
+                                            GROUP BY T1.pid) AS temp)";
+                                    $result = phpsec\SQL($query, array());
                                     echo "<tr>";
-                                    echo "<td>What is the worst-selling products between ".$selectedDateQ12_1." and ".$selectedDateQ12_2." ?</td>";     
+                                    echo "<td>What is the bottom product among products which has been sold more than 1 between ".$_POST["dateQ12_1"]." and ".$_POST["dateQ12_2"]." ?</td>";     
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
-                                else if($selectedStat == "q12_1"){
-                                    echo "<tr>";
-                                    echo "<td>What is 10 worst-selling products between ".$selectedDateQ12_1_1." and ".$selectedDateQ12_1_2." ?</td>";     
-                                    echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
-                                }
+
                                 else if($selectedStat == "q12_2"){
+                                    $query = "SELECT Temp.sid, P.pname, SUM(T.quantity) AS total_sales 
+FROM product P, transaction T, user_sell_product S, 
+(SELECT employeeid, sid
+FROM employee_workin_store 
+WHERE sid={$selectedSidQ12_2}) AS Temp
+WHERE P.pid=T.pid AND T.tid=S.tid AND Temp.employeeid=S.USERID
+	AND T.date >={$selectedDateQ12_2_1} AND T.date <={$selectedDateQ12_2_2}
+GROUP BY T.pid
+ORDER BY total_sales ASC
+LIMIT 10";
+$result = phpsec\SQL($query, array());
                                     echo "<tr>";
-                                    echo "<td>What is 10 worst-selling product in a store# ".$selectedSidQ12_2." between ".$selectedDateQ12_2_1." and ".$selectedDateQ12_2_2." ?</td>";   
+                                    echo "<td>What is 10 worst-selling product in a store# ".$selectedSidQ12_2." between ".$_POST["dateQ12_2_1"]." and ".$_POST["dateQ12_2_2"]." ?</td>";   
                                     echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
+                                    foreach($result as $product)
+				    {
+					echo "<tr>";
+					echo "<td>{$product['pname']} is sold {$product['total_sales']} time(s).</td>";
+					echo "</tr>";
+				    }
                                 }
                                 else if($selectedStat == "q13"){
                                     $query =	"SELECT P.pid, P.pname 
@@ -780,14 +808,7 @@ function getAllStoresId()
 					echo "</tr>";
 				    }
                                 } 
-                                else if($selectedStat == "q14"){
-                                    echo "<tr>";
-                                    echo "<td>What are the products which have never been sold between ".$selectedDateQ14_1." and ".$selectedDateQ14_2." ?</td>";     
-                                    echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<td>report displayed here</td>";
-                                    echo "</tr>";
-                                }
+
                                 else if($selectedStat == "q15"){
                                     $query = "SELECT P.pname, P.tinventory 
 					FROM product P where P.pid = $selectedPidQ15";
