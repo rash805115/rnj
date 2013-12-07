@@ -40,7 +40,7 @@ if(isset($_POST['submit']))
 			}
 			else
 			{
-				$query = "UPDATE store SET `sinventory` = `sinventory` - {$value} WHERE sid = 1 AND pid = ?";
+				$query = "UPDATE `store_has_product` SET `sinventory` = `sinventory` - {$value} WHERE sid = 1 AND pid = ?";
 				phpsec\SQL($query, array($key));
 				$this->info .= "Transasction Completed.";
 			}
