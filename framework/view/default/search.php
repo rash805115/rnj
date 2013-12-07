@@ -37,7 +37,7 @@
 		
 		foreach($search3 as $match)
 		{
-			if(strtolower($match['pname']) == strtolower($toSearch))
+			if(strpos(strtolower($match['pname']), strtolower($toSearch)) >= 0)
 			{
 				$search3_res = phpsec\SQL("SELECT * from product where pname = ?", array($match['pname']));
 				break;
@@ -59,7 +59,7 @@
 			foreach($ta as $t)
 			{
 				$link = "http://localhost/rnj/framework/productinfo?pid=" . $t['pid'];
-				$table .= "<tr><td>{$t['pid']}</td><td><a href=\"{$link}\">{$t['pname']}</a></td><td>{$t['tinventory']}</td><td>{$t['price']}</td><td>{$t['store']}</td></tr>";
+				$table .= "<tr><td>{$t['pid']}</td><td><a href=\"{$link}\">{$t['pname']}</a></td><td>{$t['tinventory']}</td><td>{$t['price']}</td></tr>";
 			}
 			$table .= "</table>";
 			
@@ -99,16 +99,17 @@
                             
                             <div id="answer">
                                     <?php
+				    echo "By Category:";
                                         if(count($search1_res) > 0)
                                         {
                                                 show_table($search1_res);
                                         }
-
+					echo "By Sub-Category:";
                                         if(count($search2_res) > 0)
                                         {
                                                 show_table($search2_res);
                                         }
-
+echo "By Produt Name:";
                                         if(count($search3_res) > 0)
                                         {
                                                 show_table($search3_res);
