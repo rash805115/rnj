@@ -47,7 +47,8 @@
 				<ul id=\"menu\">
 					<li><a href=\"home\" class=\"but1_active\">Home</a></li>
 					<li><a href=\"signup\" class=\"but2_active\">Register</a></li>
-					<li><a href=\"login\" class=\"but3_active\">Log in</a></li>
+					<li><a href=\"search\" class=\"but3_active\">Search</a></li>
+					<li><a href=\"login\" class=\"but4_active\">Log in</a></li>
 				</ul>
 			";
 		}
