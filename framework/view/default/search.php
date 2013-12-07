@@ -94,7 +94,7 @@
                             </div>
                          </div> 
                         
-                        
+                        <br><br><br><br><br><br><br><br><br><br>
                          <div id="frame">
                             
                             <div id="answer">
@@ -104,6 +104,7 @@
                                         {
                                                 show_table($search1_res);
                                         }
+                                        
 					echo "By Sub-Category:";
                                         if(count($search2_res) > 0)
                                         {
