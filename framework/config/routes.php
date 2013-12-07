@@ -22,6 +22,7 @@ FrontController::$Routes["users/viewstats"] =		"users/viewstatscontroller";			//
 FrontController::$Routes["cart"] =			"users/usercartcontroller";			//the user's shopping cart (logged users)
 FrontController::$Routes["users/interests"] =		"users/userinterestscontroller";		//the users interest page (logged users)
 FrontController::$Routes["users/settings"] =		"users/usersettingscontroller";			//the users settings page (logged users)
+FrontController::$Routes["users/addproduct"] =		"users/useraddproductcontroller";		//for employees to add products (logged users)
 FrontController::$Routes["signup"] =			"users/usersignupcontroller";			//for user signup
 FrontController::$Routes["users/updateaccount"] =	"users/useraccountupdatecontroller";		//for user to update their account
 FrontController::$Routes["forgotpassword"] =		"users/forgotpasswordcontroller";		//for user forgot password
